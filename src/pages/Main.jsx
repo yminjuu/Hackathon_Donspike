@@ -1,8 +1,8 @@
 import { LineChart } from 'recharts';
-import FoodInfo from '../components/Main/FoodInfo';
-import MainHeader from '../components/Main/MainHeader';
 import styled from 'styled-components';
-import MainLineChart from '../components/Main/MainLineChart';
+import MainLineChart from '../Main/LineChart/MainLineChart';
+import FoodInfo from '../Main/FoodInfo/FoodInfo';
+import MainHeader from '../Main/MainHeader';
 
 const Main = () => {
   return (

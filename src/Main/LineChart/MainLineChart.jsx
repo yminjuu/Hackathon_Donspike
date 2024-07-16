@@ -37,7 +37,6 @@ const MainLineChart = () => {
   const options = {
     chart: {
       type: 'line',
-      width: 1500,
       scrollablePlotArea: {
         minWidth: 700,
         scrollPositionX: 1,
@@ -88,6 +87,7 @@ const StyledGraphWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 1; // 낮은 z-index 설정하여 sticky 헤더 가리지 않도록
 `;
 
 const StyledDateWrapper = styled.div`
