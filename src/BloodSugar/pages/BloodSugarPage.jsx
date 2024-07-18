@@ -4,6 +4,7 @@ import AddBloodSugar from '../components/AddBloodSugar';
 const BloodSugarPage = () => {
   return (
     <>
+      <p>BloodSugarPage</p>
       <MainBloodSugarChart></MainBloodSugarChart>
       <AddBloodSugar></AddBloodSugar>
     </>

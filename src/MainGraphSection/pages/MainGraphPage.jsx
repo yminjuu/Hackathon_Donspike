@@ -5,6 +5,7 @@ import AverageBloodSugarChart from '../../Graphs/components/AverageBloodSugarCha
 const MainGraphPage = () => {
   return (
     <>
+      <p>MainGraphPage</p>
       <BloodSugarPage></BloodSugarPage>
       <FoodBarChart></FoodBarChart>
       <AverageBloodSugarChart></AverageBloodSugarChart>

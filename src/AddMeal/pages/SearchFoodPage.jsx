@@ -1,5 +1,9 @@
-const SearchFoodPage = () => {
-  return <></>;
+const SearchFood = () => {
+  return (
+    <>
+      <p>SearchFood Page</p>
+    </>
+  );
 };
 
-export default SearchFoodPage;
+export default SearchFood;

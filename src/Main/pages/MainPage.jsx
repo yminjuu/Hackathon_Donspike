@@ -6,6 +6,7 @@ const MainPage = () => {
   return (
     <>
       <MainHeader></MainHeader>
+      <p>MainPage</p>
       <MainGraphSection></MainGraphSection>
       <FoodWiki></FoodWiki>
     </>

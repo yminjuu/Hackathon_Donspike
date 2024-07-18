@@ -1,5 +1,9 @@
 const FoodWikiPage = () => {
-  return <></>;
+  return (
+    <>
+      <p>FoodWikiPage</p>
+    </>
+  );
 };
 
 export default FoodWikiPage;
