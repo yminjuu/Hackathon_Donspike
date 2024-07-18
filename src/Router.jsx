@@ -20,7 +20,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Main></Main>,
-    // 추후 바로 home으로 연결하되, 로그인 안되어있으면 login page로 route
+    // 추후 바로 Main으로 연결하되, 로그인 안되어있으면 login page로 route
   },
 ]);
 

@@ -21,15 +21,18 @@ const MainHeader = () => {
 const StyledMainHeader = styled.header`
   height: 44px;
   position: sticky;
-  top: 0;
+  padding-top: 20px;
+  top: -20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #e0e0e0;
+  z-index: 100; // 높은 z-index 값 설정
+  font-size: 20px;
 `;
 
 const StyledLogo = styled.div`
-  width: 100px;
+  width: 200px;
 `;
 
 const StyledNav = styled.nav`
