@@ -23,7 +23,7 @@ const filterDataByDate = (data, date) => {
   return data.filter(d => d.time.startsWith(date.toISOString().substring(0, 10)));
 };
 
-const MainLineChart = () => {
+const MainBloodSugarChart = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [filteredData, setFilteredData] = useState(filterDataByDate(allData, currentDate));
 
@@ -94,4 +94,4 @@ const StyledDateWrapper = styled.div`
   display: flex;
   flex-direction: row;
 `;
-export default MainLineChart;
+export default MainBloodSugarChart;

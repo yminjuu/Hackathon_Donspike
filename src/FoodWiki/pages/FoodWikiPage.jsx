@@ -1,5 +1,5 @@
-const FoodWiki = () => {
+const FoodWikiPage = () => {
   return <></>;
 };
 
-export default FoodWiki;
+export default FoodWikiPage;
