@@ -8,8 +8,9 @@ const Button = styled.button`
   padding: 0;
   cursor: pointer;
 
-  width: 100px;
-  height: 30px;
+  width: 91.103px;
+  height: 53px;
+  flex-shrink: 0;
 `;
 
 const LogoButton = ({ onClick }) => (

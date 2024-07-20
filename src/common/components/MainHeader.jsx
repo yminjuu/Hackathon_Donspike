@@ -8,10 +8,14 @@ const MainHeader = () => {
         <LogoButton></LogoButton>
         <StyledNav>
           <StyledUl>
-            <StyledLi>커뮤니티</StyledLi>
-            <StyledLi>다이어리</StyledLi>
-            <StyledLi>마이페이지</StyledLi>
-            {/* li 태그 클릭시 routing 필요 */}
+            <FoodWikiButtonWrapper>
+              {/* 검색 아이콘 svg */}
+              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                <circle cx="6.08703" cy="6.08703" r="5.32615" stroke="white" stroke-width="1.52176" />
+                <path d="M12.1741 12.1738L16 15.9998" stroke="white" stroke-width="1.52176" stroke-linecap="round" />
+              </svg>
+              푸드위키
+            </FoodWikiButtonWrapper>
           </StyledUl>
         </StyledNav>
       </StyledMainHeader>
@@ -20,22 +24,15 @@ const MainHeader = () => {
 };
 
 const StyledMainHeader = styled.header`
-  height: 44px;
+  height: 100px;
+  padding: 24px 40px;
   position: sticky;
-  padding-top: 20px;
-  top: -20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 100; // 높은 z-index 값 설정
   font-size: 20px;
   border-bottom: 1px solid black;
   background: transparent;
-`;
-
-const StyledLogo = styled.img`
-  width: 200px;
-  cursor: pointer;
 `;
 
 const StyledNav = styled.nav`
@@ -45,6 +42,30 @@ const StyledNav = styled.nav`
 const StyledUl = styled.ul`
   list-style-type: none;
   padding: 0;
+`;
+
+const FoodWikiButtonWrapper = styled.button`
+  width: 114px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 30px;
+  opacity: var(--sds-size-stroke-border);
+  background: #000;
+  padding: 9px 19px 8px 16px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2.5px;
+
+  color: var(--Grayscale-White, #fff);
+  /* Pretendard/Sb/16 */
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 `;
 
 const StyledLi = styled.li`
