@@ -31,8 +31,12 @@ const StyledMainHeader = styled.header`
   justify-content: space-between;
   align-items: center;
   font-size: 20px;
-  border-bottom: 1px solid black;
   background: transparent;
+
+  /* // 헤더의 border */
+  border-bottom: 1px solid #cfcfcf;
+  opacity: var(--sds-size-stroke-border);
+  background: rgba(255, 255, 255, 0.2);
 `;
 
 const StyledNav = styled.nav`
