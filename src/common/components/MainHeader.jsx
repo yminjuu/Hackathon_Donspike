@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+import LogoButton from './LogoButton';
 
 const MainHeader = () => {
   return (
     <>
       <StyledMainHeader>
-        <StyledLogo> Don`t spike</StyledLogo>
+        <LogoButton></LogoButton>
         <StyledNav>
           <StyledUl>
             <StyledLi>커뮤니티</StyledLi>
@@ -26,13 +27,15 @@ const StyledMainHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #e0e0e0;
   z-index: 100; // 높은 z-index 값 설정
   font-size: 20px;
+  border-bottom: 1px solid black;
+  background: transparent;
 `;
 
-const StyledLogo = styled.div`
+const StyledLogo = styled.img`
   width: 200px;
+  cursor: pointer;
 `;
 
 const StyledNav = styled.nav`
