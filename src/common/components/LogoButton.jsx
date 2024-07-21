@@ -8,8 +8,9 @@ const Button = styled.button`
   padding: 0;
   cursor: pointer;
 
-  width: 91.103px;
-  height: 53px;
+  width: 5.375rem;
+  height: 3rem;
+  margin-left: 2.5rem;
   flex-shrink: 0;
 `;
 

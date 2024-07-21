@@ -7,16 +7,14 @@ const MainHeader = () => {
       <StyledMainHeader>
         <LogoButton></LogoButton>
         <StyledNav>
-          <StyledUl>
-            <FoodWikiButtonWrapper>
-              {/* 검색 아이콘 svg */}
-              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                <circle cx="6.08703" cy="6.08703" r="5.32615" stroke="white" stroke-width="1.52176" />
-                <path d="M12.1741 12.1738L16 15.9998" stroke="white" stroke-width="1.52176" stroke-linecap="round" />
-              </svg>
-              푸드위키
-            </FoodWikiButtonWrapper>
-          </StyledUl>
+          <FoodWikiButtonWrapper>
+            {/* 검색 아이콘 svg */}
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+              <circle cx="6.08703" cy="6.08703" r="5.32615" stroke="white" stroke-width="1.52176" />
+              <path d="M12.1741 12.1738L16 15.9998" stroke="white" stroke-width="1.52176" stroke-linecap="round" />
+            </svg>
+            푸드위키
+          </FoodWikiButtonWrapper>
         </StyledNav>
       </StyledMainHeader>
     </>
@@ -24,13 +22,16 @@ const MainHeader = () => {
 };
 
 const StyledMainHeader = styled.header`
-  height: 100px;
-  padding: 24px 40px;
+  width: 100%;
+  height: 6.9%; //전체 화면에 대해 6.9%
   position: sticky;
+  top: 0;
+  z-index: 1;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 20px;
+  font-size: 1rem;
   background: transparent;
 
   /* // 헤더의 border */
@@ -40,42 +41,31 @@ const StyledMainHeader = styled.header`
 `;
 
 const StyledNav = styled.nav`
-  margin-right: 10px;
-`;
-
-const StyledUl = styled.ul`
-  list-style-type: none;
-  padding: 0;
+  margin-right: 2.5rem;
 `;
 
 const FoodWikiButtonWrapper = styled.button`
-  width: 114px;
-  height: 36px;
+  width: 5.7rem;
+  height: 1.8rem;
   flex-shrink: 0;
-  border-radius: 30px;
+  border-radius: 1.875rem;
   opacity: var(--sds-size-stroke-border);
   background: #000;
-  padding: 9px 19px 8px 16px;
+  padding-left: 0.8rem;
   cursor: pointer;
 
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 2.5px;
+  gap: 0.2rem;
 
   color: var(--Grayscale-White, #fff);
   /* Pretendard/Sb/16 */
   font-family: Pretendard;
-  font-size: 16px;
+  font-size: 0.8rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-`;
-
-const StyledLi = styled.li`
-  margin-right: 10px;
-  display: inline;
-  cursor: pointer;
 `;
 
 export default MainHeader;
