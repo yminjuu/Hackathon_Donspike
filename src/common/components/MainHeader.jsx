@@ -23,7 +23,7 @@ const MainHeader = () => {
 
 const StyledMainHeader = styled.header`
   width: 100%;
-  height: 6.9%; //전체 화면에 대해 6.9%
+  height: 6.9%; //전체 화면에 대해 8%
   position: sticky;
   top: 0;
   z-index: 1;

@@ -38,9 +38,10 @@ const MainBloodSugarChart = () => {
     chart: {
       type: 'line',
       scrollablePlotArea: {
-        minWidth: 700,
         scrollPositionX: 1,
+        maxWidth: '300',
       },
+      height: '250',
     },
     title: {
       text: 'My chart',
@@ -72,11 +73,6 @@ const MainBloodSugarChart = () => {
 
   return (
     <StyledGraphWrapper>
-      <StyledDateWrapper>
-        <button onClick={() => changeDate(-1)}>Previous Day</button>
-        {`${currentDate.getFullYear()}년 ${currentDate.getMonth() + 1}월 ${currentDate.getDay()}일`}
-        <button onClick={() => changeDate(1)}>Next Day</button>
-      </StyledDateWrapper>
       <HighchartsReact highcharts={Highcharts} options={options} />
     </StyledGraphWrapper>
   );
@@ -84,10 +80,12 @@ const MainBloodSugarChart = () => {
 
 const StyledGraphWrapper = styled.div`
   width: 100%;
+  height: 25.9rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 1; // 낮은 z-index 설정하여 sticky 헤더 가리지 않도록
+  z-index: 0; // 낮은 z-index 설정하여 sticky 헤더 가리지 않도록
+  margin-bottom: 1rem;
 `;
 
 const StyledDateWrapper = styled.div`

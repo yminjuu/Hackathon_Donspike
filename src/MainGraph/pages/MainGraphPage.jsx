@@ -11,22 +11,24 @@ const MainGraphPage = () => {
     <>
       <PageBackground>
         <MainHeader></MainHeader>
-        {/* 제목 + 혈당 섹션 */}
-        <SectionWrapper>
-          <MainBloodSugar></MainBloodSugar>
-        </SectionWrapper>
-        {/* 구분선 추가 */}
-        <HorizonWrapper>
-          <svg xmlns="http://www.w3.org/2000/svg" width="1292" height="1" viewBox="0 0 1292 1" fill="none">
-            <path d="M1 0.5L1291 0.5" stroke="#CFCFCF" stroke-linecap="round" />
-          </svg>
-        </HorizonWrapper>
+        <SectionsWrapper>
+          {/* 제목 + 혈당 섹션 */}
+          <SectionWrapper>
+            <MainBloodSugar></MainBloodSugar>
+          </SectionWrapper>
+          {/* 구분선 추가 */}
+          <HorizonWrapper>
+            <svg xmlns="http://www.w3.org/2000/svg" width="1292" height="1" viewBox="0 0 1292 1" fill="none">
+              <path d="M1 0.5L1291 0.5" stroke="#CFCFCF" stroke-linecap="round" />
+            </svg>
+          </HorizonWrapper>
 
-        {/* 하단 그래프 2개 섹션*/}
-        <SectionWrapper2>
-          <FoodBar></FoodBar>
-          <AverageBloodSugar></AverageBloodSugar>
-        </SectionWrapper2>
+          {/* 하단 그래프 2개 섹션*/}
+          <SectionWrapper2>
+            <FoodBar></FoodBar>
+            <AverageBloodSugar></AverageBloodSugar>
+          </SectionWrapper2>
+        </SectionsWrapper>
       </PageBackground>
     </>
   );
@@ -37,20 +39,30 @@ const PageBackground = styled.div`
   background-size: cover;
 `;
 
+const SectionsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const SectionWrapper = styled.section`
   display: flex;
   flex-direction: column;
-  margin: 85px 75px 33px 75px;
+  margin: 1.1rem 4.69rem 1.3rem 4.69rem;
 `;
 
 const SectionWrapper2 = styled.section`
   display: flex;
   flex-direction: row;
-  margin: 33px 75px 62px 75px;
-  justify-content: space-between;
+  margin: 1.3rem 4.69rem 2.5rem 4.69rem;
+  justify-content: center;
+  gap: 1.13rem;
 `;
 
 const HorizonWrapper = styled.div`
-  margin: 0px 86px;
+  width: 80.625rem;
+  height: 1.75rem;
+  flex-shrink: 0;
 `;
 export default MainGraphPage;

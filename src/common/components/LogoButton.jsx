@@ -9,7 +9,7 @@ const Button = styled.button`
   cursor: pointer;
 
   width: 5.375rem;
-  height: 3rem;
+  height: 5rem;
   margin-left: 2.5rem;
   flex-shrink: 0;
 `;
