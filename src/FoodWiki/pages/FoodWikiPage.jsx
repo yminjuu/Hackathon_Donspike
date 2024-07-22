@@ -1,5 +1,9 @@
-const FoodWiki = () => {
-  return <></>;
+const FoodWikiPage = () => {
+  return (
+    <>
+      <p>FoodWikiPage</p>
+    </>
+  );
 };
 
-export default FoodWiki;
+export default FoodWikiPage;
