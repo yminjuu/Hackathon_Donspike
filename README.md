@@ -12,5 +12,5 @@
 - chore : build 관련, 패키지 매니지 설정 등 production code와 무관한 부분
 
 ## (기록용) 사용 라이브러리
-- 그래프: Highcharts
+- 그래프: ChartJS
 - Carousel(회전목마 슬라이드): react-slack
