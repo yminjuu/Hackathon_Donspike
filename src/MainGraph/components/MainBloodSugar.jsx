@@ -4,8 +4,13 @@ import { commonChartTitle } from '../../common/styles/commonStyles';
 import styled from 'styled-components';
 import MainBloodSugarIcon from '../assets/imgs/MainBloodSugarIcon.svg?react';
 import AddMealButton from '../assets/imgs/AddMealButton.svg?react';
+import { Navigate, Route } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const MainBloodSugar = () => {
+  // 특정 action이 발생했을 때 어떤 주소로 이동할 수 있게 해준다.
+  const navigate = useNavigate();
+
   return (
     <>
       {/* 제목 */}
@@ -21,7 +26,14 @@ const MainBloodSugar = () => {
               <br />
               <AddSpan>식단</AddSpan>도 함께 추가하시면 더욱 정확한 기록이 가능합니다.
             </AddInfo>
-            <AddMealButton>식단 추가하기</AddMealButton>
+            <ButtonWrapper
+              role="button"
+              onClick={() => {
+                navigate('/addMeal');
+              }}
+            >
+              <AddMealButton>식단 추가하기</AddMealButton>
+            </ButtonWrapper>
           </InfoWrapper>
           <MainBloodSugarChart></MainBloodSugarChart>
         </Graph_DiscriptSec>
@@ -97,6 +109,13 @@ const AddInfo = styled.div`
   line-height: normal;
 
   opacity: var(--sds-size-stroke-border);
+`;
+
+const ButtonWrapper = styled.div`
+  cursor: pointer;
+  width: 6.5rem;
+  height: 2.375rem;
+  flex-shrink: 0;
 `;
 
 const AddSpan = styled.span`
