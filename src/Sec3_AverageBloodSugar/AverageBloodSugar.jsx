@@ -1,8 +1,8 @@
-import AverageBloodSugarChart from '../../Graphs/components/AverageBloodSugarChart';
+import AverageBloodSugarChart from '../Graphs/components/AverageBloodSugarChart';
 import styled from 'styled-components';
-import { commonGraphWrapper } from '../../common/styles/commonStyles';
-import { commonChartTitle } from '../../common/styles/commonStyles';
-import AverageGraphToolTip from './AverageGraphToolTip';
+import { commonGraphWrapper } from '../common/styles/commonStyles';
+import { commonChartTitle } from '../common/styles/commonStyles';
+import AverageGraphToolTip from './components/AverageGraphToolTip';
 
 const AverageBloodSugar = () => {
   return (

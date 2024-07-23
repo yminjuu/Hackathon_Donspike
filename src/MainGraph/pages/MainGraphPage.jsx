@@ -1,7 +1,7 @@
 import MainHeader from '../../common/components/MainHeader';
-import MainBloodSugar from '../components/MainBloodSugar';
-import AverageBloodSugar from '../components/AverageBloodSugar';
-import FoodBar from '../components/FoodBar';
+import MainBloodSugar from '../../Sec1_MainBloodSugar/MainBloodSugar';
+import AverageBloodSugar from '../../Sec3_AverageBloodSugar/AverageBloodSugar';
+import FoodBar from '../../Sec2_FoodBar/FoodBar';
 
 import styled from 'styled-components';
 import background from '../assets/imgs/background.svg';
