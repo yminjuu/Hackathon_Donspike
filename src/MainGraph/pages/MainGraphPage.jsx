@@ -1,7 +1,7 @@
 import MainHeader from '../../common/components/MainHeader';
-import MainBloodSugar from '../components/MainBloodSugar';
-import AverageBloodSugar from '../components/AverageBloodSugar';
-import FoodBar from '../components/FoodBar';
+import MainBloodSugar from '../../Sec1_MainBloodSugar/MainBloodSugar';
+import AverageBloodSugar from '../../Sec3_AverageBloodSugar/AverageBloodSugar';
+import FoodBar from '../../Sec2_FoodBar/FoodBar';
 
 import styled from 'styled-components';
 import background from '../assets/imgs/background.svg';
@@ -22,7 +22,6 @@ const MainGraphPage = () => {
               <path d="M1 0.5L1291 0.5" stroke="#CFCFCF" stroke-linecap="round" />
             </svg>
           </HorizonWrapper>
-
           {/* 하단 그래프 2개 섹션*/}
           <SectionWrapper2>
             <FoodBar></FoodBar>

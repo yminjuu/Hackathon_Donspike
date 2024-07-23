@@ -1,11 +1,11 @@
-import MainBloodSugarChart from '../../Graphs/components/MainBloodSugarChart';
-import { commonGraphWrapper } from '../../common/styles/commonStyles';
-import { commonChartTitle } from '../../common/styles/commonStyles';
+import MainBloodSugarChart from '../Graphs/components/MainBloodSugarChart';
+import { commonGraphWrapper } from '../common/styles/commonStyles';
+import { commonChartTitle } from '../common/styles/commonStyles';
 import styled from 'styled-components';
-import MainBloodSugarIcon from '../assets/imgs/MainBloodSugarIcon.svg?react';
-import AddMealButton from '../assets/imgs/AddMealButton.svg?react';
-import { Navigate, Route } from 'react-router-dom';
+import MainBloodSugarIcon from './assets/imgs/MainBloodSugarIcon.svg?react';
+import AddMealButton from './assets/imgs/AddMealButton.svg?react';
 import { useNavigate } from 'react-router-dom';
+import RecordBloodSugar from './components/RecordBloodSugar';
 
 const MainBloodSugar = () => {
   // 특정 action이 발생했을 때 어떤 주소로 이동할 수 있게 해준다.
@@ -37,7 +37,8 @@ const MainBloodSugar = () => {
           </InfoWrapper>
           <MainBloodSugarChart></MainBloodSugarChart>
         </Graph_DiscriptSec>
-        <RecordSec>{/* 혈당 기록 섹션 */}</RecordSec>
+        {/* 혈당기록섹션 */}
+        <RecordBloodSugar></RecordBloodSugar>
       </ChartWrapper>
     </>
   );
@@ -75,19 +76,6 @@ const Graph_DiscriptSec = styled.div`
   width: 62.5%;
   display: flex;
   flex-direction: column;
-`;
-
-// 혈당 기록하기 섹션
-const RecordSec = styled.div`
-  width: 28.75%;
-  height: 20.75rem;
-  flex-shrink: 0;
-  margin: 2.06rem 1.5rem 3.12rem;
-
-  border-radius: 0.625rem;
-  background: #fff;
-  /* drop-shadow */
-  box-shadow: 2px 4px 10px 2px var(--Grayscale-10, #e8e8e8);
 `;
 
 // 설명 + 식단 추가 버튼의 wrapper

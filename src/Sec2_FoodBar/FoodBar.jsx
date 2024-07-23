@@ -1,7 +1,7 @@
-import FoodBarChart from '../../Graphs/components/FoodBarChart';
+import FoodBarChart from '../Graphs/components/FoodBarChart';
 import styled from 'styled-components';
-import { commonGraphWrapper } from '../../common/styles/commonStyles';
-import { commonChartTitle } from '../../common/styles/commonStyles';
+import { commonGraphWrapper } from '../common/styles/commonStyles';
+import { commonChartTitle } from '../common/styles/commonStyles';
 
 const FoodBar = () => {
   return (
