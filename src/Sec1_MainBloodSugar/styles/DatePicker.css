@@ -3,7 +3,7 @@
 
 .react-datepicker {
     width: 17.5rem;
-    height: 16.25rem;
+    height: 15.5rem;
 
     display: flex;
     align-items: center;
@@ -23,7 +23,7 @@
     .react-datepicker__header {
         background-color: #FFFFFF;
         border :none;
-        padding: 0.8rem;
+        padding: 0.4rem;
         
         .react-datepicker__day-names {
 
