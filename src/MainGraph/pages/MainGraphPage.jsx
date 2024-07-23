@@ -22,7 +22,6 @@ const MainGraphPage = () => {
               <path d="M1 0.5L1291 0.5" stroke="#CFCFCF" stroke-linecap="round" />
             </svg>
           </HorizonWrapper>
-
           {/* 하단 그래프 2개 섹션*/}
           <SectionWrapper2>
             <FoodBar></FoodBar>

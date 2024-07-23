@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Button from '../assets/imgs/RecordBSBtn.svg?react';
-import Datepicker from '../../MainGraph/components/Datepicker';
+import Datepicker from './Datepicker';
 
 const RecordBloodSugar = () => {
   return (
