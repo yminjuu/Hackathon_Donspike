@@ -11,7 +11,7 @@ const MainHeader = () => {
             {/* 검색 아이콘 svg */}
             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
               <circle cx="6.08703" cy="6.08703" r="5.32615" stroke="white" stroke-width="1.52176" />
-              <path d="M12.1741 12.1738L16 15.9998" stroke="white" stroke-width="1.52176" stroke-linecap="round" />
+              <path d="M12.1741 12.1738L16 15.9998" stroke="white" strokeWidth="1.52176" strokeLinecap="round" />
             </svg>
             푸드위키
           </FoodWikiButtonWrapper>

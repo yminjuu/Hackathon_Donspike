@@ -19,7 +19,7 @@ const MainGraphPage = () => {
           {/* 구분선 추가 */}
           <HorizonWrapper>
             <svg xmlns="http://www.w3.org/2000/svg" width="1292" height="1" viewBox="0 0 1292 1" fill="none">
-              <path d="M1 0.5L1291 0.5" stroke="#CFCFCF" stroke-linecap="round" />
+              <path d="M1 0.5L1291 0.5" stroke="#CFCFCF" strokeLinecap="round" />
             </svg>
           </HorizonWrapper>
           {/* 하단 그래프 2개 섹션*/}
