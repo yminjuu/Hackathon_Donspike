@@ -63,13 +63,13 @@ const SearchBox = () => {
             {searchstate === true ? <SearchReset></SearchReset> : <SearchButton></SearchButton>}
           </BtnWrapper>
         </InputBoxWrapper>
-        {/* {searchState === true ? <StyledNoResult>일치하는 결과가 없습니다.</StyledNoResult> : <></>} */}
+        {searchstate === true ? <StyledNoResult>일치하는 결과가 없습니다.</StyledNoResult> : <></>}
         {/* searchState===true이고 API 결과가 빈 배열 => 일치하는 결과가 없습니다*/}
-        {searchstate === true ? (
+        {/* {searchstate === true ? (
           <SearchItem food_id="1" food_name="흰쌀밥" food_info="한 공기" addedState={false}></SearchItem>
         ) : (
           <></>
-        )}
+        )} */}
         {/* searchState===false이고 API 결과가 있음 => 알맞게 아이템을 만들어서 해당 컴포넌트를 반환 (클릭 이벤트 필요) */}
       </Wrapper>
       <TransparentWrapper>
@@ -116,7 +116,9 @@ const Wrapper = styled.div`
 
   // input 창이 focus 받으면
   &:focus-within {
-    ${props =>
+    box-shadow: none;
+    box-shadow: 2px 2px 4px 2px #c1ccfe;
+    /* ${props =>
       props.$searchstate === true
         ? // 다중 속성을 사용
           css`
@@ -125,7 +127,7 @@ const Wrapper = styled.div`
         : css`
             box-shadow: none;
             box-shadow: 2px 2px 4px 2px #c1ccfe;
-          `};
+          `}; */
   }
 `;
 

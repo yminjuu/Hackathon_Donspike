@@ -17,11 +17,11 @@ const FoodNavigationSection = () => {
   const [navstate, setNavstate] = useState('freq');
   // freq, onHand
 
-  const onNavClick = () => {
-    if (navstate === 'freq') {
+  const onNavClick = navkey => {
+    if (navstate === 'freq' && navkey === 'onHand') {
       // API GET : 자주 먹었어요! 데이터 받아서 알맞게 뿌리기
       setNavstate('onHand');
-    } else {
+    } else if (navstate === 'onHand' && navkey === 'freq') {
       setNavstate('freq');
     }
   };
@@ -33,10 +33,22 @@ const FoodNavigationSection = () => {
     <>
       <PageBackground>
         <NavWrapper>
-          <NavItem onClick={onNavClick} $navstate={navstate} $navkey="freq">
+          <NavItem
+            onClick={() => {
+              onNavClick('freq');
+            }}
+            $navstate={navstate}
+            $navkey="freq"
+          >
             자주 먹었어요!
           </NavItem>
-          <NavItem onClick={onNavClick} $navstate={navstate} $navkey="onHand">
+          <NavItem
+            onClick={() => {
+              onNavClick('onHand');
+            }}
+            $navstate={navstate}
+            $navkey="onHand"
+          >
             직접 등록해요!
           </NavItem>
         </NavWrapper>

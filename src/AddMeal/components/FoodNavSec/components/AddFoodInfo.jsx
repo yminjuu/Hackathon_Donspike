@@ -1,6 +1,7 @@
 import { css, styled } from 'styled-components';
 import AddFoodDoneBtn from '../imgs/AddFoodDoneBtn.svg?react';
 import AddFoodBtn from '../imgs/AddFoodBtn.svg?react';
+import DisableBtn from '../imgs/AddFoodBtnDisable.svg?react';
 import ResetBtn from '../imgs/ResetBtn.svg?react';
 import Horizon from '../imgs/Horizon.svg?react';
 import Essential from '../imgs/Essential.svg?react';
@@ -10,12 +11,25 @@ import { useState } from 'react';
 
 // 직접 음식 등록하기
 const AddFoodInfo = () => {
-  const [foodname, setFoodname] = useState();
+  const [foodname, setFoodname] = useState('');
   const foodNameRef = useRef();
 
+  const [regstate, setRegState] = useState(false);
+
   const onContentChange = e => {
-    console.log('입력');
     setFoodname(e.target.value);
+    if (regstate === true) setRegState(false);
+  };
+
+  const onRegBtn = () => {
+    console.log('등록 버튼 눌림');
+    setFoodname('');
+    setRegState(true);
+  };
+
+  const onResetBtn = () => {
+    setFoodname('');
+    setRegState(false);
   };
 
   const FormInfo = [
@@ -26,13 +40,9 @@ const AddFoodInfo = () => {
     { index: '지방', unit: 'g' },
   ];
 
-  const onRegBtn = () => {
-    console.log('등록 버튼 눌림');
-  };
-
   return (
     <Wrapper>
-      <ResetWrapper>
+      <ResetWrapper onClick={onResetBtn}>
         <ResetBtn></ResetBtn>
         입력 초기화
       </ResetWrapper>
@@ -72,7 +82,13 @@ const AddFoodInfo = () => {
         </UnitWrapper>
       </InfoWrapper>
       <ButtonWrapper onClick={onRegBtn}>
-        {foodname !== '' ? <AddFoodBtn></AddFoodBtn> : <AddFoodDoneBtn></AddFoodDoneBtn>}
+        {regstate === true ? (
+          <AddFoodDoneBtn></AddFoodDoneBtn>
+        ) : foodname !== '' ? (
+          <AddFoodBtn></AddFoodBtn>
+        ) : (
+          <DisableBtn></DisableBtn>
+        )}
       </ButtonWrapper>
     </Wrapper>
   );
@@ -138,7 +154,7 @@ const TitleTextWrapper = styled.div`
 const HorizonWrapper = styled.div`
   width: 35rem;
   height: 2.625rem;
-  margin: 1.5rem 0rem;
+  margin: 1rem 0rem;
 
   display: flex;
   justify-content: space-between;
