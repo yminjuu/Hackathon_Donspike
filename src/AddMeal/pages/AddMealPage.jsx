@@ -49,9 +49,13 @@ const PageBackground = styled.div`
 
 const ButtonWrapper = styled.div`
   cursor: pointer;
-  width: 0.875rem;
-  height: 0.875rem;
+  width: 5rem;
+  height: 2.5rem;
   flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const HeaderWrapper = styled.div`

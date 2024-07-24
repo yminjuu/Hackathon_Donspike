@@ -22,7 +22,7 @@ const SearchSection = () => {
 
 const PageBackground = styled.div`
   width: 100%;
-  height: 23%;
+  height: 8.3rem;
   flex-shrink: 0;
 
   background-color: #ffffff;
