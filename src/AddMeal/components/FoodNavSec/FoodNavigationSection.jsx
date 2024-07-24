@@ -1,31 +1,52 @@
 import { useState } from 'react';
 import { css, styled } from 'styled-components';
+import OftFoodItem from '../FoodNavSec/components/OftFoodItem';
+import AddFoodInfo from '../FoodNavSec/components/AddFoodInfo';
 
 const FoodNavigationSection = () => {
+  // dummy data
+  const dummyFoodData = [
+    { food_id: 1, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
+    { food_id: 2, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'true' },
+    { food_id: 3, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
+    { food_id: 4, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'true' },
+    { food_id: 5, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
+    { food_id: 6, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'true' },
+  ];
+
   const [navstate, setNavstate] = useState('freq');
   // freq, onHand
 
   const onNavClick = () => {
     if (navstate === 'freq') {
-      // API GET : 자주 먹었어요!
+      // API GET : 자주 먹었어요! 데이터 받아서 알맞게 뿌리기
       setNavstate('onHand');
     } else {
       setNavstate('freq');
     }
   };
 
+  // 직접 음식 등록
+  const onFoodReg = () => {};
+
   return (
     <>
       <PageBackground>
         <NavWrapper>
-          <NavItem onClick={onNavClick} navstate={navstate} navkey="freq">
+          <NavItem onClick={onNavClick} $navstate={navstate} $navkey="freq">
             자주 먹었어요!
           </NavItem>
-          <NavItem onClick={onNavClick} navstate={navstate} navkey="onHand">
+          <NavItem onClick={onNavClick} $navstate={navstate} $navkey="onHand">
             직접 등록해요!
           </NavItem>
         </NavWrapper>
-        <ItemsWrapper></ItemsWrapper>
+        <ItemsWrapper $navstate={navstate}>
+          {navstate === 'freq' ? (
+            dummyFoodData.map(item => <OftFoodItem key={item.food_id} {...item}></OftFoodItem>)
+          ) : (
+            <AddFoodInfo></AddFoodInfo>
+          )}
+        </ItemsWrapper>
       </PageBackground>
     </>
   );
@@ -71,7 +92,7 @@ const NavItem = styled.div`
   line-height: normal;
 
   ${props =>
-    props.navstate === props.navkey
+    props.$navstate === props.$navkey
       ? // 현재 state가 해당 버튼이 눌린 상태라면
         css`
           background: #111111;
@@ -89,7 +110,23 @@ const ItemsWrapper = styled.div`
   height: 27rem;
   flex-shrink: 0;
 
-  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  overflow-y: scroll;
+
+  ${props =>
+    props.$navstate === 'onHand'
+      ? css`
+          background-color: white;
+          border-radius: 1rem;
+          box-shadow: 2px 4px 10px #e8e8e8;
+          height: 30rem;
+        `
+      : css`
+          background-color: transparent;
+        `}
 `;
 
 export default FoodNavigationSection;

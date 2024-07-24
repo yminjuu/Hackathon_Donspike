@@ -19,12 +19,12 @@ const AddMealPage = () => {
             }}
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M15 1.03955L1.08631 14.9998" stroke="#414141" stroke-width="1.96769" stroke-linecap="round" />
+              <path d="M15 1.03955L1.08631 14.9998" stroke="#414141" strokeWidth="1.96769" strokeLinecap="round" />
               <path
                 d="M14.9136 14.9604L0.999885 1.00018"
                 stroke="#414141"
-                stroke-width="1.96769"
-                stroke-linecap="round"
+                strokeWidth="1.96769"
+                strokeLinecap="round"
               />
             </svg>
           </ButtonWrapper>
