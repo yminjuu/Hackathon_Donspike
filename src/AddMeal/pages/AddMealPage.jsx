@@ -29,8 +29,10 @@ const AddMealPage = () => {
             </svg>
           </ButtonWrapper>
         </HeaderWrapper>
-        <SearchSection></SearchSection>
-        <FoodNavigationSection></FoodNavigationSection>
+        <ContentWrapper>
+          <SearchSection></SearchSection>
+          <FoodNavigationSection></FoodNavigationSection>
+        </ContentWrapper>
       </PageBackground>
     </>
   );
@@ -45,6 +47,13 @@ const PageBackground = styled.div`
   height: 100vh;
 
   background-color: #f0f1f5;
+`;
+
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ButtonWrapper = styled.div`
