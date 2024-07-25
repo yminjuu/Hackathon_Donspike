@@ -16,9 +16,8 @@ const FoodWikiSearch = () => {
 };
 
 const MainWrapper = styled.div`
+  margin-top: 3rem;
   color: #414141;
-
-  /* Pretendard/Reg/20 */
 
   font-size: 1.25rem;
   font-weight: 400;
