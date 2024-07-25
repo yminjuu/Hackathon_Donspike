@@ -1,11 +1,17 @@
 import styled from 'styled-components';
-import ExampleImg from '../FoodWiki/exImg.svg';
+import ExampleImg from '../../imgs/exSearchImg.svg';
+import { useNavigate } from 'react-router-dom';
 
 const FoodWikiItem = ({ food_id, food_name }) => {
+  const navigate = useNavigate();
+
   const onItemClick = () => {
     console.log('아이템 클릭');
-    // API GET => 존재하면 FoodInfoPage로 넘어감
+
+    // API GET => 존재하는 경우에만 FoodInfoPage로 넘어감
+    navigate('/foodWiki/search?query=사과');
   };
+
   return (
     <>
       <InfoWrapper onClick={onItemClick}>
@@ -37,7 +43,7 @@ const FoodImg = styled.img`
   height: 4.375rem;
   flex-shrink: 0;
 
-  background: url(${ExampleImg}) lightgray -22.738px 0px / 149.883% 100% no-repeat;
+  background: url(${ExampleImg});
 `;
 const FoodTitle = styled.div`
   color: #111111;

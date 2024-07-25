@@ -75,7 +75,7 @@ const SearchBox = ({ type }) => {
         {/* <SeachSection> searchState===false이고 API 결과가 있음 => 알맞게 아이템을 만들어서 해당 컴포넌트를 반환 (클릭 이벤트 필요) */}
 
         {searchstate === true && type === 'FoodWiki' ? (
-          <FoodWikiItem food_id="1" food_name="흰쌀밥"></FoodWikiItem>
+          <FoodWikiItem food_id="1" food_name="사과"></FoodWikiItem>
         ) : (
           <></>
         )}

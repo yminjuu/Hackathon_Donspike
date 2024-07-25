@@ -23,7 +23,7 @@ const router = createBrowserRouter([
   },
   { path: '/addMeal', element: <AddMealPage></AddMealPage> },
   {
-    path: '/foodSearch:food',
+    path: '/foodWiki/search',
     element: <FoodInfoPage></FoodInfoPage>,
   },
   {
