@@ -1,8 +1,9 @@
 import MainHeader from '../../common/components/MainHeader';
-import BackgroundPtrn from '../imgs/BackgroundPtrn';
+import Background from '../imgs/Background.svg';
 import styled from 'styled-components';
 import Taco from '../imgs/Taco.svg?react';
 import { keyframes } from 'styled-components';
+import SearchBox from '../../common/components/SearchBox';
 
 const FoodWikiPage = () => {
   return (
@@ -13,6 +14,7 @@ const FoodWikiPage = () => {
           <RotatingTaco></RotatingTaco>
           <Title>푸드위키</Title>
           <Description>음식을 검색해보세요! 혈당 관리에 도움이 되는 방법을 함께 알려드릴게요.</Description>
+          <SearchBox type="FoodWiki"></SearchBox>
         </MainWrapper>
       </PageBackground>
     </>
@@ -20,14 +22,10 @@ const FoodWikiPage = () => {
 };
 
 const PageBackground = styled.div`
-  width: 100%;
-  height: 100%;
+  background-image: url(${Background});
+  background-size: cover;
 
-  background-position: center;
-  background-size: cover; /* 이미지를 화면 크기에 맞게 조절 */
-  background-repeat: no-repeat; /* 이미지가 반복되지 않도록 설정 */
-
-  background-image: url(${BackgroundPtrn});
+  position: relative;
 `;
 
 const MainWrapper = styled.div`
@@ -39,6 +37,9 @@ const MainWrapper = styled.div`
   font-weight: 400;
   display: flex;
   flex-direction: column;
+  align-items: center;
+
+  z-index: 0;
 `;
 
 const Title = styled.div`
@@ -46,7 +47,7 @@ const Title = styled.div`
 
   /* Pretendard/Sb/50 */
 
-  font-size: 3.125rem;
+  font-size: 2.5rem;
   font-weight: 600;
 `;
 
@@ -55,8 +56,10 @@ const Description = styled.div`
 
   /* Pretendard/Reg/20 */
 
-  font-size: 1.25rem;
+  font-size: 0.8rem;
   font-weight: 400;
+
+  margin: 2rem;
 `;
 
 const skew = keyframes`

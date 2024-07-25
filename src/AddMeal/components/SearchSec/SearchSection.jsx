@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import SearchBox from './components/SearchBox';
+import SearchBox from '../../../common/components/SearchBox';
 
 const SearchSection = () => {
   let today = new Date();
@@ -14,7 +14,7 @@ const SearchSection = () => {
           </TodayDate>
           에 먹은 음식을 추가해주세요!
         </Info>
-        <SearchBox></SearchBox>
+        <SearchBox type="SearchSection"></SearchBox>
       </PageBackground>
     </>
   );
@@ -57,7 +57,7 @@ const TodayDate = styled.div`
 
   font-size: 1.3rem;
   font-weight: 600;
-  border-radius: 1.875rem;
+
   opacity: var(--sds-size-stroke-border);
   background: #ebeeff;
 

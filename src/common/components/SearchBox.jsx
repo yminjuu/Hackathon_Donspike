@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import Hamburger from '../imgs/Hamburger.svg?react';
-import FrenchFries from '../imgs/FrenchFries.svg?react';
-import SearchButton from '../imgs/SearchButton.svg?react';
-import SearchReset from '../imgs/SearchReset.svg?react';
+import Hamburger from '../../AddMeal/components/SearchSec/imgs/Hamburger.svg?react';
+import FrenchFries from '../../AddMeal/components/SearchSec/imgs/FrenchFries.svg?react';
+import SearchButton from '../assets/imgs/SearchButton.svg?react';
+import SearchReset from '../assets/imgs/SearchReset.svg?react';
 import { useState, useRef, useEffect } from 'react';
 import { css } from 'styled-components';
-import SearchItem from './SearchItem';
+import SearchItem from '../../AddMeal/components/SearchSec/components/SearchItem';
 
-const SearchBox = () => {
+const SearchBox = ({ type }) => {
   // 검색어 관리
   const [searchText, setSearchText] = useState('');
 
@@ -72,10 +72,15 @@ const SearchBox = () => {
         )} */}
         {/* searchState===false이고 API 결과가 있음 => 알맞게 아이템을 만들어서 해당 컴포넌트를 반환 (클릭 이벤트 필요) */}
       </Wrapper>
-      <TransparentWrapper>
-        <StyledHamb></StyledHamb>
-        <StyledFrench></StyledFrench>
-      </TransparentWrapper>
+      {/* 위치가 SearchSection 일 때에만 디자인 추가*/}
+      {type === 'SearchSection' ? (
+        <TransparentWrapper>
+          <StyledHamb></StyledHamb>
+          <StyledFrench></StyledFrench>
+        </TransparentWrapper>
+      ) : (
+        <></>
+      )}
     </Container>
   );
 };
