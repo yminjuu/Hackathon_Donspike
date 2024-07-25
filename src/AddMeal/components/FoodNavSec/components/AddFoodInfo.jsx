@@ -100,6 +100,7 @@ const Wrapper = styled.div`
 
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
 `;
 
@@ -113,17 +114,15 @@ const ResetWrapper = styled.div`
   justify-content: right;
   gap: 0.2rem;
 
-  padding-top: 1.5rem;
+  padding-top: 1rem;
   padding-right: 2.5rem;
 
   color: #707070;
 
   /* Pretendard/Md/12 */
-  font-family: Pretendard;
+
   font-size: 0.75rem;
-  font-style: normal;
   font-weight: 500;
-  line-height: normal;
 `;
 
 const TitleWrapper = styled.div`
@@ -140,12 +139,9 @@ const TitleTextWrapper = styled.div`
   color: #111111;
 
   /* Pretendard/Sb/18 */
-  font-family: Pretendard;
-  font-size: 1.125rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
 
+  font-size: 1.125rem;
+  font-weight: 600;
   display: flex;
   flex-direction: row;
   justify-content: left;
@@ -153,7 +149,7 @@ const TitleTextWrapper = styled.div`
 
 const HorizonWrapper = styled.div`
   width: 35rem;
-  height: 2.625rem;
+  height: 2rem;
   margin: 1rem 0rem;
 
   display: flex;
@@ -165,16 +161,14 @@ const HorizonText = styled.div`
   color: var(--Grayscale-40, #a0a0a0);
 
   /* Pretendard/Md/12 */
-  font-family: Pretendard;
+
   font-size: 0.75rem;
-  font-style: normal;
   font-weight: 500;
-  line-height: normal;
 `;
 
 const InfoWrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: auto;
   display: flex;
   flex-direction: row;
 `;
@@ -209,9 +203,7 @@ const UnitWrapper = styled.div`
 const TitleText = styled.span`
   color: #111111;
 
-  font-family: Pretendard;
   font-size: 1.125rem;
-  font-style: normal;
   font-weight: 600;
 
   text-align: center;
@@ -223,9 +215,7 @@ const Text = styled.div`
   height: 2.5rem;
   color: #111111;
 
-  font-family: Pretendard;
   font-size: 1.125rem;
-  font-style: normal;
   font-weight: 600;
 
   text-align: left;
@@ -240,11 +230,9 @@ const LittleText = styled.div`
   color: #707070;
 
   /* Pretendard/Md/12 */
-  font-family: Pretendard;
+
   font-size: 0.7rem;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
 `;
 const BigInput = styled.input`
   outline: none;
@@ -279,11 +267,9 @@ const SmallInput = styled.input`
   border-radius: 1rem;
 
   color: #111111;
-  font-family: Pretendard;
+
   font-size: 0.8rem;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
   text-align: left;
   padding: 0.2rem 1rem;
 `;
@@ -293,9 +279,8 @@ const Unit = styled.span`
   color: #707070;
 
   /* Pretendard/Md/14 */
-  font-family: Pretendard;
+
   font-size: 0.875rem;
-  font-style: normal;
   font-weight: 500;
   line-height: 2.5rem;
 
@@ -304,7 +289,7 @@ const Unit = styled.span`
 
 const ButtonWrapper = styled.div`
   cursor: pointer;
-  margin-bottom: 0.88rem;
+  margin-bottom: 0.3rem;
 `;
 
 export default AddFoodInfo;

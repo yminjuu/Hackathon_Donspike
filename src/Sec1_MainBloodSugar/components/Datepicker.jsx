@@ -62,7 +62,6 @@ const CustomDatePicker = styled(DatePicker)`
   color: #414141;
   font-family: 'Segoe UI';
   font-size: 1.02rem;
-  font-style: normal;
   font-weight: 600;
   letter-spacing: 0.03rem;
 

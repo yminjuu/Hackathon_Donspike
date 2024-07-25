@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 import LogoButton from './LogoButton';
+import { useNavigate } from 'react-router-dom';
 
 const MainHeader = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <StyledMainHeader>
         <LogoButton></LogoButton>
         <StyledNav>
-          <FoodWikiButtonWrapper>
+          <FoodWikiButtonWrapper onClick={() => navigate('/foodWiki')}>
             {/* 검색 아이콘 svg */}
             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
               <circle cx="6.08703" cy="6.08703" r="5.32615" stroke="white" stroke-width="1.52176" />
@@ -23,7 +26,7 @@ const MainHeader = () => {
 
 const StyledMainHeader = styled.header`
   width: 100%;
-  height: 6.9%; //전체 화면에 대해 8%
+  height: 8%;
   position: sticky;
   top: 0;
   z-index: 1;
@@ -61,11 +64,9 @@ const FoodWikiButtonWrapper = styled.button`
 
   color: var(--Grayscale-White, #fff);
   /* Pretendard/Sb/16 */
-  font-family: Pretendard;
+
   font-size: 0.8rem;
-  font-style: normal;
   font-weight: 600;
-  line-height: normal;
 `;
 
 export default MainHeader;

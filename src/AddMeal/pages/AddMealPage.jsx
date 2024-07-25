@@ -1,7 +1,7 @@
 import SearchSection from '../components/SearchSec/SearchSection';
 import FoodNavigationSection from '../components/FoodNavSec/FoodNavigationSection';
 import styled from 'styled-components';
-import Logo from '../../common/assets/imgs/Logo.svg?react';
+import LogoButton from '../../common/components/LogoButton';
 import { useNavigate } from 'react-router-dom';
 
 const AddMealPage = () => {
@@ -11,7 +11,7 @@ const AddMealPage = () => {
     <>
       <PageBackground>
         <HeaderWrapper>
-          <Logo></Logo>
+          <LogoButton></LogoButton>
           {/* x 버튼 svg 태그 */}
           <ButtonWrapper
             onClick={() => {
@@ -43,8 +43,8 @@ const AddMealPage = () => {
 
 const PageBackground = styled.div`
   // 사용자가 보는 화면의 크기가 page의 크기가 됨
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 
   background-color: #f0f1f5;
 `;
@@ -59,7 +59,7 @@ const ContentWrapper = styled.div`
 const ButtonWrapper = styled.div`
   cursor: pointer;
   width: 5rem;
-  height: 2.5rem;
+  height: 5rem;
   flex-shrink: 0;
 
   display: flex;
@@ -69,7 +69,7 @@ const ButtonWrapper = styled.div`
 
 const HeaderWrapper = styled.div`
   height: 2rem;
-  padding: 2.5rem;
+  padding: 1.5rem;
   background-color: #ffffff;
 
   display: flex;

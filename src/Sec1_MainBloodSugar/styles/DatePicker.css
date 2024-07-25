@@ -12,7 +12,7 @@
     font-feature-settings: 'clig' off, 'liga' off;
     font-family: "Segoe UI";
     font-size: 0.89056rem;
-    font-style: normal;
+    ;
     font-weight: 700;
     line-height: 1.06869rem; /* 120% */
     letter-spacing: 0.01694rem;
@@ -66,7 +66,7 @@
     font-feature-settings: 'clig' off, 'liga' off;
     font-family: "Segoe UI";
     font-size: 0.9rem;
-    font-style: normal;
+    ;
     font-weight: 400;
 }
 

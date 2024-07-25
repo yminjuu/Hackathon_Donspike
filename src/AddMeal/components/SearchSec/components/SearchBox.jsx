@@ -158,21 +158,15 @@ const StyledInput = styled.input`
   color: #a0a0a0;
 
   /* Pretendard/Reg/20 */
-  font-family: Pretendard;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
 
+  font-size: 1rem;
+  font-weight: 400;
   border: none;
   outline: none;
 
   &::placeholder {
-    font-family: Pretendard;
     font-size: 1rem;
-    font-style: normal;
     font-weight: 400;
-    line-height: normal;
     color: #a0a0a0;
   }
 `;
@@ -215,9 +209,8 @@ const StyledNoResult = styled.div`
   color: #414141;
 
   /* Pretendard/Reg/16 */
-  font-family: Pretendard;
+
   font-size: 0.9rem;
-  font-style: normal;
   font-weight: 500;
   line-height: 6.66rem;
 `;

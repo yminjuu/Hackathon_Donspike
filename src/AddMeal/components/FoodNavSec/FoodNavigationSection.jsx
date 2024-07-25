@@ -97,11 +97,8 @@ const NavItem = styled.div`
   justify-content: center;
   align-items: center;
 
-  font-family: Pretendard;
   font-size: 1rem;
-  font-style: normal;
   font-weight: 600;
-  line-height: normal;
 
   ${props =>
     props.$navstate === props.$navkey

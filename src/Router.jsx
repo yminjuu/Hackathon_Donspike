@@ -5,6 +5,7 @@ import JoinPage from './Join/pages/JoinPage';
 import MainGraphPage from './MainGraph/pages/MainGraphPage';
 import FoodInfoPage from './FoodWiki/pages/FoodInfoPage';
 import AddMealPage from './AddMeal/pages/AddMealPage';
+import FoodWikiPage from './FoodWiki/pages/FoodWikiPage';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: '/foodSearch:food',
     element: <FoodInfoPage></FoodInfoPage>,
+  },
+  {
+    path: '/foodWiki',
+    element: <FoodWikiPage></FoodWikiPage>,
   },
 ]);
 
