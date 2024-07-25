@@ -6,6 +6,7 @@ import SearchReset from '../assets/imgs/SearchReset.svg?react';
 import { useState, useRef, useEffect } from 'react';
 import { css } from 'styled-components';
 import SearchItem from '../../AddMeal/components/SearchSec/components/SearchItem';
+import FoodWikiItem from '../../FoodWiki/components/FoodWiki/FoodWikiItem';
 
 const SearchBox = ({ type }) => {
   // 검색어 관리
@@ -44,7 +45,7 @@ const SearchBox = ({ type }) => {
 
   return (
     <Container>
-      <Wrapper $searchstate={searchstate}>
+      <Wrapper $searchstate={searchstate} $type={type}>
         <InputBoxWrapper $searchstate={searchstate}>
           <StyledInput
             // 키보드 Enter 클릭시 검색 가능
@@ -63,14 +64,22 @@ const SearchBox = ({ type }) => {
             {searchstate === true ? <SearchReset></SearchReset> : <SearchButton></SearchButton>}
           </BtnWrapper>
         </InputBoxWrapper>
-        {searchstate === true ? <StyledNoResult>일치하는 결과가 없습니다.</StyledNoResult> : <></>}
+        {/* {searchstate === true ? <StyledNoResult>일치하는 결과가 없습니다.</StyledNoResult> : <></>} */}
         {/* searchState===true이고 API 결과가 빈 배열 => 일치하는 결과가 없습니다*/}
-        {/* {searchstate === true ? (
+
+        {/* {searchstate === true && type === 'SearchSection' ? (
           <SearchItem food_id="1" food_name="흰쌀밥" food_info="한 공기" addedState={false}></SearchItem>
         ) : (
           <></>
         )} */}
-        {/* searchState===false이고 API 결과가 있음 => 알맞게 아이템을 만들어서 해당 컴포넌트를 반환 (클릭 이벤트 필요) */}
+        {/* <SeachSection> searchState===false이고 API 결과가 있음 => 알맞게 아이템을 만들어서 해당 컴포넌트를 반환 (클릭 이벤트 필요) */}
+
+        {searchstate === true && type === 'FoodWiki' ? (
+          <FoodWikiItem food_id="1" food_name="흰쌀밥"></FoodWikiItem>
+        ) : (
+          <></>
+        )}
+        {/* <FoodWiki> searchState===false이고 API 결과가 있음 => 알맞게 아이템을 만들어서 해당 컴포넌트를 반환 (클릭 이벤트 필요) */}
       </Wrapper>
       {/* 위치가 SearchSection 일 때에만 디자인 추가*/}
       {type === 'SearchSection' ? (
@@ -119,21 +128,15 @@ const Wrapper = styled.div`
         `
       : css``};
 
-  // input 창이 focus 받으면
-  &:focus-within {
-    box-shadow: none;
-    box-shadow: 2px 2px 4px 2px #c1ccfe;
-    /* ${props =>
-      props.$searchstate === true
-        ? // 다중 속성을 사용
-          css`
-            box-shadow: none;
-          `
-        : css`
+  ${props =>
+    props.$type === 'SearchSection'
+      ? css`
+          &:focus-within {
             box-shadow: none;
             box-shadow: 2px 2px 4px 2px #c1ccfe;
-          `}; */
-  }
+          }
+        `
+      : css``}// input 창이 focus 받으면
 `;
 
 const InputBoxWrapper = styled.div`
