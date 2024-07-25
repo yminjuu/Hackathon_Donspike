@@ -59,12 +59,9 @@ const Title = styled.div`
   color: #111111;
 
   /* Pretendard/Sb/18 */
-  font-family: Pretendard;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
 
+  font-size: 1rem;
+  font-weight: 500;
   margin-bottom: 2.3rem;
 `;
 
@@ -76,12 +73,9 @@ const LabelInput = styled.div`
   color: #414141;
 
   /* Pretendard/Sb/14 */
-  font-family: Pretendard;
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
 
+  font-size: 0.875rem;
+  font-weight: 500;
   margin-bottom: 1.5rem;
 `;
 
@@ -96,11 +90,9 @@ const InputWrapper = styled.div`
   color: #414141;
 
   /* Pretendard/Sb/16 */
-  font-family: Pretendard;
+
   font-size: 1rem;
-  font-style: normal;
   font-weight: 500;
-  line-height: normal;
 `;
 
 const BSInput = styled.input`
@@ -109,12 +101,8 @@ const BSInput = styled.input`
   height: 2.5rem;
   color: #414141;
 
-  font-family: Pretendard;
   font-size: 0.875rem;
-  font-style: normal;
   font-weight: 600;
-  line-height: normal;
-
   background-color: #f0f1f5;
   border-radius: 10px;
   border: none;
@@ -125,11 +113,9 @@ const BSInput = styled.input`
     color: #414141;
 
     /* Pretendard/Sb/14 */
-    font-family: Pretendard;
+
     font-size: 0.875rem;
-    font-style: normal;
     font-weight: 500;
-    line-height: normal;
   }
 `;
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import SearchBox from './components/SearchBox';
+import SearchBox from '../../../common/components/SearchBox';
 
 const SearchSection = () => {
   let today = new Date();
@@ -14,7 +14,7 @@ const SearchSection = () => {
           </TodayDate>
           에 먹은 음식을 추가해주세요!
         </Info>
-        <SearchBox></SearchBox>
+        <SearchBox type="SearchSection"></SearchBox>
       </PageBackground>
     </>
   );
@@ -37,12 +37,9 @@ const Info = styled.div`
   color: #414141;
 
   /* Pretendard/B/24 */
-  font-family: Pretendard;
-  font-size: 1.3rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
 
+  font-size: 1.3rem;
+  font-weight: 600;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -57,13 +54,10 @@ const TodayDate = styled.div`
 
   color: #3053f9;
   /* Pretendard/B/24 */
-  font-family: Pretendard;
-  font-size: 1.3rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
 
-  border-radius: 1.875rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+
   opacity: var(--sds-size-stroke-border);
   background: #ebeeff;
 

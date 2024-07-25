@@ -90,12 +90,9 @@ const AddInfo = styled.div`
   color: var(--Grayscale-80, #414141);
 
   /* Pretendard/Md/16 */
-  font-family: Pretendard;
-  font-size: 0.8rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
 
+  font-size: 0.8rem;
+  font-weight: 400;
   opacity: var(--sds-size-stroke-border);
 `;
 
@@ -111,11 +108,9 @@ const AddSpan = styled.span`
   color: var(--Primary-100, #3053f9);
 
   /* Pretendard/Md/16 */
-  font-family: Pretendard;
+
   font-size: 0.8rem;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
 `;
 
 export default MainBloodSugar;

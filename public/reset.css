@@ -90,6 +90,7 @@ video {
   font-size: 62.6%; /* rem 단위 사용*/
   font: inherit;
   vertical-align: baseline;
+  font-family: Pretendard;
 }
 /* HTML5 display-role reset for older browsers */
 article,

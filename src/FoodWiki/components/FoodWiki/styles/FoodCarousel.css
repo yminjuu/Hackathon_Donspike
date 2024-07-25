@@ -1,0 +1,27 @@
+/* 슬라이드 버튼 */
+.slick-prev, .slick-next{
+    top: 3.5rem;
+    margin: 0 -0.2rem;
+}
+
+/* 슬라이드 커스텀 */
+.slick-list {
+}
+
+/* 개별 슬라이드 */
+.slick-track {
+    border :none;
+}
+
+/* 개별 슬라이드 wrapper */
+.slick-slide {
+    width: 10rem;
+}
+
+.slick-initialized .slick-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 하단 dot */

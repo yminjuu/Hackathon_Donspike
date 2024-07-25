@@ -39,22 +39,16 @@ const InfoWrapper = styled.div`
 const FoodTitle = styled.div`
   color: #111111;
 
-  font-family: Pretendard;
   font-size: 1.125rem;
-  font-style: normal;
   font-weight: 600;
-  line-height: normal;
 `;
 
 const FoodInfo = styled.div`
   color: #414141;
 
   /* Pretendard/Md/12 */
-  font-family: Pretendard;
   font-size: 0.75rem;
-  font-style: normal;
   font-weight: 500;
-  line-height: normal;
 `;
 
 const AddBtnWrapper = styled.div`
