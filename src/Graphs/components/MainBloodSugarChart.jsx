@@ -1,113 +1,62 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Line } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  plugins,
-} from 'chart.js';
+// LineChartComponent.jsx
+import React from 'react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import MainBSToolTip from '../MainBS/MainBSToolTip';
+import CustomizedLabel from '../MainBS/CustomizedLabel';
+import '../styles/MainBloodSugarChart.css';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+// 더미데이터
+const data = [
+  { name: '7/11', bloodsugar: 90, meal: '쌀밥 \n 갓김치' },
+  { name: '7/12', bloodsugar: 125, meal: '쌀밥 \n 갓김치' },
+  { name: '7/13', bloodsugar: 90, meal: '쌀밥 \n 갓김치' },
+  { name: '7/14', bloodsugar: 125, meal: '쌀밥 \n 갓김치' },
+  { name: '7/15', bloodsugar: 85, meal: '쌀밥 \n 갓김치' },
+  { name: '7/16', bloodsugar: 130, meal: '쌀밥 \n 갓김치' },
+  { name: '7/17', bloodsugar: 110, meal: '쌀밥 \n 갓김치' },
+  { name: '7/11', bloodsugar: 100, meal: '쌀밥 \n 갓김치' },
+  { name: '7/12', bloodsugar: 125, meal: '쌀밥 \n 갓김치' },
+  { name: '7/13', bloodsugar: 90, meal: '쌀밥 \n 갓김치' },
+  { name: '7/14', bloodsugar: 110, meal: '쌀밥 \n 갓김치' },
+  { name: '7/15', bloodsugar: 85, meal: '쌀밥 \n 갓김치' },
+  { name: '7/16', bloodsugar: 120, meal: '쌀밥 \n 갓김치' },
+];
 
 const MainBloodSugarChart = () => {
-  const myMealItems = ['쌀밥', '갓김치', '제육볶음', '두바이초콜릿'];
-
-  // 툴팁 콜백 함수
-  const footer = tooltipItems => {
-    var myMealString = '';
-    myMealItems.forEach(myMealItem => {
-      myMealString += myMealItem + '\n';
-    });
-    console.log(myMealString);
-    return myMealString;
-  };
-
-  // 더미 x축 데이터
-  const labels = ['7/11', '7/12', '7/13', '7/14', '7/15', '7/16', '7/17', '7/18', '7/19', '7/20'];
-
-  // 데이터
-  const data = {
-    labels,
-    datasets: [
-      {
-        data: [85, 130, 110, 90, 93, 95, 90, 103, 105, 108],
-        backgroundColor: '#414141',
-        borderColor: '#414141',
-      },
-    ],
-  };
-
-  // 그래프 옵션
-  const options = {
-    responsive: false,
-    interaction: {
-      intersect: false,
-    },
-    scales: {
-      x: {
-        min: 0,
-        max: 7,
-        grid: {
-          display: false,
-        },
-      },
-      y: {
-        position: 'right',
-      },
-    },
-    plugins: {
-      tooltip: {
-        position: 'average',
-        callbacks: {
-          footer: footer,
-        },
-      },
-    },
-    elements: {
-      line: {
-        fill: false,
-        backgroundColor: '#414141',
-        borderColor: '#414141',
-        // line에 대해선 hover 안 먹히고 있음.
-        hoverBackgroundColor: '#3053F9',
-        hoverBorderColor: '#3053F9',
-      },
-      point: {
-        backgroundColor: '#414141',
-        hoverBackgroundColor: '#3053F9',
-        hoverBorderColor: '#3053F9',
-      },
-    },
-  };
+  // 데이터 중 최대 혈당량을 구함
+  const dataMax = Math.max(...data.map(d => d.bloodsugar));
 
   return (
-    <StyledGraphWrapper>
-      <GraphContainer>
-        <Line options={options} data={data} width="auto" height="auto" />
-      </GraphContainer>
-    </StyledGraphWrapper>
+    <div style={{ width: '100%', overflowX: 'auto', overflowY: 'hidden' }} className="custom-scroll box1">
+      <div style={{ width: '1200px', height: '275px' }}>
+        <LineChart
+          width={1200}
+          height={275}
+          data={data}
+          margin={{
+            top: 10,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid horizontal={true} vertical={false} />
+          <XAxis dataKey="name" interval={0} tick={{ fontSize: 13 }} />
+          <YAxis domain={['dataMin-20', 'dataMax+5']} tickCount={6} allowDecimals={false} />
+          {/* y축 인덱스의 최대/최소값은 혈당의 실제 최대/최소값-20 */}
+          <Tooltip content={<MainBSToolTip />} />
+          <Line
+            type="linear"
+            dataKey="bloodsugar"
+            stroke="#414141"
+            dot={{ r: 3, fill: 'black' }}
+            activeDot={{ r: 6, fill: '#3053f9', strokeWidth: 0 }}
+            label={<CustomizedLabel dataMax={dataMax} />}
+          />
+        </LineChart>
+      </div>
+    </div>
   );
 };
 
-const StyledGraphWrapper = styled.div`
-  width: 100%;
-  height: 25.9rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 0; // 낮은 z-index 설정하여 sticky 헤더 가리지 않도록
-  margin-bottom: 1rem;
-`;
-
-const GraphContainer = styled.div`
-  width: 48.625rem;
-  height: 17.19669rem;
-  flex-shrink: 0;
-`;
 export default MainBloodSugarChart;
