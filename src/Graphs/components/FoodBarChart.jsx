@@ -1,8 +1,10 @@
 // BarChartComponent.jsx
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { BarChart, Bar, XAxis, LabelList } from 'recharts';
 import CustomBarShape from '../FoodBar/CustomBarShape';
+import CustomLabel from '../FoodBar/CustomLabel';
 
+// count에 따라 내림차순으로 데이터 정렬 필요
 const data = [
   { name: '밥', count: 10 },
   { name: '사과', count: 8 },
@@ -14,6 +16,7 @@ const data = [
 ];
 
 const FoodBarChart = () => {
+  const totalCount = data.length;
   return (
     <div style={{ width: '100%', overflowX: 'auto' }}>
       <div style={{ width: '1200px', height: '270px', margin: '0 auto' }}>
@@ -29,10 +32,11 @@ const FoodBarChart = () => {
           }}
           barCategoryGap="30%" // 바 간의 간격 조절
         >
-          <XAxis dataKey="name" interval={0} tick={{ fontSize: 13 }} />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="count" fill="#3053F9" shape={<CustomBarShape />} />
+          <XAxis dataKey="name" interval={0} tick={{ fontSize: 13 }} count={length} />
+          <Bar dataKey="count" fill="#3053F9" shape={props => <CustomBarShape {...props} totalCount={totalCount} />}>
+            {' '}
+            <LabelList dataKey="count" content={CustomLabel} />
+          </Bar>
         </BarChart>
       </div>
     </div>
