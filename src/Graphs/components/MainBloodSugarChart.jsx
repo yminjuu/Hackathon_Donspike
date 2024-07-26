@@ -3,7 +3,7 @@ import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import MainBSToolTip from '../MainBS/MainBSToolTip';
 import CustomizedLabel from '../MainBS/CustomizedLabel';
-import '../styles/MainBloodSugarChart.css';
+import '../styles/CustomScroll.css';
 
 // 더미데이터
 const data = [
@@ -27,10 +27,10 @@ const MainBloodSugarChart = () => {
   const dataMax = Math.max(...data.map(d => d.bloodsugar));
 
   return (
-    <div style={{ width: '100%', overflowX: 'auto', overflowY: 'hidden' }} className="custom-scroll box1">
-      <div style={{ width: '1200px', height: '275px' }}>
+    <div style={{ width: '100%', overflowX: 'auto', overflowY: 'hidden' }} className="custom-scroll">
+      <div style={{ width: '1000px', height: '275px' }}>
         <LineChart
-          width={1200}
+          width={1000}
           height={275}
           data={data}
           margin={{
@@ -49,6 +49,7 @@ const MainBloodSugarChart = () => {
             type="linear"
             dataKey="bloodsugar"
             stroke="#414141"
+            strokeWidth={2}
             dot={{ r: 3, fill: 'black' }}
             activeDot={{ r: 6, fill: '#3053f9', strokeWidth: 0 }}
             label={<CustomizedLabel dataMax={dataMax} />}

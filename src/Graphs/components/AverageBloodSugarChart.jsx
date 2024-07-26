@@ -1,6 +1,7 @@
 // LineChartComponent.jsx
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import '../styles/CustomScroll.css';
 
 const data = [
   { name: 'Page A', uv: 4000, pv: 2400, amt: 2400 },
@@ -10,15 +11,14 @@ const data = [
   { name: 'Page E', uv: 1890, pv: 4800, amt: 2181 },
   { name: 'Page F', uv: 2390, pv: 3800, amt: 2500 },
   { name: 'Page G', uv: 3490, pv: 4300, amt: 2100 },
-  // 더 많은 데이터 포인트를 추가하세요
 ];
 
 const AverageBloodSugarChart = () => {
   return (
-    <div style={{ width: '100%', overflowX: 'auto' }}>
-      <div style={{ width: '1200px', height: '275px' }}>
+    <div style={{ width: '100%', overflowX: 'auto', overflowY: 'hidden' }} className="custom-scroll">
+      <div style={{ width: '1000px', height: '275px' }}>
         <LineChart
-          width={1200}
+          width={1000}
           height={275}
           data={data}
           margin={{
@@ -28,13 +28,16 @@ const AverageBloodSugarChart = () => {
             bottom: 5,
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
-          <YAxis />
           <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="pv" stroke="#8884d8" />
-          <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+          <Line
+            type="linear"
+            dataKey="uv"
+            stroke="#414141"
+            strokeWidth={2}
+            dot={{ r: 3, fill: 'black' }}
+            activeDot={{ r: 6, fill: '#3053f9', strokeWidth: 0 }}
+          />
         </LineChart>
       </div>
     </div>

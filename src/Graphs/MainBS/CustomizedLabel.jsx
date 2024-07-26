@@ -7,11 +7,11 @@ const CustomizedLabel = ({ x, y, stroke, value, dataMax }) => {
   return (
     <>
       {offset < 10 ? (
-        <text x={x} y={y} dy={-9} fill="red" fontSize={13} fontWeight="600" textAnchor="middle">
+        <text x={x} y={y} dy={-12} fill="red" fontSize={13} fontWeight="600" textAnchor="middle">
           {value}
         </text>
       ) : (
-        <text x={x} y={y} dy={-9} fill={stroke} fontSize={11} textAnchor="middle">
+        <text x={x} y={y} dy={-13} fill={stroke} fontSize={11} textAnchor="middle">
           {value}
         </text>
       )}
