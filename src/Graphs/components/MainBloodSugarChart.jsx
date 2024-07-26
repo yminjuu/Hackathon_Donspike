@@ -41,7 +41,7 @@ const MainBloodSugarChart = () => {
           }}
         >
           <CartesianGrid horizontal={true} vertical={false} />
-          <XAxis dataKey="name" interval={0} tick={{ fontSize: 13 }} />
+          <XAxis dataKey="name" interval={0} tick={{ fontSize: 13 }} padding={{ left: 20, right: 20 }} />
           <YAxis domain={['dataMin-20', 'dataMax+5']} tickCount={6} allowDecimals={false} />
           {/* y축 인덱스의 최대/최소값은 혈당의 실제 최대/최소값-20 */}
           <Tooltip content={<MainBSToolTip />} />
