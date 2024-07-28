@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Hamburger from '../../AddMeal/components/SearchSec/imgs/Hamburger.svg?react';
-import FrenchFries from '../../AddMeal/components/SearchSec/imgs/FrenchFries.svg?react';
+import Hamburger from '../../AddMeal/components/SearchSec/imgs/Hamburger.jpg';
+import FrenchFries from '../../AddMeal/components/SearchSec/imgs/FrenchFries.jpg';
 import SearchButton from '../assets/imgs/SearchButton.svg?react';
 import SearchReset from '../assets/imgs/SearchReset.svg?react';
 import { useState, useRef, useEffect } from 'react';
@@ -84,8 +84,8 @@ const SearchBox = ({ type }) => {
       {/* 위치가 SearchSection 일 때에만 디자인 추가*/}
       {type === 'SearchSection' ? (
         <TransparentWrapper>
-          <StyledHamb></StyledHamb>
-          <StyledFrench></StyledFrench>
+          <StyledHamb src={Hamburger} />
+          <StyledFrench src={FrenchFries} />
         </TransparentWrapper>
       ) : (
         <></>
@@ -194,18 +194,24 @@ const TransparentWrapper = styled.div`
   z-index: 2;
 `;
 
-const StyledHamb = styled(Hamburger)`
+const StyledHamb = styled.img`
+  width: 4.7295rem;
+  height: 4.7295rem;
+
   position: absolute;
-  top: -140%;
-  left: 80%; /* Adjust based on the position of the icon */
-  z-index: 1;
+  top: -100%;
+  left: 83%; /* Adjust based on the position of the icon */
+  z-index: 2;
 `;
 
-const StyledFrench = styled(FrenchFries)`
+const StyledFrench = styled.img`
+  width: 4.7295rem;
+  height: 4.7295rem;
+
   position: absolute;
-  top: -120%;
-  left: 91%; /* Adjust based on the position of the icon */
-  z-index: 1;
+  top: -80%;
+  left: 94%; /* Adjust based on the position of the icon */
+  z-index: 2;
 `;
 
 const StyledNoResult = styled.div`
