@@ -1,6 +1,6 @@
 // LineChartComponent.jsx
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import MainBSToolTip from '../MainBS/MainBSToolTip';
 import CustomizedLabel from '../MainBS/CustomizedLabel';
 import '../styles/CustomScroll.css';
@@ -25,6 +25,8 @@ const data = [
 const MainBloodSugarChart = () => {
   // 데이터 중 최대 혈당량을 구함
   const dataMax = Math.max(...data.map(d => d.bloodsugar));
+  const dataMin = Math.min(...data.map(d => d.bloodsugar));
+  // 이번 달의 데이터를 받아서 해당 값에 대한 referenceline 추가 필요
 
   return (
     <div style={{ width: '100%', overflowX: 'auto', overflowY: 'hidden' }} className="custom-scroll">
@@ -42,7 +44,7 @@ const MainBloodSugarChart = () => {
         >
           <CartesianGrid horizontal={true} vertical={false} />
           <XAxis dataKey="name" interval={0} tick={{ fontSize: 13 }} padding={{ left: 20, right: 20 }} />
-          <YAxis domain={['dataMin-20', 'dataMax+5']} tickCount={6} allowDecimals={false} />
+          <YAxis domain={['dataMin-20', 'dataMax+5']} tickCount={6} allowDecimals={false} orientation="right" />
           {/* y축 인덱스의 최대/최소값은 혈당의 실제 최대/최소값-20 */}
           <Tooltip content={<MainBSToolTip />} />
           <Line

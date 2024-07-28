@@ -1,42 +1,51 @@
 // LineChartComponent.jsx
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label, LabelList } from 'recharts';
 import '../styles/CustomScroll.css';
+import CustomLabel from '../AverageBS/CustomLabel';
 
+// 필요한 부분 : 실제 날짜를 name으로 변환하는 과정에서 이번 달에 해당되는 데이터를
+// 구분하기 위한 속성 추가하기
 const data = [
-  { name: 'Page A', uv: 4000, pv: 2400, amt: 2400 },
-  { name: 'Page B', uv: 3000, pv: 1398, amt: 2210 },
-  { name: 'Page C', uv: 2000, pv: 9800, amt: 2290 },
-  { name: 'Page D', uv: 2780, pv: 3908, amt: 2000 },
-  { name: 'Page E', uv: 1890, pv: 4800, amt: 2181 },
-  { name: 'Page F', uv: 2390, pv: 3800, amt: 2500 },
-  { name: 'Page G', uv: 3490, pv: 4300, amt: 2100 },
+  { name: '1월', average: 130 },
+  { name: '2월', average: 150 },
+  { name: '3월', average: 110 },
+  { name: '4월', average: 100 },
+  { name: '5월', average: 90 },
+  { name: '6월', average: 100 },
+  { name: '7월', average: 110 },
+  { name: '8월', average: 130 },
+  { name: '9월', average: 100 },
+  { name: '10월', average: 105 },
+  { name: '11월', average: 110 },
+  { name: '12월', average: 120 },
 ];
 
 const AverageBloodSugarChart = () => {
   return (
     <div style={{ width: '100%', overflowX: 'auto', overflowY: 'hidden' }} className="custom-scroll">
-      <div style={{ width: '1000px', height: '275px' }}>
+      <div style={{ width: '900px', height: '270px' }}>
         <LineChart
-          width={1000}
-          height={275}
+          width={900}
+          height={270}
           data={data}
           margin={{
-            top: 5,
+            top: 20,
             right: 30,
             left: 20,
             bottom: 5,
           }}
         >
-          <XAxis dataKey="name" />
+          <XAxis dataKey="name" padding={{ left: 20, right: 20 }} />
           <Tooltip />
           <Line
             type="linear"
-            dataKey="uv"
+            dataKey="average"
             stroke="#414141"
             strokeWidth={2}
             dot={{ r: 3, fill: 'black' }}
             activeDot={{ r: 6, fill: '#3053f9', strokeWidth: 0 }}
+            label={<CustomLabel />}
           />
         </LineChart>
       </div>

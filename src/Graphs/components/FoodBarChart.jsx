@@ -33,7 +33,7 @@ const FoodBarChart = () => {
           }}
           barCategoryGap="30%" // 바 간의 간격 조절
         >
-          <XAxis dataKey="name" interval={0} tick={{ fontSize: 13 }} count={length} />
+          <XAxis dataKey="name" interval={0} tick={{ fontSize: 13 }} count={length} padding={{ left: 20, right: 20 }} />
           <Bar dataKey="count" fill="#3053F9" shape={props => <CustomBarShape {...props} totalCount={totalCount} />}>
             {' '}
             <LabelList dataKey="count" content={CustomLabel} />
