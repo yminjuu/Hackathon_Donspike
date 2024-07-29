@@ -5,13 +5,14 @@ import { commonChartTitle } from '../common/styles/commonStyles';
 import AverageGraphToolTip from './components/AverageGraphToolTip';
 
 const AverageBloodSugar = () => {
+  const offset = -20;
   return (
     <>
       <ChartWrapper>
         <ChartTitle>월별 공복 혈당 평균</ChartTitle>
         <GraphWrapper>
           <AverageBloodSugarChart></AverageBloodSugarChart>
-          <AverageGraphToolTip></AverageGraphToolTip>
+          <AverageGraphToolTip offset={offset}></AverageGraphToolTip>
         </GraphWrapper>
       </ChartWrapper>
     </>
