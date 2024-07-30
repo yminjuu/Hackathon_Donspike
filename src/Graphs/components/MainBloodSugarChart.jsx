@@ -18,7 +18,7 @@ const data = [
   { name: '7/12', bloodsugar: 125, meal: '쌀밥 \n 갓김치' },
   { name: '7/13', bloodsugar: 90, meal: '쌀밥 \n 갓김치' },
   { name: '7/14', bloodsugar: 110, meal: '쌀밥 \n 갓김치' },
-  { name: '7/15', bloodsugar: 85, meal: '쌀밥 \n 갓김치' },
+  { name: '7/15', bloodsugar: 85, meal: '쌀밥 \n 갓김d치' },
   { name: '7/16', bloodsugar: 120, meal: '쌀밥 \n 갓김치' },
 ];
 

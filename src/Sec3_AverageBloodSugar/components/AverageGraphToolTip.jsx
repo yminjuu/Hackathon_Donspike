@@ -8,6 +8,7 @@ const BalloonContainer = styled.div`
   height: 14rem;
   flex-shrink: 0;
   flex-shrink: 0;
+  margin-right: 1rem;
 `;
 
 const TooltipStyled = styled(Tooltip)`
@@ -37,6 +38,7 @@ const TextContainer = styled.div`
   color: #414141;
   font-size: 14px;
   font-weight: 500;
+  line-height: 1.15rem;
 `;
 
 const BSSpan = styled.span`
