@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import Hamburger from '../../AddMeal/components/SearchSec/imgs/Hamburger.jpg';
-import FrenchFries from '../../AddMeal/components/SearchSec/imgs/FrenchFries.jpg';
+import Salad from '../../AddMeal/components/SearchSec/imgs/salad.jpg';
 import SearchButton from '../assets/imgs/SearchButton.svg?react';
 import SearchReset from '../assets/imgs/SearchReset.svg?react';
 import { useState, useRef, useEffect } from 'react';
@@ -84,8 +83,7 @@ const SearchBox = ({ type }) => {
       {/* 위치가 SearchSection 일 때에만 디자인 추가*/}
       {type === 'SearchSection' ? (
         <TransparentWrapper>
-          <StyledHamb src={Hamburger} />
-          <StyledFrench src={FrenchFries} />
+          <StyledSalad src={Salad} />
         </TransparentWrapper>
       ) : (
         <></>
@@ -194,23 +192,13 @@ const TransparentWrapper = styled.div`
   z-index: 2;
 `;
 
-const StyledHamb = styled.img`
-  width: 4.7295rem;
-  height: 4.7295rem;
+const StyledSalad = styled.img`
+  width: 6rem;
+  height: 7rem;
 
   position: absolute;
-  top: -100%;
+  top: -170%;
   left: 83%; /* Adjust based on the position of the icon */
-  z-index: 2;
-`;
-
-const StyledFrench = styled.img`
-  width: 4.7295rem;
-  height: 4.7295rem;
-
-  position: absolute;
-  top: -80%;
-  left: 94%; /* Adjust based on the position of the icon */
   z-index: 2;
 `;
 
