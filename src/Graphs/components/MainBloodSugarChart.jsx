@@ -82,7 +82,7 @@ const MainBloodSugarChart = () => {
             strokeWidth={2}
             dot={{ r: 3, fill: 'black' }}
             activeDot={{ r: 6, fill: '#3053f9', strokeWidth: 0 }}
-            label={<CustomizedLabel dataMax={dataMax} />}
+            // label={<CustomizedLabel dataMax={dataMax} />}
           />
         </LineChart>
       </div>
