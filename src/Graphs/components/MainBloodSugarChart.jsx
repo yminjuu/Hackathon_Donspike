@@ -7,19 +7,46 @@ import '../styles/CustomScroll.css';
 
 // 더미데이터
 const data = [
-  { name: '7/11', bloodsugar: 90, meal: '쌀밥 \n 갓김치' },
-  { name: '7/12', bloodsugar: 125, meal: '쌀밥 \n 갓김치' },
-  { name: '7/13', bloodsugar: 90, meal: '쌀밥 \n 갓김치' },
-  { name: '7/14', bloodsugar: 125, meal: '쌀밥 \n 갓김치' },
-  { name: '7/15', bloodsugar: 85, meal: '쌀밥 \n 갓김치' },
-  { name: '7/16', bloodsugar: 130, meal: '쌀밥 \n 갓김치' },
-  { name: '7/17', bloodsugar: 110, meal: '쌀밥 \n 갓김치' },
-  { name: '7/11', bloodsugar: 100, meal: '쌀밥 \n 갓김치' },
-  { name: '7/12', bloodsugar: 125, meal: '쌀밥 \n 갓김치' },
-  { name: '7/13', bloodsugar: 90, meal: '쌀밥 \n 갓김치' },
-  { name: '7/14', bloodsugar: 110, meal: '쌀밥 \n 갓김치' },
-  { name: '7/15', bloodsugar: 85, meal: '쌀밥 \n 갓김치' },
-  { name: '7/16', bloodsugar: 120, meal: '쌀밥 \n 갓김치' },
+  {
+    recorddate: '2024-06-17T17:00:00.123456+09:00',
+    bloodsugar: 150.0,
+    foodnames: ['사과', '배'],
+  },
+  {
+    recorddate: '2024-06-18T17:00:00.123456+09:00',
+    bloodsugar: 140.0,
+    foodnames: ['사과', '배'],
+  },
+  {
+    recorddate: '2024-06-19T17:00:00.123456+09:00',
+    bloodsugar: 130.0,
+    foodnames: ['사과', '배'],
+  },
+  {
+    recorddate: '2024-06-20T17:00:00.123456+09:00',
+    bloodsugar: 120.0,
+    foodnames: ['사과', '배'],
+  },
+  {
+    recorddate: '2024-06-21T17:00:00.123456+09:00',
+    bloodsugar: 110.0,
+    foodnames: ['사과', '배'],
+  },
+  {
+    recorddate: '2024-06-22T17:00:00.123456+09:00',
+    bloodsugar: 100.0,
+    foodnames: ['사과', '배'],
+  },
+  {
+    recorddate: '2024-06-23T17:00:00.123456+09:00',
+    bloodsugar: 150.0,
+    foodnames: ['사과', '배'],
+  },
+  {
+    recorddate: '2024-06-24T17:00:00.123456+09:00',
+    bloodsugar: 130.0,
+    foodnames: ['사과', '배'],
+  },
 ];
 
 const MainBloodSugarChart = () => {
@@ -55,7 +82,7 @@ const MainBloodSugarChart = () => {
             strokeWidth={2}
             dot={{ r: 3, fill: 'black' }}
             activeDot={{ r: 6, fill: '#3053f9', strokeWidth: 0 }}
-            label={<CustomizedLabel dataMax={dataMax} />}
+            // label={<CustomizedLabel dataMax={dataMax} />}
           />
         </LineChart>
       </div>

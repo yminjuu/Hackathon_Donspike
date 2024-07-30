@@ -1,5 +1,5 @@
 const CustomLabel = ({ x, y, value }) => {
-  const isThisMonth = value > 200; // 이번 달 것만 받음
+  const isThisMonth = value > 200;
   const bgColor = isThisMonth ? '#3053F9' : '#EBEEFF';
   //   const borderColor = isThisMonth ? 'red' : 'black';
   const textColor = isThisMonth ? '#FFFFFF' : '#707070';

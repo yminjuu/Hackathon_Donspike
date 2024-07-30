@@ -6,10 +6,21 @@ import styled from 'styled-components';
 
 const MainBSTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
-    const amt = payload[0].payload.meal;
+    const date = new Date(payload[0].payload.recorddate);
+    // console.log(payload[0].payload.bloodsugar); //혈당
+    // console.log(payload[0].payload.recorddate); //날짜
     return (
       <CustomToolTip>
-        <Text className="desc">{`${amt}`}</Text>
+        <DateText>
+          {date.getFullYear()} . {date.getMonth() + 1} . {date.getDate()}
+        </DateText>
+        <BSText>혈당값 : {payload[0].payload.bloodsugar}</BSText>
+        <MealWrapper>
+          오늘의 식단
+          {payload[0].payload.foodnames.map(foodname => (
+            <MealText className="desc">{foodname}</MealText>
+          ))}
+        </MealWrapper>
       </CustomToolTip>
     );
   }
@@ -21,13 +32,36 @@ const CustomToolTip = styled.div`
   background-color: #f0f1f5;
   padding: 10px;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  line-height: 1rem;
 `;
 
-const Text = styled.div`
+const DateText = styled.div`
+  font-style: italic;
+  font-size: 0.85rem;
+`;
+
+const BSText = styled.div`
+  font-weight: bold;
+`;
+
+const MealWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const MealText = styled.div`
   color: #111111;
 
   font-size: 12px;
   font-weight: 500;
+
+  line-height: 1rem;
+  text-align: center;
 `;
 
 export default MainBSTooltip;
