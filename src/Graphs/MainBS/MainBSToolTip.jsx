@@ -1,67 +1,111 @@
 import React from 'react';
-import styled from 'styled-components';
+import { styled, css } from 'styled-components';
+import ExpectTooltip from '../imgs/ExpectTooltip.svg?react';
+import MainTooltip from '../imgs/MainToolTip.svg?react';
 
 // active: hover 이벤트로 툴팁이 활성화된 상황
 // payload: tooltip에 띄울 정보를 props로 받음
 
 const MainBSTooltip = ({ active, payload, label }) => {
-  if (active && payload && payload.length) {
-    const date = new Date(payload[0].payload.recorddate);
-    // console.log(payload[0].payload.bloodsugar); //혈당
-    // console.log(payload[0].payload.recorddate); //날짜
+  if (active && payload && payload[0].payload.foodnames.length != 0) {
+    const data = payload[0].payload;
+
     return (
-      <CustomToolTip>
-        <DateText>
-          {date.getFullYear()} . {date.getMonth() + 1} . {date.getDate()}
-        </DateText>
-        <BSText>혈당값 : {payload[0].payload.bloodsugar}</BSText>
+      <ToolTipWrapper>
+        <MainTooltip></MainTooltip>
+        <DateText>{data.formatDate}</DateText>
         <MealWrapper>
-          오늘의 식단
-          {payload[0].payload.foodnames.map(foodname => (
-            <MealText className="desc">{foodname}</MealText>
+          {data.foodnames.map(item => (
+            <MealText key={data.item}>{item}</MealText>
           ))}
         </MealWrapper>
-      </CustomToolTip>
+        <BSText bloodsugar={data.bloodsugar}>{data.bloodsugar}</BSText>
+      </ToolTipWrapper>
+    );
+  } else if (active && payload && payload[0].payload.expect > 0) {
+    console.log('여기');
+    return (
+      <ExpectToolTipWrapper>
+        <Container>
+          {' '}
+          <ExpectTooltip></ExpectTooltip>
+          <BSText>{payload[0].payload.expect}</BSText>
+        </Container>
+      </ExpectToolTipWrapper>
     );
   }
 
   return null;
 };
 
-const CustomToolTip = styled.div`
-  background-color: #f0f1f5;
-  padding: 10px;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
-
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-
-  line-height: 1rem;
+const ToolTipWrapper = styled.div`
+  position: relative;
+  width: 10rem;
+  height: 10rem;
 `;
 
-const DateText = styled.div`
-  font-style: italic;
-  font-size: 0.85rem;
-`;
-
-const BSText = styled.div`
-  font-weight: bold;
+const ExpectToolTipWrapper = styled.div`
+  position: relative;
+  width: 3rem;
+  height: 3rem;
 `;
 
 const MealWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+  width: 5.4rem;
+  height: 5.8375rem;
+
+  position: absolute;
+  top: 40%;
+  left: 28%;
+
+  padding: 0.3rem;
+
+  overflow: scroll;
+`;
+
+const Container = styled.div`
+  position: absolute;
+  top: -25%;
+  left: -10%;
+
+  overflow: scroll;
+`;
+
+const BSText = styled.div`
+  position: absolute;
+  color: #3053f9;
+
+  font-size: 0.875rem;
+  font-weight: 600;
+
+  ${props =>
+    props.bloodsugar > 0
+      ? css`
+          top: 25%;
+          left: 60%;
+        `
+      : css`
+          top: 40%;
+          left: 60%;
+        `}
+`;
+
+const DateText = styled.div`
+  color: #707070;
+  font-size: 0.75rem;
+  font-weight: 500;
+
+  position: absolute;
+  top: 11%;
+  left: 30%;
 `;
 
 const MealText = styled.div`
   color: #111111;
 
-  font-size: 12px;
+  font-size: 0.85rem;
   font-weight: 500;
-
-  line-height: 1rem;
-  text-align: center;
+  line-height: 1.05rem;
 `;
 
 export default MainBSTooltip;

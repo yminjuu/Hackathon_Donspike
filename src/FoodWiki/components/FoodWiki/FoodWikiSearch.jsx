@@ -7,7 +7,7 @@ const FoodWikiSearch = () => {
     <>
       <MainWrapper>
         <RotatingTaco></RotatingTaco>
-        <Title>푸드위키</Title>
+        <Title>혈당백과</Title>
         <Description>음식을 검색해보세요! 혈당 관리에 도움이 되는 방법을 함께 알려드릴게요.</Description>
         <SearchBox type="FoodWiki"></SearchBox>
       </MainWrapper>

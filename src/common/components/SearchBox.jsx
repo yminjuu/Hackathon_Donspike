@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import Hamburger from '../../AddMeal/components/SearchSec/imgs/Hamburger.jpg';
-import FrenchFries from '../../AddMeal/components/SearchSec/imgs/FrenchFries.jpg';
+import Salad from '../../AddMeal/components/SearchSec/imgs/salad.jpg';
 import SearchButton from '../assets/imgs/SearchButton.svg?react';
 import SearchReset from '../assets/imgs/SearchReset.svg?react';
 import { useState, useRef, useEffect } from 'react';
@@ -84,8 +83,7 @@ const SearchBox = ({ type }) => {
       {/* 위치가 SearchSection 일 때에만 디자인 추가*/}
       {type === 'SearchSection' ? (
         <TransparentWrapper>
-          <StyledHamb src={Hamburger} />
-          <StyledFrench src={FrenchFries} />
+          <StyledSalad src={Salad} />
         </TransparentWrapper>
       ) : (
         <></>
@@ -101,6 +99,8 @@ const Container = styled.div`
 
   display: flex;
   justify-content: space-between;
+
+  z-index: 1;
 `;
 
 const Wrapper = styled.div`
@@ -118,7 +118,7 @@ const Wrapper = styled.div`
   border-radius: 0.625rem;
   background-color: white;
 
-  z-index: 3;
+  z-index: 5;
 
   ${props =>
     props.$searchstate === true
@@ -183,7 +183,7 @@ const BtnWrapper = styled.div`
   cursor: pointer;
 `;
 
-// 햄버거, 감튀 요소의 position: absolute을 위해 존재하는 투명한 컨테이너 (z-index 사용을 위해서)
+// 햄버거, 감튀 요소의 position: absolute을 위해 존재하는 투명한 컨테이너 (position: absolute 사용을 위해서)
 const TransparentWrapper = styled.div`
   width: 33.75rem;
   height: 3.375rem;
@@ -191,27 +191,16 @@ const TransparentWrapper = styled.div`
   top: 0;
   left: 0;
   background-color: transparent;
-  z-index: 2;
 `;
 
-const StyledHamb = styled.img`
-  width: 4.7295rem;
-  height: 4.7295rem;
+const StyledSalad = styled.img`
+  width: 6rem;
+  height: 7rem;
 
   position: absolute;
-  top: -100%;
+  top: -170%;
   left: 83%; /* Adjust based on the position of the icon */
-  z-index: 2;
-`;
-
-const StyledFrench = styled.img`
-  width: 4.7295rem;
-  height: 4.7295rem;
-
-  position: absolute;
-  top: -80%;
-  left: 94%; /* Adjust based on the position of the icon */
-  z-index: 2;
+  z-index: 4;
 `;
 
 const StyledNoResult = styled.div`
