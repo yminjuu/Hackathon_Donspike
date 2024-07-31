@@ -45,7 +45,7 @@ const data = [
   {
     recorddate: '2024-06-24T17:00:00.123456+09:00',
     bloodsugar: 130.0,
-    foodnames: ['사과', '배'],
+    foodnames: ['사과', '배', '사과', '배', '사과', '배', '사과', '배', '사과', '배'],
     expect: 130.0, // 전날 혈당값과 이어주기 위해서 존재
   },
   {
@@ -55,13 +55,19 @@ const data = [
   },
 ];
 
-//
 const formatDate = dateString => {
   const date = new Date(dateString);
-  const month = (date.getMonth() + 1).toString().padStart(2, '0'); // 월을 2자리로 맞춤
-  const day = date.getDate().toString().padStart(2, '0'); // 일을 2자리로 맞춤
-  return `${month}/${day}`;
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString();
+  const day = date.getDate().toString();
+  return `${year}.${month}.${day}`;
 };
+
+// 포맷데이터를 추가 : key값은 formatDate
+const updateData = data.map(item => ({
+  ...item,
+  formatDate: formatDate(item.recorddate),
+}));
 
 const CustomizedDot = props => {
   const { cx, cy, stroke, payload, value } = props;
@@ -88,7 +94,7 @@ const MainBloodSugarChart = () => {
         <LineChart
           width={1000}
           height={275}
-          data={data}
+          data={updateData}
           margin={{
             top: 10,
             right: 30,

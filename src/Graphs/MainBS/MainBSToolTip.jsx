@@ -9,12 +9,16 @@ import MainTooltip from '../imgs/MainToolTip.svg?react';
 const MainBSTooltip = ({ active, payload, label }) => {
   if (active && payload && payload[0].payload.foodnames.length != 0) {
     const data = payload[0].payload;
-    const date = new Date(data.recorddate);
+
     return (
       <ToolTipWrapper>
         <MainTooltip></MainTooltip>
-        <DateText>{data.recorddate}</DateText>
-        <MealText></MealText>
+        <DateText>{data.formatDate}</DateText>
+        <MealWrapper>
+          {data.foodnames.map(item => (
+            <MealText key={data.item}>{item}</MealText>
+          ))}
+        </MealWrapper>
         <BSText bloodsugar={data.bloodsugar}>{data.bloodsugar}</BSText>
       </ToolTipWrapper>
     );
@@ -46,12 +50,25 @@ const ExpectToolTipWrapper = styled.div`
   height: 3rem;
 `;
 
+const MealWrapper = styled.div`
+  width: 5.4rem;
+  height: 5.8375rem;
+
+  position: absolute;
+  top: 40%;
+  left: 28%;
+
+  padding: 0.3rem;
+
+  overflow: scroll;
+`;
+
 const Container = styled.div`
   position: absolute;
   top: -25%;
   left: -10%;
 
-  overflow: visible;
+  overflow: scroll;
 `;
 
 const BSText = styled.div`
@@ -77,13 +94,18 @@ const DateText = styled.div`
   color: #707070;
   font-size: 0.75rem;
   font-weight: 500;
+
+  position: absolute;
+  top: 11%;
+  left: 30%;
 `;
 
 const MealText = styled.div`
   color: #111111;
 
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 500;
+  line-height: 1.05rem;
 `;
 
 export default MainBSTooltip;
