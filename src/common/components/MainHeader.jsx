@@ -16,7 +16,7 @@ const MainHeader = () => {
               <circle cx="6.08703" cy="6.08703" r="5.32615" stroke="white" strokeWidth="1.52176" />
               <path d="M12.1741 12.1738L16 15.9998" stroke="white" strokeWidth="1.52176" strokeLinecap="round" />
             </svg>
-            푸드위키
+            혈당백과
           </FoodWikiButtonWrapper>
         </StyledNav>
       </StyledMainHeader>
