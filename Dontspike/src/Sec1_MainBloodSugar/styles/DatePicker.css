@@ -1,0 +1,90 @@
+/* {모듈명}.module.css로 정의해두고 */
+/* 컴포넌트에서 import하여 사용한다. */
+
+.react-datepicker {
+    width: 17.5rem;
+    height: 15.5rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #111111;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: "Segoe UI";
+    font-size: 0.89056rem;
+    ;
+    font-weight: 700;
+    line-height: 1.06869rem; /* 120% */
+    letter-spacing: 0.01694rem;
+
+    box-shadow: 2px 4px 10px #E8E8E8;
+    border :none;
+
+    .react-datepicker__header {
+        background-color: #FFFFFF;
+        border :none;
+        padding: 0.4rem;
+        
+        .react-datepicker__day-names {
+
+            .react-datepicker__day-name {
+                color: #A0A0A0;
+                border: none;
+                font-size: 0.65rem;
+            }
+        }
+    }
+
+}
+
+.react-datepicker__current-month {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.react-datepicker__triangle {
+    display: none;
+  }
+
+.react-datepicker__input-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0;
+    gap: 0.5rem;
+
+    .react-datepicker__view-calendar-icon {
+        display: flex;
+    }
+}
+
+.react-datepicker__month {
+    margin: 0;
+
+    color: var(--Grayscale-100, #111);
+    text-align: center;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: "Segoe UI";
+    font-size: 0.9rem;
+    ;
+    font-weight: 400;
+}
+
+.react-datepicker__day:hover{
+    border-radius: 40rem;
+}
+
+.react-datepicker__day--selected{
+    background-color: #C1CCFE;
+    color: #111111;
+    border-radius: 40rem;
+    font-weight: 400;
+} 
+
+.react-datepicker__day--today {
+    font-weight: 600;
+}
+
+.react-datepicker__day--outside-month {
+    color: #A0A0A0;
+}
