@@ -99,6 +99,8 @@ const Container = styled.div`
 
   display: flex;
   justify-content: space-between;
+
+  z-index: 1;
 `;
 
 const Wrapper = styled.div`
@@ -116,7 +118,7 @@ const Wrapper = styled.div`
   border-radius: 0.625rem;
   background-color: white;
 
-  z-index: 3;
+  z-index: 5;
 
   ${props =>
     props.$searchstate === true
@@ -181,7 +183,7 @@ const BtnWrapper = styled.div`
   cursor: pointer;
 `;
 
-// 햄버거, 감튀 요소의 position: absolute을 위해 존재하는 투명한 컨테이너 (z-index 사용을 위해서)
+// 햄버거, 감튀 요소의 position: absolute을 위해 존재하는 투명한 컨테이너 (position: absolute 사용을 위해서)
 const TransparentWrapper = styled.div`
   width: 33.75rem;
   height: 3.375rem;
@@ -189,7 +191,6 @@ const TransparentWrapper = styled.div`
   top: 0;
   left: 0;
   background-color: transparent;
-  z-index: 2;
 `;
 
 const StyledSalad = styled.img`
@@ -199,7 +200,7 @@ const StyledSalad = styled.img`
   position: absolute;
   top: -170%;
   left: 83%; /* Adjust based on the position of the icon */
-  z-index: 2;
+  z-index: 4;
 `;
 
 const StyledNoResult = styled.div`

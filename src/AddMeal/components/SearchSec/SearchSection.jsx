@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import SearchBox from '../../../common/components/SearchBox';
+import Datepicker from '../SearchSec/components/DatePicker';
 
 const SearchSection = () => {
   let today = new Date();
@@ -8,9 +9,12 @@ const SearchSection = () => {
     <>
       <PageBackground>
         <Info>
-          오늘{' '}
-          <TodayDate>
+          {/* <TodayDate>
             {today.getMonth() + 1}/{today.getDate()}
+          </TodayDate> */}
+          <TodayDate>
+            {/* {today.getMonth() + 1}/{today.getDate()} */}
+            <Datepicker className="datepicker" type="AddMeal" />
           </TodayDate>
           에 먹은 음식을 추가해주세요!
         </Info>
@@ -23,14 +27,18 @@ const SearchSection = () => {
 const PageBackground = styled.div`
   width: 100%;
   height: 8.3rem;
+  padding-top: 1rem;
   flex-shrink: 0;
 
   background-color: #ffffff;
 
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
   gap: 1rem;
+
+  position: relative;
 `;
 
 const Info = styled.div`
@@ -45,14 +53,18 @@ const Info = styled.div`
   justify-content: space-between;
   gap: 0.5rem;
   align-items: center;
+
+  position: absolute;
+  top: -10%;
+  z-index: 3;
 `;
 
 const TodayDate = styled.div`
-  width: 4rem;
-  height: 2rem;
+  display: flex;
+  flex-direction: row;
+  z-index: 1;
   flex-shrink: 0;
 
-  color: #3053f9;
   /* Pretendard/B/24 */
 
   font-size: 1.3rem;
