@@ -9,7 +9,7 @@ const LogoButton = () => {
   return (
     <Button
       onClick={() => {
-        navigate('/');
+        navigate('/main');
       }}
     >
       <Logo></Logo>
