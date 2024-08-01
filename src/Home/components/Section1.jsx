@@ -41,7 +41,7 @@ const Section1 = () => {
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100;
 
   display: flex;
   flex-direction: column;
@@ -133,7 +133,6 @@ const PersonSpan = styled.span`
 
 const Footer = styled.footer`
   width: 100%;
-  height: 1.25rem;
   padding: 0.2rem 0;
   color: #707070;
   font-size: 0.8rem;
