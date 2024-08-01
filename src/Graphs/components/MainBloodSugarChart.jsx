@@ -126,7 +126,7 @@ const MainBloodSugarChart = () => {
       expect: 130.0, // 전날 혈당값과 이어주기 위해서 존재
     },
     {
-      recorddate: '2024-07-31T17:00:00.123456+09:00',
+      recorddate: '2024-08-01T17:00:00.123456+09:00',
       expect: 140.0,
       foodnames: [],
     },
@@ -135,7 +135,8 @@ const MainBloodSugarChart = () => {
   const fetchMainChartData = async () => {
     try {
       const newData = await axios.get(`${BASE_URL}/api/blood-sugar/food/${user_id}}`); // data를 배열 형식으로 새로 받아옴
-      setData(newData);
+      console.log('main graph data : ', newData);
+      if (newData.length != 0) setData(newData);
     } catch (error) {
       console.log(error);
     }

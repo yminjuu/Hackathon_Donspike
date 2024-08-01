@@ -1,39 +1,54 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { css, styled } from 'styled-components';
 import OftFoodItem from '../FoodNavSec/components/OftFoodItem';
 import AddFoodInfo from '../FoodNavSec/components/AddFoodInfo';
 
-const FoodNavigationSection = ({ selectedDate }) => {
+const FoodNavigationSection = ({ selectedDate, fetchMeal }) => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const user_id = 1;
 
-  // 알맞게 선택된 날짜 전달되고 있음
-  console.log(selectedDate);
-
   // 자주 먹은 음식 데이터
-  const [data, setData] = useState();
+  const [favFood, setFavFood] = useState([]);
 
   const fetchData = async () => {
     try {
-      const newData = await axios.get(
-        // month 동적??? 이번달 거만 보내주는건지???
-        `${BASE_URL}/api/{user_id}/food/favorites?month=2024-07`,
-      );
-      setData(newData);
+      // 자주 먹었어요: month는 우선 7월로 받고(더미데이터) 나중에 8월로 바꾸면 됨.
+      // const newData = await axios.get(
+      //   `${BASE_URL}/api/{user_id}/food/favorites?month=2024-07`,
+      // );
+      // console.log('fav food fetch');
+
+      // 우선 더미데이터
+      const newData = [
+        { food_id: 1, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
+        { food_id: 2, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'true' },
+        { food_id: 3, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
+        { food_id: 4, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'true' },
+        { food_id: 5, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
+        { food_id: 6, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'true' },
+      ];
+
+      // addedState를 처음엔 false로 해서 받고 => 추가되면 true로 바꾸어 리랜더링해야됨
+      setFavFood(newData);
     } catch (error) {
       console.log(error);
     }
   };
 
   // dummy data
-  const dummyFoodData = [
-    { food_id: 1, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
-    { food_id: 2, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'true' },
-    { food_id: 3, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
-    { food_id: 4, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'true' },
-    { food_id: 5, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
-    { food_id: 6, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'true' },
-  ];
+  // const dummyFoodData = [
+  //   { food_id: 1, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
+  //   { food_id: 2, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'true' },
+  //   { food_id: 3, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
+  //   { food_id: 4, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'true' },
+  //   { food_id: 5, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
+  //   { food_id: 6, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'true' },
+  // ];
+
+  // 최초 렌더링 데이터 가져오기
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const [navstate, setNavstate] = useState('freq');
   // freq, onHand
@@ -57,6 +72,7 @@ const FoodNavigationSection = ({ selectedDate }) => {
       console.log(carbohydrate);
       console.log(protein);
       console.log(fat);
+
       // const res = await axios.post(`${BASE_URL}/api/${user_id}/food`, {
       //   foodname: foodname,
       //   amount: amount,
@@ -102,7 +118,7 @@ const FoodNavigationSection = ({ selectedDate }) => {
         </NavWrapper>
         <ItemsWrapper $navstate={navstate}>
           {navstate === 'freq' ? (
-            dummyFoodData.map(item => <OftFoodItem key={item.food_id} {...item}></OftFoodItem>)
+            favFood.map(item => <OftFoodItem key={item.food_id} {...item} onClick={fetchMeal}></OftFoodItem>)
           ) : (
             <AddFoodInfo onClick={onFoodReg}></AddFoodInfo>
           )}

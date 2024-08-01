@@ -4,13 +4,16 @@ import AddDoneBtn from '../imgs/AfterAddButton.svg?react';
 import { useState } from 'react';
 
 // props: food_id, food_name, food_info, addedState
-const FoodItem = ({ food_id, food_name, food_info, addedState }) => {
+
+const FoodItem = ({ food_id, food_name, food_info, addedState, onClick }) => {
+  console.log(onClick);
   const [added, setAdd] = useState(addedState);
 
   // 음식 추가됨
   const onAddBtnClick = () => {
-    added === true ? setAdd(false) : setAdd(true);
-    if (added === true) {
+    if (added === 'false') {
+      setAdd('true'); // true로 변경하여 버튼 변경
+      onClick(food_id);
       // 식단 추가 버튼이 눌린 경우임 => 식단 추가 POST
     }
   };
@@ -22,11 +25,14 @@ const FoodItem = ({ food_id, food_name, food_info, addedState }) => {
         <FoodInfo>{food_info}</FoodInfo>
       </InfoWrapper>
       <AddBtnWrapper onClick={onAddBtnClick}>
-        {added === true ? <AddDoneBtn></AddDoneBtn> : <AddBtn></AddBtn>}
+        {added === 'true' ? <AddDoneBtn></AddDoneBtn> : <AddBtn></AddBtn>}
       </AddBtnWrapper>
     </>
   );
 };
+
+// AddDoneBtn: 이미 추가됨
+// AddBtn: 추가 안 됨
 
 const InfoWrapper = styled.div`
   display: flex;

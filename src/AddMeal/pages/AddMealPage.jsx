@@ -8,12 +8,14 @@ const AddMealPage = () => {
   // SearchSection에서 선택된 날짜 관리
   const [selectedDate, setSelectedDate] = useState();
 
-  const fetchMeal = async ({ food_id }) => {
+  const fetchMeal = async food_id => {
     try {
-      const res = await axios.post(`${BASE_URL}/api/diet/add-food`, {
-        food_id: food_id,
-        // 날짜도 필요?
-      });
+      console.log('fetchMeal');
+      console.log(food_id); // 알맞게 받아오고 있음
+      // const res = await axios.post(`${BASE_URL}/api/diet/add-food`, {
+      //   food_id: food_id,
+      //   // 날짜도 필요? selectedDate
+      // });
 
       if (res.status === 200) {
         console.log('식단 추가 성공 ', res);

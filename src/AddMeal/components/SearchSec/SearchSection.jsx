@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import SearchBox from '../../../common/components/SearchBox';
 import Datepicker from '../SearchSec/components/DatePicker';
 
-const SearchSection = ({ setSelectedDate }) => {
+const SearchSection = ({ setSelectedDate, fetchMeal }) => {
   let today = new Date();
 
   const onDateChange = startDate => {
@@ -19,7 +19,7 @@ const SearchSection = ({ setSelectedDate }) => {
           </TodayDate>
           에 먹은 음식을 추가해주세요!
         </Info>
-        <SearchBox type="SearchSection"></SearchBox>
+        <SearchBox type="SearchSection" fetchMeal={fetchMeal}></SearchBox>
       </PageBackground>
     </>
   );

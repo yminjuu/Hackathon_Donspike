@@ -11,6 +11,21 @@ const SearchBox = ({ type, fetchMeal }) => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const user_id = 1;
 
+  // 검색 상태 관리
+  const [searchstate, toggleSearchState] = useState(false); //초기 상태: false
+  const searchInput = useRef(null);
+
+  // 검색 성공 여부 관리
+  const [searchSuccess, setSuccess] = useState(false);
+
+  // 검색 결과 데이터 관리
+  const [searchResult, setResult] = useState({
+    food_id: '1',
+    food_name: '흰쌀밥',
+    food_info: '한공기', // not essential
+    addedState: 'false', // not essential
+  });
+
   // 검색어 관리
   const [searchText, setSearchText] = useState('');
 
@@ -20,10 +35,6 @@ const SearchBox = ({ type, fetchMeal }) => {
     }
   }, [searchText]);
 
-  // 검색 상태 관리
-  const [searchstate, toggleSearchState] = useState(false);
-  const searchInput = useRef(null);
-
   // 푸드위키: 검색 관리
   // food_id="1" food_name="사과"
   const fetchFoodWikiSearchResult = async () => {
@@ -31,9 +42,13 @@ const SearchBox = ({ type, fetchMeal }) => {
       const data = await axios.get(
         `${BASE_URL}/api/foodwiki?search_food=${food_id}`, //food_id를 어떻게 알지/??
       );
+      setSuccess(true);
+      setResult(data); // state 변경 => 리렌더링
       console.log(data);
     } catch (error) {
-      console.log(error);
+      if (error.response && error.response.status === 404) {
+        // 검색 결과 없을 때 처리
+      }
     }
   };
 
@@ -42,17 +57,21 @@ const SearchBox = ({ type, fetchMeal }) => {
   const fetchMealSearchResult = async () => {
     try {
       const data = await axios.get(`${BASE_URL}/api/${user_id}/food?search_food=${foodname}`);
+      setSuccess(true);
+      setResult(data); // state 변경 => 리렌더링
       console.log(data);
+      // 식단에 이미 추가되어있는지 여부: 내가 default로 false로 설정?
     } catch (error) {
-      console.log(error);
+      if (error.response && error.response.status === 404) {
+        // 검색 결과 없을 때 처리
+      }
     }
   };
 
   // 검색 버튼 클릭 => Wrapper이 알맞게 바뀜
   const onSearchBtnClick = () => {
-    // fetchSearchResult(); // API 연결시 주석 제거
     if (searchText != '') {
-      if (!searchstate) onSearchTrue();
+      if (!searchstate) onSearchTrue(); // API 데이터 받으러
       else onSearchFalse(); //이미 받아온 상태였음 (x버튼 클릭함)
     } else {
       searchInput.current.focus();
@@ -100,15 +119,23 @@ const SearchBox = ({ type, fetchMeal }) => {
         {/* {searchstate === true ? <StyledNoResult>일치하는 결과가 없습니다.</StyledNoResult> : <></>} */}
         {/* searchState===true이고 API 결과가 빈 배열 => 일치하는 결과가 없습니다*/}
 
+        {/* searchState에 대한 조건 추가 */}
         {searchstate === true && type === 'SearchSection' ? (
-          <SearchItem food_id="1" food_name="흰쌀밥" food_info="한 공기" addedState={false}></SearchItem>
+          <SearchItem
+            food_id={searchResult.food_id}
+            food_name={searchResult.food_name}
+            food_info={searchResult.food_info}
+            addedState={searchResult.addedState}
+            onClick={fetchMeal} // 음식 추가시
+          ></SearchItem>
         ) : (
           <></>
         )}
         {/* <SeachSection> searchState===false이고 API 결과가 있음 => 알맞게 아이템을 만들어서 해당 컴포넌트를 반환 (클릭 이벤트 필요) */}
 
+        {/* searchState에 대한 조건 추가 */}
         {searchstate === true && type === 'FoodWiki' ? (
-          <FoodWikiItem food_id="1" food_name="사과"></FoodWikiItem>
+          <FoodWikiItem food_id={searchResult.food_id} food_name={searchResult.food_name}></FoodWikiItem>
         ) : (
           <></>
         )}
