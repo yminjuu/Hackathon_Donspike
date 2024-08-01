@@ -10,37 +10,11 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 const MainGraphPage = () => {
-  // 혈당값 입력시 데이터 업데이트를 위한 데이터 관리
+  // 혈당값 입력시 데이터 업데이트를 위한 데이터 관리 (실제로 사용하는 데이터가 아니다)
+  // 이 데이터는 혈당만 관리하며, context로 뿌린다.
+  // 혈당 입력시 => state 변화로 setBS 함수 실행 =>
+  // MainGraphpage 리렌더링된다 => 다른 그래프 전부 리렌더링되어 다시 데이터를 GET해온다.
   const [bloodSugar, setBS] = useState(null);
-
-  // 식단 입력시 데이터 업데이트를 위한 데이터 관리
-  const [meal, setMeal] = useState(null);
-
-  // 혈당 + 식단 데이터 관리
-
-  // foodbar 데이터 관리
-
-  // 평균 혈당 데이터 관리
-
-  // 혈당 값 입력시 2가지 그래프 업데이트해주는 함수 - 메인/ 평균 혈당
-  useEffect(() => {
-    fetchBSData();
-  }, [bloodSugar]);
-
-  // 식단 입력시 2가지 그래프 업데이트해주는 함수- 식단&혈당 그래프, foodbar 그래프
-  useEffect(() => {
-    fetchMealData();
-  }, [meal]);
-
-  const fetchBSData = async () => {
-    // 혈당+식단 데이터를 가져오는 axios 로직 추가하여
-    // 평균 혈당 데이터를 가져오는 axios 로직 추가
-  };
-
-  const fetchMealData = async () => {
-    // 혈당+식단 데이터를 가져오는 axios 로직 추가
-    // 식단 데이터를 가져오는 axios 로직 추가
-  };
 
   return (
     <>
@@ -49,7 +23,7 @@ const MainGraphPage = () => {
         <SectionsWrapper>
           {/* 제목 + 혈당 섹션 */}
           <SectionWrapper>
-            <MainBloodSugar setMeal={setMeal} setBS={setBS}></MainBloodSugar>
+            <MainBloodSugar setBS={setBS}></MainBloodSugar>
           </SectionWrapper>
           {/* 구분선 추가 */}
           <HorizonWrapper>

@@ -1,5 +1,5 @@
 // LineChartComponent.jsx
-import React from 'react';
+import { useEffect, React } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label, LabelList } from 'recharts';
 import '../styles/CustomScroll.css';
 import CustomLabel from '../AverageBS/CustomLabel';
@@ -22,6 +22,10 @@ const data = [
 ];
 
 const AverageBloodSugarChart = () => {
+  useEffect(() => {
+    console.log('평균 그래프 리렌더링');
+  });
+
   return (
     <div style={{ width: '100%', overflowX: 'auto', overflowY: 'hidden' }} className="custom-scroll">
       <div style={{ width: '900px', height: '270px' }}>

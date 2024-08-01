@@ -3,9 +3,15 @@ import styled from 'styled-components';
 import { commonGraphWrapper } from '../common/styles/commonStyles';
 import { commonChartTitle } from '../common/styles/commonStyles';
 import AverageGraphToolTip from './components/AverageGraphToolTip';
+import { useEffect } from 'react';
 
 const AverageBloodSugar = () => {
   const offset = -20;
+
+  useEffect(() => {
+    console.log('AverageBloodSugar 리렌더링');
+  });
+
   return (
     <>
       <ChartWrapper>

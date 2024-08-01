@@ -2,16 +2,15 @@ import styled from 'styled-components';
 import Button_before from '../assets/imgs/RecordBSBtn_Before.svg?react';
 import Button_ok from '../assets/imgs/RecordBSBtn_OK.svg?react';
 import Datepicker from './Datepicker';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const RecordBloodSugar = () => {
+const RecordBloodSugar = ({ setBS }) => {
   const [text, setText] = useState('');
 
   // 혈당 입력시
   const onBSInput = e => {
     setText(e.target.value);
   };
-
   return (
     <>
       <Wrapper>
@@ -29,7 +28,16 @@ const RecordBloodSugar = () => {
         </LabelInput>
         <ButtonContainer>
           <ButtonWrapper>
-            {text == '' ? <StyledBtn_Before></StyledBtn_Before> : <StyledBtn_OK></StyledBtn_OK>}
+            {text == '' ? (
+              <StyledBtn_Before></StyledBtn_Before>
+            ) : (
+              <StyledBtn_OK
+                onClick={e => {
+                  setBS(e.target.value); // props로 전달받은 state 변경함수 실행 => 그래프 리렌더링되도록
+                  setText('');
+                }}
+              ></StyledBtn_OK>
+            )}
             {/* 혈당 입력 여부에 따라 버튼 비활성화/활성화되도록 수정해야 함 */}
           </ButtonWrapper>
         </ButtonContainer>
