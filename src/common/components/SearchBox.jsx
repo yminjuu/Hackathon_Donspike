@@ -7,7 +7,10 @@ import { css } from 'styled-components';
 import SearchItem from '../../AddMeal/components/SearchSec/components/SearchItem';
 import FoodWikiItem from '../../FoodWiki/components/FoodWiki/FoodWikiItem';
 
-const SearchBox = ({ type }) => {
+const SearchBox = ({ type, fetchMeal }) => {
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
+  const user_id = 1;
+
   // 검색어 관리
   const [searchText, setSearchText] = useState('');
 
@@ -21,22 +24,53 @@ const SearchBox = ({ type }) => {
   const [searchstate, toggleSearchState] = useState(false);
   const searchInput = useRef(null);
 
+  // 푸드위키: 검색 관리
+  // food_id="1" food_name="사과"
+  const fetchFoodWikiSearchResult = async () => {
+    try {
+      const data = await axios.get(
+        `${BASE_URL}/api/foodwiki?search_food=${food_id}`, //food_id를 어떻게 알지/??
+      );
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // 식단 추가 : 검색 관리
+  // food_id="1" food_name="흰쌀밥" food_info="한 공기" addedState={false}
+  const fetchMealSearchResult = async () => {
+    try {
+      const data = await axios.get(`${BASE_URL}/api/${user_id}/food?search_food=${foodname}`);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // 검색 버튼 클릭 => Wrapper이 알맞게 바뀜
   const onSearchBtnClick = () => {
-    // API POST : 음식 검색
+    // fetchSearchResult(); // API 연결시 주석 제거
     if (searchText != '') {
       if (!searchstate) onSearchTrue();
-      else onSearchFalse();
+      else onSearchFalse(); //이미 받아온 상태였음 (x버튼 클릭함)
     } else {
       searchInput.current.focus();
     }
   };
 
-  // 검색 상태 변경
+  // 검색 => 데이터 받아오기
   const onSearchTrue = () => {
+    // if (type==='FoodWiki'){
+    //   fetchFoodWikiSearchResult()
+    // } else if (type==='SearchSection'){
+    //   fetchMealSearchResult()
+    // }
+    // API 연결시 주석처리 제거
     toggleSearchState(true); // reset 아이콘으로 바뀜
   };
 
+  // X 버튼 누름 => 초기 검색 box로 돌아감
   const onSearchFalse = () => {
     setSearchText('');
     toggleSearchState(false); // 돋보기 아이콘으로 바뀜
@@ -66,11 +100,11 @@ const SearchBox = ({ type }) => {
         {/* {searchstate === true ? <StyledNoResult>일치하는 결과가 없습니다.</StyledNoResult> : <></>} */}
         {/* searchState===true이고 API 결과가 빈 배열 => 일치하는 결과가 없습니다*/}
 
-        {/* {searchstate === true && type === 'SearchSection' ? (
+        {searchstate === true && type === 'SearchSection' ? (
           <SearchItem food_id="1" food_name="흰쌀밥" food_info="한 공기" addedState={false}></SearchItem>
         ) : (
           <></>
-        )} */}
+        )}
         {/* <SeachSection> searchState===false이고 API 결과가 있음 => 알맞게 아이템을 만들어서 해당 컴포넌트를 반환 (클릭 이벤트 필요) */}
 
         {searchstate === true && type === 'FoodWiki' ? (

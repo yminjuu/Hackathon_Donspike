@@ -2,19 +2,20 @@ import styled from 'styled-components';
 import SearchBox from '../../../common/components/SearchBox';
 import Datepicker from '../SearchSec/components/DatePicker';
 
-const SearchSection = () => {
+const SearchSection = ({ setSelectedDate }) => {
   let today = new Date();
+
+  const onDateChange = startDate => {
+    console.log(startDate);
+    setSelectedDate(startDate);
+  };
 
   return (
     <>
       <PageBackground>
         <Info>
-          {/* <TodayDate>
-            {today.getMonth() + 1}/{today.getDate()}
-          </TodayDate> */}
           <TodayDate>
-            {/* {today.getMonth() + 1}/{today.getDate()} */}
-            <Datepicker className="datepicker" type="AddMeal" />
+            <Datepicker onClick={onDateChange} className="datepicker" type="AddMeal" />
           </TodayDate>
           에 먹은 음식을 추가해주세요!
         </Info>

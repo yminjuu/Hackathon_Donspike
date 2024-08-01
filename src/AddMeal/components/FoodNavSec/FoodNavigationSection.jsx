@@ -3,7 +3,28 @@ import { css, styled } from 'styled-components';
 import OftFoodItem from '../FoodNavSec/components/OftFoodItem';
 import AddFoodInfo from '../FoodNavSec/components/AddFoodInfo';
 
-const FoodNavigationSection = () => {
+const FoodNavigationSection = ({ selectedDate }) => {
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
+  const user_id = 1;
+
+  // 알맞게 선택된 날짜 전달되고 있음
+  console.log(selectedDate);
+
+  // 자주 먹은 음식 데이터
+  const [data, setData] = useState();
+
+  const fetchData = async () => {
+    try {
+      const newData = await axios.get(
+        // month 동적??? 이번달 거만 보내주는건지???
+        `${BASE_URL}/api/{user_id}/food/favorites?month=2024-07`,
+      );
+      setData(newData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // dummy data
   const dummyFoodData = [
     { food_id: 1, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
@@ -27,7 +48,34 @@ const FoodNavigationSection = () => {
   };
 
   // 직접 음식 등록
-  const onFoodReg = () => {};
+  const onFoodReg = async ({ foodname, amount, calorie, carbohydrate, protein, fat }) => {
+    // 여기서 매개변수를 받아서 axios.post 호출
+    try {
+      console.log(foodname);
+      console.log(amount);
+      console.log(calorie);
+      console.log(carbohydrate);
+      console.log(protein);
+      console.log(fat);
+      // const res = await axios.post(`${BASE_URL}/api/${user_id}/food`, {
+      //   foodname: foodname,
+      //   amount: amount,
+      //   calorie: calorie,
+      //   carbohydrate: carbohydrate,
+      //   protein: protein,
+      //   fat: fat,
+      // });
+
+      if (res.status === 200) {
+        console.log('음식 등록 완료 ', res);
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        console.log('음식 등록 실패');
+      }
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -56,7 +104,7 @@ const FoodNavigationSection = () => {
           {navstate === 'freq' ? (
             dummyFoodData.map(item => <OftFoodItem key={item.food_id} {...item}></OftFoodItem>)
           ) : (
-            <AddFoodInfo></AddFoodInfo>
+            <AddFoodInfo onClick={onFoodReg}></AddFoodInfo>
           )}
         </ItemsWrapper>
       </PageBackground>

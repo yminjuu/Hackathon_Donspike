@@ -5,6 +5,7 @@ import { useState } from 'react';
 import FoodItem from '../../FoodItem';
 
 // props로 정보 받아서 띄우기
+// props: food_id, food_name, food_info, addedState
 const SearchItem = props => {
   return (
     <>
