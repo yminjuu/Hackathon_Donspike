@@ -28,7 +28,7 @@ const PageHeader = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-  padding: 7rem 18rem;
+  padding: 4rem 18rem 4rem 18rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -94,7 +94,7 @@ const Wrapper3 = styled.div`
 
 const ArrowWrapper1 = styled.div`
   position: absolute;
-  top: -20%;
+  top: -10%;
   left: -6%;
 `;
 
@@ -129,8 +129,8 @@ const ArrowDesc = styled.div`
 
 const ArrowDesc1 = styled(ArrowDesc)`
   position: absolute;
-  top: -20%;
-  left: -380%;
+  top: -10%;
+  left: -400%;
 `;
 
 const ArrowDesc2 = styled(ArrowDesc)`

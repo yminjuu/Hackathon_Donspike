@@ -64,6 +64,7 @@ const CustomDatePicker = styled(DatePicker)`
   letter-spacing: 0.03rem;
 
   display: flex;
+  justify-content: center;
   align-items: center;
   flex-shrink: 0;
 

@@ -25,7 +25,7 @@ const PageHeader = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-  padding: 4rem 28rem;
+  padding: 1.5rem 28rem 4rem 28rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
