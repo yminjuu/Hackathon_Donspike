@@ -8,7 +8,7 @@ const SubPageHeader = ({ type }) => {
 
   const onBtnClick = () => {
     if (type === 'FoodInfo') navigate('/foodWiki');
-    else navigate('/');
+    else navigate('/main');
   };
 
   return (

@@ -2,6 +2,10 @@ import React from 'react';
 import Fullpage, { FullPageSections, FullpageSection, FullpageNavigation } from '@ap.cx/react-fullpage';
 import bg1 from '../assets/background.svg';
 import styled from 'styled-components';
+import Section1 from '../components/Section1';
+import Section2 from '../components/Section2';
+import Section3 from '../components/Section3';
+import Section4 from '../components/Section4';
 
 const LandingPage = () => {
   const SectionStyle1 = {
@@ -18,34 +22,21 @@ const LandingPage = () => {
     backgroundColor: '#EBEEFF',
   };
 
-  const PageHeader = styled.div`
-    width: 100%;
-    height: 9.375rem;
-    flex-shrink: 0;
-
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
-    border-top: 10rem;
-    background: #fff;
-  `;
-
   return (
     <Fullpage>
       <FullpageNavigation />
       <FullPageSections>
         <FullpageSection style={{ ...SectionStyle1 }}>
-          <h1>Screen 1</h1>
+          <Section1></Section1>
         </FullpageSection>
         <FullpageSection style={{ ...SectionStyle2 }}>
-          <PageHeader></PageHeader>
-          <h1>Screen 2</h1>
+          <Section2></Section2>
         </FullpageSection>
         <FullpageSection style={{ ...SectionStyle2 }}>
-          <PageHeader></PageHeader>
-          <h1>Screen 3</h1>
+          <Section3></Section3>
         </FullpageSection>
         <FullpageSection style={{ ...SectionStyle1 }}>
-          <h1>Screen 4</h1>
+          <Section4></Section4>
         </FullpageSection>
       </FullPageSections>
     </Fullpage>
