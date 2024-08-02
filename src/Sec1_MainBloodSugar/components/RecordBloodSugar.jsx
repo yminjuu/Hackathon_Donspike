@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Button_before from '../assets/imgs/RecordBSBtn_Before.svg?react';
-import Button_ok from '../assets/imgs/RecordBSBtn_OK.svg?react';
+import Button_before from '../assets/RecordBSBtn_Before.svg?react';
+import Button_ok from '../assets/RecordBSBtn_OK.svg?react';
 import Datepicker from './Datepicker';
 import { useEffect, useState } from 'react';
 import axios from 'axios';

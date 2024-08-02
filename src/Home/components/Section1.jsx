@@ -2,8 +2,8 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import LogoButton from '../../common/components/LogoButton';
 import MainContent from '../assets/MainContent.svg?react';
-import mainperson1 from '../assets/imgs/MainPerson1.png';
-import mainperson2 from '../assets/imgs/MainPerson2.png';
+import mainperson1 from '../assets/MainPerson1.png';
+import mainperson2 from '../assets/MainPerson2.png';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 

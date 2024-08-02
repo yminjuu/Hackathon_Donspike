@@ -1,11 +1,11 @@
 import { React, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import buritto from '../assets/imgs/buritto.png';
+import buritto from '../assets/buritto.png';
 import { css } from 'styled-components';
 import Content1 from '../assets/SubContent2_1.svg?react';
 import Content2 from '../assets/SubContent2_2.svg?react';
 import Content3 from '../assets/SubContent2_3.svg?react';
-import Arrow from '../assets/arrows/arrow3.svg?react';
+import Arrow from '../assets/arrow3.svg?react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 

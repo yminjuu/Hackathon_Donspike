@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ExampleImg from '../../imgs/exSearchImg.svg';
+import ExampleImg from '../../../FoodWiki/assets/exSearchImg.svg?react';
 import { useNavigate } from 'react-router-dom';
 
 const FoodWikiItem = props => {
@@ -7,7 +7,7 @@ const FoodWikiItem = props => {
 
   const onItemClick = () => {
     // API GET => 존재하는 경우에만 FoodInfoPage로 넘어감
-    navigate('/foodWiki/search?query=사과');
+    navigate(`/foodWiki/search?query=${props.food_name}`);
   };
 
   return (

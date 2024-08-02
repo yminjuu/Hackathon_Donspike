@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Logo from '../assets/imgs/Logo.svg?react';
+import Logo from '../assets/Logo.svg?react';
 import { useNavigate } from 'react-router-dom';
 
 const LogoButton = () => {

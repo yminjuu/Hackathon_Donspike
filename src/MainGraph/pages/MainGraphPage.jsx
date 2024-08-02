@@ -4,7 +4,7 @@ import AverageBloodSugar from '../../Sec3_AverageBloodSugar/AverageBloodSugar';
 import FoodBar from '../../Sec2_FoodBar/FoodBar';
 
 import styled from 'styled-components';
-import background from '../assets/imgs/background.svg';
+import background from '../assets/background.svg';
 import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';

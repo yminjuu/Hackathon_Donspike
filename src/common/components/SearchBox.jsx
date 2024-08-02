@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import Salad from '../../AddMeal/components/SearchSec/imgs/salad.jpg';
-import SearchButton from '../assets/imgs/SearchButton.svg?react';
-import SearchReset from '../assets/imgs/SearchReset.svg?react';
+import Salad from '../../AddMeal/components/SearchSec/assets/salad.jpg';
+import SearchButton from '../assets/SearchButton.svg?react';
+import SearchReset from '../assets/SearchReset.svg?react';
 import { useState, useRef, useEffect } from 'react';
 import { css } from 'styled-components';
 import SearchItem from '../../AddMeal/components/SearchSec/components/SearchItem';

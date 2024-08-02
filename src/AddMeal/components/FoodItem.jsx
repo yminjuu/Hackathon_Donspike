@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import AddBtn from '../imgs/AddButton.svg?react';
-import AddDoneBtn from '../imgs/AfterAddButton.svg?react';
+import AddBtn from '../assets/AddButton.svg?react';
+import AddDoneBtn from '../assets/AfterAddButton.svg?react';
 import { useState } from 'react';
 
 // props: food_id, food_name, food_info, addedState

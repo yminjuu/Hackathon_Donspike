@@ -1,10 +1,10 @@
 import { css, styled } from 'styled-components';
-import AddFoodDoneBtn from '../imgs/AddFoodDoneBtn.svg?react';
-import AddFoodBtn from '../imgs/AddFoodBtn.svg?react';
-import DisableBtn from '../imgs/AddFoodBtnDisable.svg?react';
-import ResetBtn from '../imgs/ResetBtn.svg?react';
-import Horizon from '../imgs/Horizon.svg?react';
-import Essential from '../imgs/Essential.svg?react';
+import AddFoodDoneBtn from '../assets/AddFoodDoneBtn.svg?react';
+import AddFoodBtn from '../assets/AddFoodBtn.svg?react';
+import DisableBtn from '../assets/AddFoodBtnDisable.svg?react';
+import ResetBtn from '../assets/ResetBtn.svg?react';
+import Horizon from '../assets/Horizon.svg?react';
+import Essential from '../assets/Essential.svg?react';
 import React from 'react';
 import { useRef } from 'react';
 import { useState } from 'react';

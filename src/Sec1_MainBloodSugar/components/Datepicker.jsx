@@ -1,7 +1,7 @@
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useEffect, useState } from 'react';
-import CalendarIcon from '../assets/imgs/CalendarIcon';
+import CalendarIcon from '../assets/CalendarIcon';
 import { styled, css } from 'styled-components';
 import { forwardRef } from 'react';
 import '../styles/DatePicker.css';

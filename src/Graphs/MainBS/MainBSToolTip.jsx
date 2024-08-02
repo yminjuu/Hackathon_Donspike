@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled, css } from 'styled-components';
-import ExpectTooltip from '../imgs/ExpectTooltip.svg?react';
-import MainTooltip from '../imgs/MainToolTip.svg?react';
+import ExpectTooltip from '../assets/ExpectTooltip.svg?react';
+import MainTooltip from '../assets/MainToolTip.svg?react';
 
 // active: hover 이벤트로 툴팁이 활성화된 상황
 // payload: tooltip에 띄울 정보를 props로 받음

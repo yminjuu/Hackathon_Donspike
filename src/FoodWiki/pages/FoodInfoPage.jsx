@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 import SubPageHeader from '../../common/components/SubPageHeader';
-import FoodWikiLogo from '../imgs/FoodWikiLogo.svg?react';
+import FoodWikiLogo from '../assets/FoodWikiLogo.svg?react';
 import Tip from '../components/FoodInfo/Tip';
 import Nutrient from '../components/FoodInfo/Nutrient';
 import { useEffect, useState } from 'react';
