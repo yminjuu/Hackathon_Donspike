@@ -6,7 +6,6 @@ import axios from 'axios';
 
 const FoodNavigationSection = ({ selectedDate, fetchMeal }) => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
-  const user_id = 1;
 
   // 자주 먹은 음식 데이터
   const [favFood, setFavFood] = useState([]);
@@ -14,47 +13,44 @@ const FoodNavigationSection = ({ selectedDate, fetchMeal }) => {
   const fetchData = async () => {
     try {
       // 자주 먹었어요: month는 우선 7월로 받고(더미데이터) 나중에 8월로 바꾸면 됨.
-      const Data = await axios.get(`${BASE_URL}/api/food/favorites?month=2024-07`);
+      const { data } = await axios.get(`${BASE_URL}/api/food/favorites?month=2024-07`);
       console.log('fav food fetch');
-      console.log('결과 : ', Data);
+      console.log('자주 먹은 음식 받은 결과 : ', data);
 
-      // // 우선 더미데이터
+      // const updatedData = data.map(item => ({
+      //   ...item,
+      //   addedState: false
+      // }));
 
-      // const newData = [
-      //   { food_id: 1, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
-      //   { food_id: 2, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'true' },
-      //   { food_id: 3, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
-      //   { food_id: 4, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'true' },
-      //   { food_id: 5, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
-      //   { food_id: 6, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'true' },
-      // ];
+      // 필요한 데이터의 키값들: foodname, food_id, count 받을 예정
+      // 내가 추가해야 하는 state: addedState default로 false로 추가
 
       // addedState를 처음엔 false로 해서 받고 => 추가되면 true로 바꾸어 리랜더링해야됨
-      setFavFood(Data.data);
+
+      // 더미데이터
+      const updatedData = [
+        { foodname: '밥', count: 10, food_id: 1, addedState: false },
+        { foodname: '사과', count: 8, food_id: 2, addedState: false },
+        { foodname: '낙지볶음', count: 7, food_id: 3, addedState: false },
+        { foodname: '김치찜', count: 6, food_id: 4, addedState: false },
+        { foodname: '샐러드', count: 6, food_id: 5, addedState: false },
+      ];
+
+      setFavFood(updatedData);
     } catch (error) {
       console.log(error);
     }
   };
 
-  // dummy data
-  // const dummyFoodData = [
-  //   { food_id: 1, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
-  //   { food_id: 2, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'true' },
-  //   { food_id: 3, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
-  //   { food_id: 4, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'true' },
-  //   { food_id: 5, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
-  //   { food_id: 6, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'true' },
-  // ];
-
   // 최초 렌더링 데이터 가져오기
   useEffect(() => {
     fetchData();
-    onFoodReg();
   }, []);
 
   const [navstate, setNavstate] = useState('freq');
-  // freq, onHand
+  // 어떤 nav를 선택했는지 관리 : freq, onHand
 
+  // nav 변경 관리
   const onNavClick = navkey => {
     if (navstate === 'freq' && navkey === 'onHand') {
       // API GET : 자주 먹었어요! 데이터 받아서 알맞게 뿌리기
@@ -65,37 +61,23 @@ const FoodNavigationSection = ({ selectedDate, fetchMeal }) => {
   };
 
   // 직접 음식 등록
-  const onFoodReg = async ({ foodname, amount, calorie, carbohydrate, protein, fat }) => {
+  const onFoodReg = async ({ foodname }) => {
     // 여기서 매개변수를 받아서 axios.post 호출
-    console.log('음식 등록');
+    console.log('음식 등록', foodname);
     try {
-      console.log(foodname);
-      console.log(amount);
-      console.log(calorie);
-      console.log(carbohydrate);
-      console.log(protein);
-      console.log(fat);
-
-      const res = await axios.post(
-        `${BASE_URL}/api/food?search_food=배`,
-        // {
-        // foodname: foodname,
-        // amount: amount,
-        // calorie: calorie,
-        // carbohydrate: carbohydrate,
-        // protein: protein,
-        // fat: fat,
-        // }
-      );
+      const res = await axios.post(`${BASE_URL}/api/food`, {
+        foodname: foodname,
+      });
 
       if (res.status === 200) {
+        console.log(res);
         console.log('음식 등록 완료 ', res);
       }
     } catch (error) {
+      console.log(error);
       if (error.response && error.response.status === 404) {
         console.log('음식 등록 실패');
       }
-      console.log(error);
     }
   };
 
@@ -124,7 +106,7 @@ const FoodNavigationSection = ({ selectedDate, fetchMeal }) => {
         </NavWrapper>
         <ItemsWrapper $navstate={navstate}>
           {navstate === 'freq' ? (
-            favFood.map(item => <OftFoodItem key={item} {...item} onClick={fetchMeal}></OftFoodItem>)
+            favFood.map(item => <OftFoodItem key={item.food_id} {...item} fetchMeal={fetchMeal}></OftFoodItem>)
           ) : (
             <AddFoodInfo onClick={onFoodReg}></AddFoodInfo>
           )}

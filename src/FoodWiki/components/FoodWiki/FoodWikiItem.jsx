@@ -3,11 +3,9 @@ import ExampleImg from '../../imgs/exSearchImg.svg';
 import { useNavigate } from 'react-router-dom';
 
 const FoodWikiItem = props => {
-  console.log(props);
   const navigate = useNavigate();
 
   const onItemClick = () => {
-    console.log('아이템 클릭');
     // API GET => 존재하는 경우에만 FoodInfoPage로 넘어감
     navigate('/foodWiki/search?query=사과');
   };

@@ -3,8 +3,10 @@ import FoodNavigationSection from '../components/FoodNavSec/FoodNavigationSectio
 import styled from 'styled-components';
 import SubPageHeader from '../../common/components/SubPageHeader';
 import { useState } from 'react';
+import axios from 'axios';
 
 const AddMealPage = () => {
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
   // SearchSection에서 선택된 날짜 관리
   const [selectedDate, setSelectedDate] = useState();
 
@@ -12,10 +14,16 @@ const AddMealPage = () => {
     try {
       console.log('fetchMeal');
       console.log(food_id); // 알맞게 받아오고 있음
-      // const res = await axios.post(`${BASE_URL}/api/diet/add-food`, {
-      //   food_id: food_id,
-      //   // 날짜도 필요? selectedDate
-      // });
+
+      // {
+      //   "foodId": 2,
+      //   "date": 2024-08-02,
+      // }
+
+      const res = await axios.post(`${BASE_URL}/api/diet/add-food`, {
+        foodId: 1,
+        date: '2024-08-02', // 날짜 데이터 형식 이거 맞는지
+      });
 
       if (res.status === 200) {
         console.log('식단 추가 성공 ', res);

@@ -5,15 +5,16 @@ import { useState } from 'react';
 
 // props: food_id, food_name, food_info, addedState
 
-const FoodItem = ({ food_id, food_name, food_info, addedState, onClick }) => {
-  console.log(onClick);
+const FoodItem = ({ food_id, foodname, count, addedState, fetchMeal }) => {
+  console.log(food_id, foodname, count, addedState);
+
   const [added, setAdd] = useState(addedState);
 
   // 음식 추가됨
   const onAddBtnClick = () => {
-    if (added === 'false') {
-      setAdd('true'); // true로 변경하여 버튼 변경
-      onClick(food_id);
+    if (added === false) {
+      setAdd(true); // true로 변경하여 버튼 변경
+      fetchMeal(food_id);
       // 식단 추가 버튼이 눌린 경우임 => 식단 추가 POST
     }
   };
@@ -21,11 +22,10 @@ const FoodItem = ({ food_id, food_name, food_info, addedState, onClick }) => {
   return (
     <>
       <InfoWrapper>
-        <FoodTitle>{food_name}</FoodTitle>
-        <FoodInfo>{food_info}</FoodInfo>
+        <FoodTitle>{foodname}</FoodTitle>
       </InfoWrapper>
       <AddBtnWrapper onClick={onAddBtnClick}>
-        {added === 'true' ? <AddDoneBtn></AddDoneBtn> : <AddBtn></AddBtn>}
+        {added === true ? <AddDoneBtn></AddDoneBtn> : <AddBtn></AddBtn>}
       </AddBtnWrapper>
     </>
   );
@@ -47,14 +47,6 @@ const FoodTitle = styled.div`
 
   font-size: 1.125rem;
   font-weight: 600;
-`;
-
-const FoodInfo = styled.div`
-  color: #414141;
-
-  /* Pretendard/Md/12 */
-  font-size: 0.75rem;
-  font-weight: 500;
 `;
 
 const AddBtnWrapper = styled.div`

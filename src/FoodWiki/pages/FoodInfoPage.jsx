@@ -15,30 +15,22 @@ const FoodInfoPage = () => {
 
   const fetchFoodWikiSearchResult = async () => {
     try {
-      console.log('여기');
       const res = await axios.get(`https://api.donspike.store/api/foodwiki?search_food=${query}`);
-      console.log(res.data[0]); // 응답 중 data만 출력
 
       setData(res.data[0]); // state 변경 => 리렌더링
-      console.log('result set 완료');
+      console.log(data);
     } catch (error) {
       if (error.response && error.response.status === 404) {
         // 검색 결과 없을 때 처리
+        console.log('에러 발생', res);
       }
     }
   };
 
+  // 초기 렌더링 => 정보 가져옴
   useEffect(() => {
     fetchFoodWikiSearchResult();
   }, []);
-
-  console.log('검색어: ' + query);
-
-  // 더미 기본 정보
-  const dummyBasicData = {
-    food_name: '사과',
-    food_amount: '250g',
-  };
 
   // 더미 영양정보 데이터
   const dummyNutrient = [
@@ -82,13 +74,13 @@ const FoodInfoPage = () => {
       </HeaderWrapper>
       <ContentWrapper>
         <InfoWrapper>
-          <Nutrient BasicData={dummyBasicData} Nutrient={dummyNutrient}></Nutrient>
-          {/* <Nutrient></Nutrient> */}
+          <Nutrient {...data}></Nutrient>
         </InfoWrapper>
         <TipWrapper>
-          {dummyTip.map(item => (
-            <Tip key={item.tip_title} {...item}></Tip>
-          ))}
+          <Tip tip_title="전문가의 소견" tip_content={data.expertOpinion} />
+          <Tip tip_title="적정 섭취량" tip_content={data.properIntake} />
+          <Tip tip_title="추천 섭취 방법" tip_content={data.ingestionMethod} />
+          <Tip tip_title="혈당 지수" tip_content={data.gi} />
         </TipWrapper>
       </ContentWrapper>
     </>

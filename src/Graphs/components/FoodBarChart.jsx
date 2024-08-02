@@ -8,11 +8,11 @@ import axios from 'axios';
 
 // count에 따라 내림차순으로 받은 데이터 정렬 필요
 const data = [
-  { name: '밥', count: 10 },
-  { name: '사과', count: 8 },
-  { name: '낙지볶음', count: 7 },
-  { name: '김치찜', count: 6 },
-  { name: '샐러드', count: 6 },
+  { foodname: '밥', count: 10, food_id: 1 },
+  { foodname: '사과', count: 8, food_id: 2 },
+  { foodname: '낙지볶음', count: 7, food_id: 3 },
+  { foodname: '김치찜', count: 6, food_id: 4 },
+  { foodname: '샐러드', count: 6, food_id: 5 },
 ];
 
 const FoodBarChart = () => {
@@ -27,8 +27,9 @@ const FoodBarChart = () => {
     try {
       // 현재 7월값으로 요청하고 있음
       const { data } = await axios.get(`${BASE_URL}/api/food/favorites?month=2024-07`);
-      console.log(data);
+      console.log('foodbar chart GET: ', data);
       // 받아온 데이터 state에 반영 아직 안 함
+      // foodname, food_id, count 받을 예정
     } catch (error) {
       console.log(error);
     }
