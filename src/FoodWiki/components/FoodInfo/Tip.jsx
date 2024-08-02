@@ -8,7 +8,7 @@ const Tip = ({ tip_title, tip_content }) => {
       {/* horizon */}
       {tip_title != '혈당 지수' ? (
         <svg xmlns="http://www.w3.org/2000/svg" width="550" height="2" viewBox="0 0 550 2" fill="none">
-          <path d="M1 1L631 0.999951" stroke="#E8E8E8" strokLinecap="round" />
+          <path d="M1 1L631 0.999951" stroke="#E8E8E8" strokeLinecap="round" />
         </svg>
       ) : (
         <></>

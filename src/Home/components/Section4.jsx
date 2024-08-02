@@ -1,8 +1,12 @@
-import { React } from 'react';
+import { React, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import Search from '../assets/imgs/search.png';
 import Btn from '../assets/NavBtn.svg?react';
 import { useNavigate } from 'react-router-dom';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger); // ScrollTrigger Trigger 호출
 
 const Wrapper = styled.div`
   width: 100%;
@@ -48,10 +52,26 @@ const ImgBtn = styled.div`
 `;
 
 const Section4 = () => {
+  const wrapperRef = useRef(null);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: wrapperRef.current,
+        start: 'top 100%',
+        end: 'bottom 60%',
+        toggleActions: 'play none restart none',
+      },
+    });
+
+    tl.from(wrapperRef.current, { opacity: 0, y: +100, duration: 1.3 });
+  }, []);
+
   return (
     <Wrapper>
-      <MainWrapper>
+      <MainWrapper ref={wrapperRef}>
         <Icon src={Search}></Icon>
         <Text>혈당 스파이크를 방지할 작은 시작,</Text>
         <ImgBtn

@@ -7,23 +7,8 @@ import MainTooltip from '../imgs/MainToolTip.svg?react';
 // payload: tooltip에 띄울 정보를 props로 받음
 
 const MainBSTooltip = ({ active, payload, label }) => {
-  if (active && payload && payload[0].payload.foodnames.length != 0) {
-    const data = payload[0].payload;
-
-    return (
-      <ToolTipWrapper>
-        <MainTooltip></MainTooltip>
-        <DateText>{data.formatDate}</DateText>
-        <MealWrapper>
-          {data.foodnames.map(item => (
-            <MealText key={data.item}>{item}</MealText>
-          ))}
-        </MealWrapper>
-        <BSText bloodsugar={data.bloodsugar}>{data.bloodsugar}</BSText>
-      </ToolTipWrapper>
-    );
-  } else if (active && payload && payload[0].payload.expect > 0) {
-    console.log('여기');
+  // 예상 혈당값이 있을 때 먼저 처리
+  if (active && payload && payload[0].payload.expect > 0 && !payload[0].payload.bloodsugar) {
     return (
       <ExpectToolTipWrapper>
         <Container>
@@ -32,6 +17,24 @@ const MainBSTooltip = ({ active, payload, label }) => {
           <BSText>{payload[0].payload.expect}</BSText>
         </Container>
       </ExpectToolTipWrapper>
+    );
+  } else if (active && payload) {
+    const data = payload[0].payload;
+
+    return (
+      <ToolTipWrapper>
+        <MainTooltip></MainTooltip>
+        <DateText>{data.tooltipDate}</DateText>
+        <MealWrapper>
+          {/* 식단 데이터가 있을 때에만 map하도록 */}
+          {payload[0].payload.foodBsMappingId.length != 0 ? (
+            data.foodBsMappingId.map(item => <MealText key={data.item}>{item}</MealText>)
+          ) : (
+            <></>
+          )}
+        </MealWrapper>
+        <BSText bloodsugar={data.bloodsugar}>{data.bloodsugar}</BSText>
+      </ToolTipWrapper>
     );
   }
 

@@ -4,7 +4,10 @@ import LogoButton from '../../common/components/LogoButton';
 import MainContent from '../assets/MainContent.svg?react';
 import mainperson1 from '../assets/imgs/MainPerson1.png';
 import mainperson2 from '../assets/imgs/MainPerson2.png';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+gsap.registerPlugin(ScrollTrigger); // ScrollTrigger Trigger 호출
 const Section1 = () => {
   return (
     <Wrapper>
@@ -70,7 +73,7 @@ const MainContent1 = styled.div`
 
 const MainContent2 = styled.div`
   width: 100%;
-  height: 38%;
+  height: 100%;
   margin-bottom: 3rem;
   display: flex;
   flex-direction: column;

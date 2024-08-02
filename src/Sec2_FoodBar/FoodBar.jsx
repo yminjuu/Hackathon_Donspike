@@ -2,8 +2,13 @@ import FoodBarChart from '../Graphs/components/FoodBarChart';
 import styled from 'styled-components';
 import { commonGraphWrapper } from '../common/styles/commonStyles';
 import { commonChartTitle } from '../common/styles/commonStyles';
+import { useEffect } from 'react';
 
 const FoodBar = () => {
+  useEffect(() => {
+    console.log('FoodBar 리렌더링');
+  });
+
   return (
     <>
       <ChartWrapper>

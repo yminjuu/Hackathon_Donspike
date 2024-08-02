@@ -1,61 +1,18 @@
-// LineChartComponent.jsx
-import React from 'react';
+/* eslint-disable */
+import React, { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine } from 'recharts';
 import MainBSToolTip from '../MainBS/MainBSToolTip';
-import CustomizedLabel from '../MainBS/CustomizedLabel';
 import '../styles/CustomScroll.css';
-
-// 더미데이터
-const data = [
-  {
-    recorddate: '2024-06-17T17:00:00.123456+09:00',
-    bloodsugar: 150.0,
-    foodnames: ['사과', '배'],
-  },
-  {
-    recorddate: '2024-06-18T17:00:00.123456+09:00',
-    bloodsugar: 140.0,
-    foodnames: ['사과', '배'],
-  },
-  {
-    recorddate: '2024-06-19T17:00:00.123456+09:00',
-    bloodsugar: 130.0,
-    foodnames: ['사과', '배'],
-  },
-  {
-    recorddate: '2024-06-20T17:00:00.123456+09:00',
-    bloodsugar: 120.0,
-    foodnames: ['사과', '배'],
-  },
-  {
-    recorddate: '2024-06-21T17:00:00.123456+09:00',
-    bloodsugar: 110.0,
-    foodnames: ['사과', '배'],
-  },
-  {
-    recorddate: '2024-06-22T17:00:00.123456+09:00',
-    bloodsugar: 100.0,
-    foodnames: ['사과', '배'],
-  },
-  {
-    recorddate: '2024-06-23T17:00:00.123456+09:00',
-    bloodsugar: 150.0,
-    foodnames: ['사과', '배'],
-  },
-  {
-    recorddate: '2024-06-24T17:00:00.123456+09:00',
-    bloodsugar: 130.0,
-    foodnames: ['사과', '배', '사과', '배', '사과', '배', '사과', '배', '사과', '배'],
-    expect: 130.0, // 전날 혈당값과 이어주기 위해서 존재
-  },
-  {
-    recorddate: '2024-07-31T17:00:00.123456+09:00',
-    expect: 140.0,
-    foodnames: [],
-  },
-];
+import axios from 'axios';
 
 const formatDate = dateString => {
+  const date = new Date(dateString);
+  const month = (date.getMonth() + 1).toString();
+  const day = date.getDate().toString();
+  return `${month}/${day}`;
+};
+
+const tooltipDate = dateString => {
   const date = new Date(dateString);
   const year = date.getFullYear();
   const month = (date.getMonth() + 1).toString();
@@ -63,17 +20,12 @@ const formatDate = dateString => {
   return `${year}.${month}.${day}`;
 };
 
-// 포맷데이터를 추가 : key값은 formatDate
-const updateData = data.map(item => ({
-  ...item,
-  formatDate: formatDate(item.recorddate),
-}));
-
 const CustomizedDot = props => {
   const { cx, cy, stroke, payload, value } = props;
   const date = new Date();
   const indexDate = new Date(payload.recorddate);
 
+  // 오늘 날짜와 동일하면 띄우도록 설정을 해두었음.
   if (
     date.getFullYear() === indexDate.getFullYear() &&
     date.getMonth() === indexDate.getMonth() &&
@@ -84,9 +36,44 @@ const CustomizedDot = props => {
 };
 
 const MainBloodSugarChart = () => {
-  // 데이터 중 최대 혈당량을 구함
+  const user_id = 1;
+
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
+
+  const [data, setData] = useState([]); // 메인 그래프 데이터
+
+  const fetchMainChartData = async () => {
+    try {
+      const res = await axios.get(`${BASE_URL}/api/blood-sugar/food/${user_id}`); // data를 배열 형식으로 새로 받아옴
+
+      // 임의의 예상값 추가 => 실제 예상하도록 고쳐야함
+      const newData = [
+        ...res.data,
+        { bloodsugar: 135, recorddate: '2024-12-24T20:03:30', foodBsMappingId: ['감자탕', '짜장면'], expect: 135 },
+        // 예상 혈당 구분을 위해서 혈당을 0으로 set
+        { bloodsugar: NaN, recorddate: '2024-12-25T20:03:30', foodBsMappingId: [], expect: 140 },
+      ];
+      setData(newData);
+    } catch (error) {
+      console.log('에러 발생', error);
+    }
+  };
+
+  // 최초 렌더링시 데이터 가져옴
+  useEffect(() => {
+    fetchMainChartData();
+  }, []);
+
+  // 데이터 중 최대 혈당량을 구함 => reference line 위함
   const dataMax = Math.max(...data.map(d => d.bloodsugar));
   const dataMin = Math.min(...data.map(d => d.bloodsugar));
+
+  // 포맷데이터를 추가 : key값은 formatDate, tooltip의 날짜는 tooltipDate
+  const updateData = data.map(item => ({
+    ...item,
+    formatDate: formatDate(item.recorddate),
+    tooltipDate: tooltipDate(item.recorddate),
+  }));
 
   return (
     <div style={{ width: '100%', overflowX: 'auto', overflowY: 'hidden' }} className="custom-scroll">
@@ -131,7 +118,6 @@ const MainBloodSugarChart = () => {
             strokeWidth={2}
             dot={{ r: 3, fill: 'black' }}
             activeDot={{ r: 6, fill: '#3053f9', strokeWidth: 0 }}
-            // label={<CustomizedLabel dataMax={dataMax} />}
           />
         </LineChart>
       </div>

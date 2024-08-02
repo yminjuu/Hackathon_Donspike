@@ -1,16 +1,14 @@
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CalendarIcon from '../assets/imgs/CalendarIcon';
 import { styled, css } from 'styled-components';
 import { forwardRef } from 'react';
 import '../styles/DatePicker.css';
 import { ko } from 'date-fns/locale';
 
-const Datepicker = () => {
+const Datepicker = ({ selectedDate, setDate }) => {
   // default 값: 현재 날짜
-  const [startDate, setStartDate] = useState(new Date());
-
   const CustomInput = forwardRef(({ value, onClick, className }, ref) => (
     <CustomInputBtn className={className} onClick={onClick} ref={ref}>
       {value}
@@ -25,8 +23,8 @@ const Datepicker = () => {
           showIcon
           icon={<CalendarIcon />}
           dateFormat="yyyy. MM. dd" /* 버튼에 명시되는 날짜 형식 커스텀*/
-          selected={startDate} /* default 선택된 date 값*/
-          onChange={date => setStartDate(date)} /* 날짜 선택 이벤트 */
+          selected={selectedDate} /* default 선택된 date 값*/
+          onChange={date => setDate(date)} /* 날짜 선택 이벤트 */
           popperPlacement="bottom"
           customInput={<CustomInput className="customInput" />} /* input 디자인을 커스텀 */
         />
@@ -34,14 +32,6 @@ const Datepicker = () => {
     </>
   );
 };
-
-const AddMealWrapper = styled.div`
-  width: 8rem;
-  height: 2.5rem;
-  background-color: #ebeeff;
-  text-align: center;
-  border-radius: 0.5rem;
-`;
 
 const Wrapper = styled.div`
   width: 10.5rem;

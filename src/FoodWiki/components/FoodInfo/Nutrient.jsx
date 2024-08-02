@@ -1,40 +1,71 @@
 import styled from 'styled-components';
 import ExImg from '../../imgs/exImg.svg?react';
 
-const Nutrient = ({ BasicData, Nutrient }) => {
-  console.log(BasicData);
-  console.log(Nutrient);
+const Nutrient = ({ foodname, amount, calorie, carbohydrate, protein, fat, sodium, cholesterol }) => {
   return (
     <Wrapper>
       <BasicWrapper>
         <ExImg></ExImg>
         <FoodWrapper>
-          <FoodTitle>{BasicData.food_name}</FoodTitle>
-          <FoodAmount>{BasicData.food_amount}</FoodAmount>
+          <FoodTitle>{foodname}</FoodTitle>
+          <FoodAmount>{amount}</FoodAmount>
         </FoodWrapper>
       </BasicWrapper>
       <NutrientWrapper>
-        {Nutrient.map((item, index) => {
-          const [key, value] = Object.entries(item)[0];
-          return (
-            <>
-              <NutrientItem key={index}>
-                <Index>{key}</Index>
-                <ValueWrapper>
-                  <Number>{value}</Number>
-                  <Unit>g</Unit>
-                </ValueWrapper>
-              </NutrientItem>
-              {key != '콜레스테롤' ? (
-                <svg xmlns="http://www.w3.org/2000/svg" width="350" height="2" viewBox="0 0 350 2" fill="none">
-                  <path d="M1 1L426 0.999967" stroke="#E8E8E8" stroke-linecap="round" />
-                </svg>
-              ) : (
-                <></>
-              )}
-            </>
-          );
-        })}
+        <NutrientItem>
+          <Index>열량</Index>
+          <ValueWrapper>
+            <Number>{calorie}</Number>
+            <Unit>kcal</Unit>
+          </ValueWrapper>
+        </NutrientItem>
+        <svg xmlns="http://www.w3.org/2000/svg" width="350" height="2" viewBox="0 0 350 2" fill="none">
+          <path d="M1 1L426 0.999967" stroke="#E8E8E8" strokeLinecap="round" />
+        </svg>
+        <NutrientItem>
+          <Index>탄수화물</Index>
+          <ValueWrapper>
+            <Number>{carbohydrate}</Number>
+            <Unit>g</Unit>
+          </ValueWrapper>
+        </NutrientItem>
+        <svg xmlns="http://www.w3.org/2000/svg" width="350" height="2" viewBox="0 0 350 2" fill="none">
+          <path d="M1 1L426 0.999967" stroke="#E8E8E8" strokeLinecap="round" />
+        </svg>
+        <NutrientItem>
+          <Index>단백질</Index>
+          <ValueWrapper>
+            <Number>{protein}</Number>
+            <Unit>g</Unit>
+          </ValueWrapper>
+        </NutrientItem>
+        <svg xmlns="http://www.w3.org/2000/svg" width="350" height="2" viewBox="0 0 350 2" fill="none">
+          <path d="M1 1L426 0.999967" stroke="#E8E8E8" strokeLinecap="round" />
+        </svg>
+        <NutrientItem>
+          <Index>지방</Index>
+          <ValueWrapper>
+            <Number>{fat}</Number>
+            <Unit>g</Unit>
+          </ValueWrapper>
+        </NutrientItem>
+        <NutrientItem>
+          <Index>나트륨</Index>
+          <ValueWrapper>
+            <Number>{sodium}</Number>
+            <Unit>mg</Unit>
+          </ValueWrapper>
+        </NutrientItem>
+        <svg xmlns="http://www.w3.org/2000/svg" width="350" height="2" viewBox="0 0 350 2" fill="none">
+          <path d="M1 1L426 0.999967" stroke="#E8E8E8" strokeLinecap="round" />
+        </svg>
+        <NutrientItem>
+          <Index>콜레스테롤</Index>
+          <ValueWrapper>
+            <Number>{cholesterol}</Number>
+            <Unit>mg</Unit>
+          </ValueWrapper>
+        </NutrientItem>
       </NutrientWrapper>
     </Wrapper>
   );

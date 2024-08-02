@@ -1,12 +1,12 @@
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { styled, css } from 'styled-components';
 import { forwardRef } from 'react';
 import '../styles/Datepicker.css';
 import { ko } from 'date-fns/locale';
 
-const Datepicker = () => {
+const Datepicker = ({ onClick }) => {
   // default 값: 현재 날짜
   const [startDate, setStartDate] = useState(new Date());
 
@@ -15,6 +15,11 @@ const Datepicker = () => {
       {value}
     </CustomInputBtn>
   ));
+
+  // 부모 컴포넌트에게 선택된 date 전달
+  useEffect(() => {
+    onClick(startDate);
+  }, [startDate]);
 
   return (
     <>
@@ -64,6 +69,7 @@ const CustomDatePicker = styled(DatePicker)`
   letter-spacing: 0.03rem;
 
   display: flex;
+  justify-content: center;
   align-items: center;
   flex-shrink: 0;
 

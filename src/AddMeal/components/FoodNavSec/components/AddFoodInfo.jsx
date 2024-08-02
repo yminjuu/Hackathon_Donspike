@@ -10,10 +10,19 @@ import { useRef } from 'react';
 import { useState } from 'react';
 
 // 직접 음식 등록하기
-const AddFoodInfo = () => {
+// 직접 음식 등록하기
+const AddFoodInfo = ({ onClick }) => {
   const [foodname, setFoodname] = useState('');
-  const foodNameRef = useRef();
+  const [nutritionInfo, setNutritionInfo] = useState({
+    amount: '',
+    calorie: '',
+    carbohydrate: '',
+    protein: '',
+    fat: '',
+  });
 
+  // 음식 이름이 입력되어야만 버튼이 활성화되도록
+  const foodNameRef = useRef();
   const [regstate, setRegState] = useState(false);
 
   const onContentChange = e => {
@@ -21,23 +30,47 @@ const AddFoodInfo = () => {
     if (regstate === true) setRegState(false);
   };
 
+  const onNutritionChange = (e, type) => {
+    setNutritionInfo(prev => ({ ...prev, [type]: e.target.value }));
+  };
+
   const onRegBtn = () => {
     console.log('등록 버튼 눌림');
-    setFoodname('');
-    setRegState(true);
+    if (foodname !== '') {
+      onClick({
+        foodname,
+        ...nutritionInfo,
+      });
+      setFoodname('');
+      setRegState(true);
+      setNutritionInfo({
+        amount: '',
+        calorie: '',
+        carbohydrate: '',
+        protein: '',
+        fat: '',
+      });
+    }
   };
 
   const onResetBtn = () => {
     setFoodname('');
+    setNutritionInfo({
+      amount: '',
+      calorie: '',
+      carbohydrate: '',
+      protein: '',
+      fat: '',
+    });
     setRegState(false);
   };
 
   const FormInfo = [
-    { index: '내용량', unit: 'g' },
-    { index: '칼로리', unit: 'kcal' },
-    { index: '탄수화물', unit: 'g' },
-    { index: '단백질', unit: 'g' },
-    { index: '지방', unit: 'g' },
+    { type: 'amount', index: '내용량', unit: 'g' },
+    { type: 'calorie', index: '칼로리', unit: 'kcal' },
+    { type: 'carbohydrate', index: '탄수화물', unit: 'g' },
+    { type: 'protein', index: '단백질', unit: 'g' },
+    { type: 'fat', index: '지방', unit: 'g' },
   ];
 
   return (
@@ -72,7 +105,12 @@ const AddFoodInfo = () => {
         </IndexWrapper>
         <InputWrapper>
           {FormInfo.map(item => (
-            <SmallInput key={item.index} type="number"></SmallInput>
+            <SmallInput
+              key={item.type}
+              type="number"
+              onChange={e => onNutritionChange(e, item.type)}
+              value={nutritionInfo[item.type]}
+            />
           ))}
         </InputWrapper>
         <UnitWrapper>

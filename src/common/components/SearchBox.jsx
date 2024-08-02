@@ -6,37 +6,103 @@ import { useState, useRef, useEffect } from 'react';
 import { css } from 'styled-components';
 import SearchItem from '../../AddMeal/components/SearchSec/components/SearchItem';
 import FoodWikiItem from '../../FoodWiki/components/FoodWiki/FoodWikiItem';
+import axios from 'axios';
 
-const SearchBox = ({ type }) => {
+const SearchBox = ({ type, fetchMeal }) => {
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
+  const user_id = 1;
+
+  // 검색 상태 관리 : 검색 가능(false) / 검색 이미 완료 상태(true)
+  const [searchstate, toggleSearchState] = useState(false); //초기 상태: false
+
   // 검색어 관리
   const [searchText, setSearchText] = useState('');
-
+  const searchInput = useRef(null);
   useEffect(() => {
     if (searchText == '' && searchstate === true) {
       onSearchFalse();
     }
   }, [searchText]);
 
-  // 검색 상태 관리
-  const [searchstate, toggleSearchState] = useState(false);
-  const searchInput = useRef(null);
+  // 검색 성공 여부 관리: 성공 true (FoodWikiInfo로 갈 수 있는 창) / 실패 (검색 결과가 없다는 창) false
+  const [searchSuccess, setSuccess] = useState(false);
+
+  // 검색 결과 데이터 관리: 성공시 이름과 함께 사진을 띄울 수 있어야 함
+  const [searchResult, setResult] = useState({});
+  // searchResult가 들어오면 리렌더링, searchSuccess , searchstate 여부 바뀌면 리렌더링
+  useEffect(() => {
+    console.log('useeffect에 의해 리랜더링');
+  }, [searchResult, searchSuccess, searchstate]);
+
+  // 푸드위키: 검색 관리
+  // food_id="1" food_name="사과"
+  const fetchFoodWikiSearchResult = async () => {
+    try {
+      console.log('검색 : ', searchText);
+      const res = await axios.get(`https://api.donspike.store/api/foodwiki?search_food=${searchText}`);
+
+      if (res.status === 200 && res.data.length > 0) {
+        setSuccess(true); // 검색 성공
+        console.log('푸드위키 api 검색 결과');
+        console.log(res.data[0]);
+        setResult(res.data[0]); // state 변경 => 리렌더링
+      } else {
+        console.log('검색 실패', res);
+        setSuccess(false);
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        // 검색 결과 없을 때 처리
+        console.log(res);
+        setSuccess(false);
+      }
+    }
+  };
+
+  // 식단 추가 : 검색 관리
+  // food_id="1" food_name="흰쌀밥" food_info="한 공기" addedState={false}
+  // 바로 추가하려면 food_id 필요!!
+  const fetchMealSearchResult = async () => {
+    try {
+      const res = await axios.get(`${BASE_URL}/api/food?search_food=${searchText}`);
+
+      if (res.status === 200 && res.data.length > 0) {
+        setSuccess(true); // 검색 성공
+        console.log('addmeal api 검색 결과', res);
+        console.log(res.data[0]);
+        setResult(res.data[0]); // state 변경 => 리렌더링
+      } else {
+        console.log('검색 실패', res);
+        setSuccess(false);
+      }
+      // 식단에 이미 추가되어있는지 여부: 내가 default로 false로 설정?
+    } catch (error) {
+      console.log('에러 발생: ', error);
+      setSuccess(false);
+    }
+  };
 
   // 검색 버튼 클릭 => Wrapper이 알맞게 바뀜
   const onSearchBtnClick = () => {
-    // API POST : 음식 검색
     if (searchText != '') {
-      if (!searchstate) onSearchTrue();
-      else onSearchFalse();
+      if (!searchstate) onSearchTrue(); // API 데이터 받으러
+      else onSearchFalse(); //이미 받아온 상태였음 (x버튼 클릭함)
     } else {
       searchInput.current.focus();
     }
   };
 
-  // 검색 상태 변경
+  // 검색 => 데이터 받아오기
   const onSearchTrue = () => {
-    toggleSearchState(true); // reset 아이콘으로 바뀜
+    toggleSearchState(true);
+    if (type === 'FoodWiki') {
+      fetchFoodWikiSearchResult(); // 이게 맞음
+    } else if (type === 'SearchSection') {
+      fetchMealSearchResult();
+    }
   };
 
+  // X 버튼 누름 => 초기 검색 box로 돌아감
   const onSearchFalse = () => {
     setSearchText('');
     toggleSearchState(false); // 돋보기 아이콘으로 바뀜
@@ -63,23 +129,42 @@ const SearchBox = ({ type }) => {
             {searchstate === true ? <SearchReset></SearchReset> : <SearchButton></SearchButton>}
           </BtnWrapper>
         </InputBoxWrapper>
-        {/* {searchstate === true ? <StyledNoResult>일치하는 결과가 없습니다.</StyledNoResult> : <></>} */}
-        {/* searchState===true이고 API 결과가 빈 배열 => 일치하는 결과가 없습니다*/}
 
-        {/* {searchstate === true && type === 'SearchSection' ? (
-          <SearchItem food_id="1" food_name="흰쌀밥" food_info="한 공기" addedState={false}></SearchItem>
-        ) : (
-          <></>
-        )} */}
-        {/* <SeachSection> searchState===false이고 API 결과가 있음 => 알맞게 아이템을 만들어서 해당 컴포넌트를 반환 (클릭 이벤트 필요) */}
-
-        {searchstate === true && type === 'FoodWiki' ? (
-          <FoodWikiItem food_id="1" food_name="사과"></FoodWikiItem>
+        {/* 검색 결과 처리 */}
+        {searchstate === true ? (
+          searchSuccess === false ? (
+            <StyledNoResult>일치하는 결과가 없습니다.</StyledNoResult>
+          ) : type === 'SearchSection' ? (
+            <SearchItem
+              food_id={searchResult.food_id}
+              food_name={searchResult.food_name}
+              food_info={searchResult.food_info}
+              addedState={searchResult.addedState}
+              onClick={fetchMeal} // 음식 추가시
+            ></SearchItem>
+          ) : (
+            <FoodWikiItem {...searchResult}></FoodWikiItem>
+          )
         ) : (
           <></>
         )}
+        {/* {searchstate === true ? <StyledNoResult>일치하는 결과가 없습니다.</StyledNoResult> : <></>} */}
+        {/* searchState===true이고 API 결과가 빈 배열 => 일치하는 결과가 없습니다*/}
+        {/* searchState에 대한 조건 추가 */}
+        {/* {searchstate === true && type === 'SearchSection' ? (
+          <SearchItem
+            food_id={searchResult.food_id}
+            food_name={searchResult.food_name}
+            food_info={searchResult.food_info}
+            addedState={searchResult.addedState}
+            onClick={fetchMeal} // 음식 추가시
+          ></SearchItem> */}
+        {/* <SeachSection> searchState===false이고 API 결과가 있음 => 알맞게 아이템을 만들어서 해당 컴포넌트를 반환 (클릭 이벤트 필요) */}
+        {/* searchState에 대한 조건 추가 */}
+        {/* {searchstate === true ? <FoodWikiItem {...searchResult}></FoodWikiItem> : <></>} */}
         {/* <FoodWiki> searchState===false이고 API 결과가 있음 => 알맞게 아이템을 만들어서 해당 컴포넌트를 반환 (클릭 이벤트 필요) */}
       </Wrapper>
+
       {/* 위치가 SearchSection 일 때에만 디자인 추가*/}
       {type === 'SearchSection' ? (
         <TransparentWrapper>
