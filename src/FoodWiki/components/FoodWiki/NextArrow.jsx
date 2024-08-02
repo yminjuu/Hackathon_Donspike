@@ -1,4 +1,4 @@
-import Svg from './imgs/nextArrow.svg?react';
+import Svg from './assets/nextArrow.svg?react';
 import styled from 'styled-components';
 
 const NextArrow = ({ className, onClick }) => {

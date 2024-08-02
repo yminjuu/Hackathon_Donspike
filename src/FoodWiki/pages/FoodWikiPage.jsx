@@ -1,5 +1,5 @@
 import MainHeader from '../../common/components/MainHeader';
-import Background from '../imgs/Background.svg';
+import Background from '../assets/Background.svg';
 import styled from 'styled-components';
 import FoodWikiSearch from '../components/FoodWiki/FoodWikiSearch';
 import FoodCarousel from '../components/FoodWiki/FoodCarousel';

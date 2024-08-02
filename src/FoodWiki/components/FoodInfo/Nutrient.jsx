@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ExImg from '../../imgs/exImg.svg?react';
+import ExImg from '../../assets/exImg.svg?react';
 
 const Nutrient = ({ foodname, amount, calorie, carbohydrate, protein, fat, sodium, cholesterol }) => {
   return (

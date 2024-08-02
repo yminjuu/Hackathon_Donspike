@@ -1,4 +1,4 @@
-import Svg from './imgs/prevArrow.svg?react';
+import Svg from './assets/prevArrow.svg?react';
 import styled from 'styled-components';
 
 const PrevArrow = ({ className, onClick }) => {

@@ -1,6 +1,6 @@
 import { styled, keyframes } from 'styled-components';
 import SearchBox from '../../../common/components/SearchBox';
-import Taco from '../../imgs/Taco.svg?react';
+import Taco from '../../../FoodWiki/assets/Taco.svg?react';
 
 const FoodWikiSearch = () => {
   return (

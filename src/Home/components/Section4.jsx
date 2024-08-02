@@ -1,6 +1,6 @@
 import { React, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import Search from '../assets/imgs/search.png';
+import Search from '../assets/search.png';
 import Btn from '../assets/NavBtn.svg?react';
 import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';

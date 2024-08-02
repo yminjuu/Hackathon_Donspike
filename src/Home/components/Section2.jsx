@@ -1,14 +1,14 @@
 import { React, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import pencil from '../assets/imgs/pencil.png';
+import pencil from '../assets/pencil.png';
 import { css } from 'styled-components';
 import Content1 from '../assets/SubContent1_1.svg?react';
 import Content2 from '../assets/SubContent1_2.svg?react';
 import Content3 from '../assets/SubContent1_3.svg?react';
-import Arrow1 from '../assets/arrows/arrow1.svg?react';
-import Arrow2 from '../assets/arrows/arrow2.svg?react';
-import Arrow3 from '../assets/arrows/arrow3.svg?react';
-import Arrow4 from '../assets/arrows/arrow4.svg?react';
+import Arrow1 from '../assets/arrow1.svg?react';
+import Arrow2 from '../assets/arrow2.svg?react';
+import Arrow3 from '../assets/arrow3.svg?react';
+import Arrow4 from '../assets/arrow4.svg?react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 

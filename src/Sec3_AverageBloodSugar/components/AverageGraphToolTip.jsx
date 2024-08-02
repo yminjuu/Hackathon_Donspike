@@ -1,4 +1,4 @@
-import Tooltip from '../assets/imgs/AverageGraphToolTip.svg?react';
+import Tooltip from '../assets/AverageGraphToolTip.svg?react';
 import { styled, css } from 'styled-components';
 
 const BalloonContainer = styled.div`
