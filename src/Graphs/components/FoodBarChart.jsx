@@ -1,9 +1,10 @@
 // BarChartComponent.jsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, LabelList } from 'recharts';
 import CustomBarShape from '../FoodBar/CustomBarShape';
 import CustomLabel from '../FoodBar/CustomLabel';
 import '../styles/CustomScroll.css';
+import axios from 'axios';
 
 // count에 따라 내림차순으로 받은 데이터 정렬 필요
 const data = [
@@ -15,7 +16,29 @@ const data = [
 ];
 
 const FoodBarChart = () => {
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
+  const user_id = 1;
+
+  const [favData, setFavData] = useState();
+
   const totalCount = data.length;
+
+  const fetchFavFoodData = async () => {
+    try {
+      // 현재 7월값으로 요청하고 있음
+      const { data } = await axios.get(`${BASE_URL}/api/food/favorites?month=2024-07`);
+      console.log(data);
+      // 받아온 데이터 state에 반영 아직 안 함
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // 최초 렌더링시 데이터 가져옴
+  useEffect(() => {
+    fetchFavFoodData();
+  }, []);
+
   return (
     <div style={{ width: '100%', overflowX: 'hidden', overflowY: 'hidden' }} className="custom-scroll">
       <div style={{ width: '100%', height: '270px', margin: '0 auto' }}>
