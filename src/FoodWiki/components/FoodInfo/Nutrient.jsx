@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import ExImg from '../../imgs/exImg.svg?react';
 
 const Nutrient = ({ foodname, amount, calorie, carbohydrate, protein, fat, sodium, cholesterol }) => {
-  console.log(foodname, amount, calorie, carbohydrate, protein, fat, sodium, cholesterol);
   return (
     <Wrapper>
       <BasicWrapper>

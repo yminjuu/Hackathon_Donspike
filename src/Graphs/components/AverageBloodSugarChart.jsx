@@ -35,7 +35,7 @@ const AverageBloodSugarChart = () => {
       const res = await axios.get(`${BASE_URL}/api/${user_id}/blood-sugar/average`);
 
       if (res.status === 200) {
-        console.log(res);
+        console.log('평균 API 연동 결과: ', res);
       }
     } catch (error) {
       if (error.response && error.response.status === 404) {

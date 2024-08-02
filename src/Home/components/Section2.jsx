@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import pencil from '../assets/imgs/pencil.png';
 import { css } from 'styled-components';
@@ -9,6 +9,10 @@ import Arrow1 from '../assets/arrows/arrow1.svg?react';
 import Arrow2 from '../assets/arrows/arrow2.svg?react';
 import Arrow3 from '../assets/arrows/arrow3.svg?react';
 import Arrow4 from '../assets/arrows/arrow4.svg?react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger); // ScrollTrigger Trigger 호출
 
 const PageHeader = styled.div`
   width: 100%;
@@ -151,6 +155,25 @@ const ArrowDesc4 = styled(ArrowDesc)`
 `;
 
 const Section2 = () => {
+  const wrapper1Ref = useRef(null);
+  const wrapper2Ref = useRef(null);
+  const wrapper3Ref = useRef(null);
+
+  useEffect(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: wrapper1Ref.current,
+        start: 'top 80%',
+        end: 'bottom 60%',
+        toggleActions: 'play none restart none',
+      },
+    });
+
+    tl.from(wrapper1Ref.current, { opacity: 0, y: -50, duration: 0.8 })
+      .from(wrapper2Ref.current, { opacity: 0, y: -50, duration: 0.8 }, '+=0.01')
+      .from(wrapper3Ref.current, { opacity: 0, y: -50, duration: 0.8 }, '+=0.01');
+  }, []);
+
   return (
     <>
       <PageHeader>
@@ -163,14 +186,14 @@ const Section2 = () => {
         </TextWrapper>
       </PageHeader>
       <ContentWrapper>
-        <Wrapper1>
+        <Wrapper1 ref={wrapper1Ref}>
           <Content1></Content1>
           <ArrowWrapper1>
             <Arrow1></Arrow1>
             <ArrowDesc1>매일매일 측정한 혈당을 기록하고 그래프에 추가할 수 있어요.</ArrowDesc1>
           </ArrowWrapper1>
         </Wrapper1>
-        <Wrapper2>
+        <Wrapper2 ref={wrapper2Ref}>
           <Content2></Content2>
           <ArrowWrapper2>
             <Arrow2></Arrow2>
@@ -181,7 +204,7 @@ const Section2 = () => {
             <ArrowDesc3>기록해주신 혈당 수치를 기반으로 다음 날의 예상 혈당을 확인 할 수 있어요.</ArrowDesc3>
           </ArrowWrapper3>
         </Wrapper2>
-        <Wrapper3>
+        <Wrapper3 ref={wrapper3Ref}>
           <Content3></Content3>
           <ArrowWrapper4>
             <Arrow4></Arrow4>

@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import buritto from '../assets/imgs/buritto.png';
 import { css } from 'styled-components';
@@ -6,6 +6,10 @@ import Content1 from '../assets/SubContent2_1.svg?react';
 import Content2 from '../assets/SubContent2_2.svg?react';
 import Content3 from '../assets/SubContent2_3.svg?react';
 import Arrow from '../assets/arrows/arrow3.svg?react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger); // ScrollTrigger Trigger 호출
 
 const PageHeader = styled.div`
   width: 100%;
@@ -158,6 +162,25 @@ const TextWrap = styled.div`
 `;
 
 const Section3 = () => {
+  const wrapper1Ref = useRef(null);
+  const wrapper2Ref = useRef(null);
+  const wrapper3Ref = useRef(null);
+
+  useEffect(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: wrapper1Ref.current,
+        start: 'top 80%',
+        end: 'bottom 60%',
+        toggleActions: 'play none restart none',
+      },
+    });
+
+    tl.from(wrapper1Ref.current, { opacity: 0, y: -50, duration: 0.8 })
+      .from(wrapper2Ref.current, { opacity: 0, y: -50, duration: 0.8 }, '+=0.01')
+      .from(wrapper3Ref.current, { opacity: 0, y: -50, duration: 0.8 }, '+=0.01');
+  }, []);
+
   return (
     <>
       <PageHeader>
@@ -168,7 +191,7 @@ const Section3 = () => {
         </TextWrapper>
       </PageHeader>
       <ContentWrapper>
-        <Wrapper1>
+        <Wrapper1 ref={wrapper1Ref}>
           <Content1></Content1>
           <ArrowWrapper1>
             <Arrow></Arrow>
@@ -177,7 +200,7 @@ const Section3 = () => {
             </ArrowDesc1>
           </ArrowWrapper1>
         </Wrapper1>
-        <Wrapper2>
+        <Wrapper2 ref={wrapper2Ref}>
           <Content2></Content2>
           <ArrowWrapper2>
             <Arrow></Arrow>
@@ -187,7 +210,7 @@ const Section3 = () => {
             </ArrowDesc2>
           </ArrowWrapper2>
         </Wrapper2>
-        <Wrapper3>
+        <Wrapper3 ref={wrapper3Ref}>
           <Content3></Content3>
           <ArrowWrapper3>
             <Arrow></Arrow>
