@@ -6,6 +6,7 @@ import { useState, useRef, useEffect } from 'react';
 import { css } from 'styled-components';
 import SearchItem from '../../AddMeal/components/SearchSec/components/SearchItem';
 import FoodWikiItem from '../../FoodWiki/components/FoodWiki/FoodWikiItem';
+import axios from 'axios';
 
 const SearchBox = ({ type, fetchMeal }) => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -19,12 +20,8 @@ const SearchBox = ({ type, fetchMeal }) => {
   const [searchSuccess, setSuccess] = useState(false);
 
   // 검색 결과 데이터 관리
-  const [searchResult, setResult] = useState({
-    food_id: '1',
-    food_name: '흰쌀밥',
-    food_info: '한공기', // not essential
-    addedState: 'false', // not essential
-  });
+  const [searchResult, setResult] = useState({});
+  useEffect(() => {}, [searchResult]);
 
   // 검색어 관리
   const [searchText, setSearchText] = useState('');
@@ -39,15 +36,19 @@ const SearchBox = ({ type, fetchMeal }) => {
   // food_id="1" food_name="사과"
   const fetchFoodWikiSearchResult = async () => {
     try {
-      const data = await axios.get(
-        `${BASE_URL}/api/foodwiki?search_food=${food_id}`, //food_id를 어떻게 알지/??
-      );
-      setSuccess(true);
-      setResult(data); // state 변경 => 리렌더링
-      console.log(data);
+      console.log('api 요청 : ', searchText);
+      const res = await axios.get(`https://api.donspike.store/api/foodwiki?search_food=${searchText}`);
+      console.log(res);
+      console.log(res.data[0]); // 응답 중 data만 출력
+
+      setSuccess(true); // 검색 성공
+      setResult(res.data[0]); // state 변경 => 리렌더링
+      console.log('result set 완료');
     } catch (error) {
       if (error.response && error.response.status === 404) {
+        console.log('여기');
         // 검색 결과 없을 때 처리
+        setSuccess(false);
       }
     }
   };
@@ -55,6 +56,7 @@ const SearchBox = ({ type, fetchMeal }) => {
   // 식단 추가 : 검색 관리
   // food_id="1" food_name="흰쌀밥" food_info="한 공기" addedState={false}
   const fetchMealSearchResult = async () => {
+    // console.log(`${BASE_URL}/api/${user_id}/food?search_food=${foodname}`);
     try {
       const data = await axios.get(`${BASE_URL}/api/${user_id}/food?search_food=${foodname}`);
       setSuccess(true);
@@ -80,13 +82,14 @@ const SearchBox = ({ type, fetchMeal }) => {
 
   // 검색 => 데이터 받아오기
   const onSearchTrue = () => {
-    // if (type==='FoodWiki'){
-    //   fetchFoodWikiSearchResult()
-    // } else if (type==='SearchSection'){
-    //   fetchMealSearchResult()
-    // }
-    // API 연결시 주석처리 제거
     toggleSearchState(true); // reset 아이콘으로 바뀜
+    if (type === 'FoodWiki') {
+      console.log('foodwiki get');
+      fetchFoodWikiSearchResult();
+    } else if (type === 'SearchSection') {
+      // fetchMealSearchResult();
+    }
+    // API 연결시 주석처리 제거
   };
 
   // X 버튼 누름 => 초기 검색 box로 돌아감
@@ -134,11 +137,7 @@ const SearchBox = ({ type, fetchMeal }) => {
         {/* <SeachSection> searchState===false이고 API 결과가 있음 => 알맞게 아이템을 만들어서 해당 컴포넌트를 반환 (클릭 이벤트 필요) */}
 
         {/* searchState에 대한 조건 추가 */}
-        {searchstate === true && type === 'FoodWiki' ? (
-          <FoodWikiItem food_id={searchResult.food_id} food_name={searchResult.food_name}></FoodWikiItem>
-        ) : (
-          <></>
-        )}
+        {searchstate === true ? <FoodWikiItem {...searchResult}></FoodWikiItem> : <></>}
         {/* <FoodWiki> searchState===false이고 API 결과가 있음 => 알맞게 아이템을 만들어서 해당 컴포넌트를 반환 (클릭 이벤트 필요) */}
       </Wrapper>
       {/* 위치가 SearchSection 일 때에만 디자인 추가*/}

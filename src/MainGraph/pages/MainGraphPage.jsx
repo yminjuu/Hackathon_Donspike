@@ -10,11 +10,12 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 const MainGraphPage = () => {
-  // 혈당값 입력시 데이터 업데이트를 위한 데이터 관리 (실제로 사용하는 데이터가 아니다)
-  // 이 데이터는 혈당만 관리하며, context로 뿌린다.
-  // 혈당 입력시 => state 변화로 setBS 함수 실행 =>
-  // MainGraphpage 리렌더링된다 => 다른 그래프 전부 리렌더링되어 다시 데이터를 GET해온다.
-  const [bloodSugar, setBS] = useState(null);
+  // 현재 새로 추가된 bloodSugar이 있는지를 관리 => MainGraph의 리렌더링을 야기
+  const [bloodSugar, setBS] = useState([]);
+
+  useEffect(() => {
+    // bloodSugar 수정 => 그래프 리렌더링 필요
+  }, [bloodSugar]);
 
   return (
     <>

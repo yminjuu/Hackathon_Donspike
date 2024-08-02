@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import ExampleImg from '../../imgs/exSearchImg.svg';
 import { useNavigate } from 'react-router-dom';
 
-const FoodWikiItem = ({ food_id, food_name }) => {
+const FoodWikiItem = props => {
+  console.log(props);
   const navigate = useNavigate();
 
   const onItemClick = () => {
     console.log('아이템 클릭');
-
     // API GET => 존재하는 경우에만 FoodInfoPage로 넘어감
     navigate('/foodWiki/search?query=사과');
   };
@@ -16,7 +16,7 @@ const FoodWikiItem = ({ food_id, food_name }) => {
     <>
       <InfoWrapper onClick={onItemClick}>
         <FoodImg></FoodImg>
-        <FoodTitle>{food_name}</FoodTitle>
+        <FoodTitle>{props.foodname}</FoodTitle>
       </InfoWrapper>
     </>
   );

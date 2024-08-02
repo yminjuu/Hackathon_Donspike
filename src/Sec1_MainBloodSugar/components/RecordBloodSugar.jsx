@@ -3,21 +3,52 @@ import Button_before from '../assets/imgs/RecordBSBtn_Before.svg?react';
 import Button_ok from '../assets/imgs/RecordBSBtn_OK.svg?react';
 import Datepicker from './Datepicker';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const RecordBloodSugar = ({ setBS }) => {
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
+  const user_id = 1;
+  // 입력된 혈당값 관리
   const [text, setText] = useState('');
+
+  // 선택된 날짜 관리
+  const [selectedDate, setDate] = useState(new Date());
 
   // 혈당 입력시
   const onBSInput = e => {
     setText(e.target.value);
   };
+
+  // 혈당 입력 확인시 데이터 fetch
+  const fetchNewBS = async () => {
+    try {
+      const res = await axios.post(`${BASE_URL}/api/${user_id}/blood-sugar`, {
+        bloodsugar: text,
+        date: startDate,
+      });
+
+      if (res.status === 200) {
+        console.log('혈당 입력 완료');
+
+        setBS(text); // props로 전달받은 state 변경함수 실행 => 그래프 리렌더링되도록
+        setText(''); // 입력 혈당 초기화
+        setStartDate(new Date()); // 선택 날짜 초기화
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        console.log(error);
+      }
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Wrapper>
         <Title>혈당 기록하기</Title>
         <LabelInput>
           <div>날짜</div>
-          <Datepicker></Datepicker>
+          <Datepicker selectedDate={selectedDate} setDate={setDate}></Datepicker>
         </LabelInput>
         <LabelInput>
           <div>혈당</div>
@@ -28,17 +59,7 @@ const RecordBloodSugar = ({ setBS }) => {
         </LabelInput>
         <ButtonContainer>
           <ButtonWrapper>
-            {text == '' ? (
-              <StyledBtn_Before></StyledBtn_Before>
-            ) : (
-              <StyledBtn_OK
-                onClick={e => {
-                  setBS(e.target.value); // props로 전달받은 state 변경함수 실행 => 그래프 리렌더링되도록
-                  setText('');
-                }}
-              ></StyledBtn_OK>
-            )}
-            {/* 혈당 입력 여부에 따라 버튼 비활성화/활성화되도록 수정해야 함 */}
+            {text == '' ? <StyledBtn_Before></StyledBtn_Before> : <StyledBtn_OK onClick={fetchNewBS}></StyledBtn_OK>}
           </ButtonWrapper>
         </ButtonContainer>
       </Wrapper>

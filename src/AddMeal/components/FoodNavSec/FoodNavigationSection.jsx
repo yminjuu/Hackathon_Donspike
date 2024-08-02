@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { css, styled } from 'styled-components';
 import OftFoodItem from '../FoodNavSec/components/OftFoodItem';
 import AddFoodInfo from '../FoodNavSec/components/AddFoodInfo';
+import axios from 'axios';
 
 const FoodNavigationSection = ({ selectedDate, fetchMeal }) => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -13,23 +14,23 @@ const FoodNavigationSection = ({ selectedDate, fetchMeal }) => {
   const fetchData = async () => {
     try {
       // 자주 먹었어요: month는 우선 7월로 받고(더미데이터) 나중에 8월로 바꾸면 됨.
-      // const newData = await axios.get(
-      //   `${BASE_URL}/api/{user_id}/food/favorites?month=2024-07`,
-      // );
-      // console.log('fav food fetch');
+      const Data = await axios.get(`${BASE_URL}/api/food/favorites?month=2024-07`);
+      console.log('fav food fetch');
+      console.log('결과 : ', Data);
 
-      // 우선 더미데이터
-      const newData = [
-        { food_id: 1, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
-        { food_id: 2, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'true' },
-        { food_id: 3, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
-        { food_id: 4, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'true' },
-        { food_id: 5, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
-        { food_id: 6, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'true' },
-      ];
+      // // 우선 더미데이터
+
+      // const newData = [
+      //   { food_id: 1, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
+      //   { food_id: 2, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'true' },
+      //   { food_id: 3, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
+      //   { food_id: 4, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'true' },
+      //   { food_id: 5, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'false' },
+      //   { food_id: 6, food_name: '흰쌀밥', food_info: '1공기(210g)', addedState: 'true' },
+      // ];
 
       // addedState를 처음엔 false로 해서 받고 => 추가되면 true로 바꾸어 리랜더링해야됨
-      setFavFood(newData);
+      setFavFood(Data.data);
     } catch (error) {
       console.log(error);
     }
@@ -48,6 +49,7 @@ const FoodNavigationSection = ({ selectedDate, fetchMeal }) => {
   // 최초 렌더링 데이터 가져오기
   useEffect(() => {
     fetchData();
+    onFoodReg();
   }, []);
 
   const [navstate, setNavstate] = useState('freq');
@@ -65,6 +67,7 @@ const FoodNavigationSection = ({ selectedDate, fetchMeal }) => {
   // 직접 음식 등록
   const onFoodReg = async ({ foodname, amount, calorie, carbohydrate, protein, fat }) => {
     // 여기서 매개변수를 받아서 axios.post 호출
+    console.log('음식 등록');
     try {
       console.log(foodname);
       console.log(amount);
@@ -73,14 +76,17 @@ const FoodNavigationSection = ({ selectedDate, fetchMeal }) => {
       console.log(protein);
       console.log(fat);
 
-      // const res = await axios.post(`${BASE_URL}/api/${user_id}/food`, {
-      //   foodname: foodname,
-      //   amount: amount,
-      //   calorie: calorie,
-      //   carbohydrate: carbohydrate,
-      //   protein: protein,
-      //   fat: fat,
-      // });
+      const res = await axios.post(
+        `${BASE_URL}/api/food?search_food=배`,
+        // {
+        // foodname: foodname,
+        // amount: amount,
+        // calorie: calorie,
+        // carbohydrate: carbohydrate,
+        // protein: protein,
+        // fat: fat,
+        // }
+      );
 
       if (res.status === 200) {
         console.log('음식 등록 완료 ', res);
@@ -118,7 +124,7 @@ const FoodNavigationSection = ({ selectedDate, fetchMeal }) => {
         </NavWrapper>
         <ItemsWrapper $navstate={navstate}>
           {navstate === 'freq' ? (
-            favFood.map(item => <OftFoodItem key={item.food_id} {...item} onClick={fetchMeal}></OftFoodItem>)
+            favFood.map(item => <OftFoodItem key={item} {...item} onClick={fetchMeal}></OftFoodItem>)
           ) : (
             <AddFoodInfo onClick={onFoodReg}></AddFoodInfo>
           )}

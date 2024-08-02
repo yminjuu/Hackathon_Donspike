@@ -4,10 +4,33 @@ import SubPageHeader from '../../common/components/SubPageHeader';
 import FoodWikiLogo from '../imgs/FoodWikiLogo.svg?react';
 import Tip from '../components/FoodInfo/Tip';
 import Nutrient from '../components/FoodInfo/Nutrient';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const FoodInfoPage = () => {
   const [foodSearch] = useSearchParams();
   const query = foodSearch.get('query');
+
+  const [data, setData] = useState([]);
+
+  const fetchFoodWikiSearchResult = async () => {
+    try {
+      console.log('여기');
+      const res = await axios.get(`https://api.donspike.store/api/foodwiki?search_food=${query}`);
+      console.log(res.data[0]); // 응답 중 data만 출력
+
+      setData(res.data[0]); // state 변경 => 리렌더링
+      console.log('result set 완료');
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        // 검색 결과 없을 때 처리
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchFoodWikiSearchResult();
+  }, []);
 
   console.log('검색어: ' + query);
 
@@ -48,6 +71,7 @@ const FoodInfoPage = () => {
       tip_content: '사과의 혈당지수는 36으로, 설탕에 비해 비교적 높은 음식은 아니며 저혈당 제품에 속합니다.',
     },
   ];
+
   return (
     <>
       <HeaderWrapper>
@@ -59,6 +83,7 @@ const FoodInfoPage = () => {
       <ContentWrapper>
         <InfoWrapper>
           <Nutrient BasicData={dummyBasicData} Nutrient={dummyNutrient}></Nutrient>
+          {/* <Nutrient></Nutrient> */}
         </InfoWrapper>
         <TipWrapper>
           {dummyTip.map(item => (

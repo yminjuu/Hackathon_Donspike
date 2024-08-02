@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import ExImg from '../../imgs/exImg.svg?react';
 
 const Nutrient = ({ BasicData, Nutrient }) => {
-  console.log(BasicData);
-  console.log(Nutrient);
   return (
     <Wrapper>
       <BasicWrapper>

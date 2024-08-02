@@ -13,22 +13,6 @@ const MainBloodSugar = ({ setBS }) => {
   // 특정 action이 발생했을 때 어떤 주소로 이동할 수 있게 해준다.
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log('Main Graph 리렌더링');
-  });
-
-  const dataSets = {
-    labels: ['2024-07-01', '2024-07-02', '2024-07-03'],
-    datasets: [
-      {
-        label: 'Dataset 1',
-        data: [65, 59, 80],
-        borderColor: 'rgba(75,192,192,1)',
-        fill: false,
-      },
-    ],
-  };
-
   return (
     <>
       {/* 제목 */}
