@@ -7,5 +7,7 @@ module.exports = {
   plugins: ['react-refresh'], // 'prettier' 추가
   rules: {
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+    test: /\.svg$/,
+    use: 'file-loader', // 또는 'url-loader'
   },
 };
