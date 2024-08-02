@@ -137,7 +137,7 @@ const SearchBox = ({ type, fetchMeal }) => {
           ) : type === 'SearchSection' ? (
             <SearchItem
               food_id={searchResult.food_id}
-              food_name={searchResult.food_name}
+              foodname={searchResult.foodname}
               food_info={searchResult.food_info}
               addedState={searchResult.addedState}
               onClick={fetchMeal} // 음식 추가시
