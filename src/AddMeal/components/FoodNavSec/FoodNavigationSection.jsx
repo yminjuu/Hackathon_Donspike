@@ -64,9 +64,10 @@ const FoodNavigationSection = ({ selectedDate, fetchMeal }) => {
   const onFoodReg = async ({ foodname }) => {
     // 여기서 매개변수를 받아서 axios.post 호출
     console.log('음식 등록', foodname);
+    const food = foodname;
     try {
       const res = await axios.post(`${BASE_URL}/api/food`, {
-        foodname: foodname,
+        foodname: food,
       });
 
       if (res.status === 200) {
@@ -74,7 +75,7 @@ const FoodNavigationSection = ({ selectedDate, fetchMeal }) => {
         console.log('음식 등록 완료 ', res);
       }
     } catch (error) {
-      console.log(error);
+      console.log('에러 발생: ', error);
       if (error.response && error.response.status === 404) {
         console.log('음식 등록 실패');
       }

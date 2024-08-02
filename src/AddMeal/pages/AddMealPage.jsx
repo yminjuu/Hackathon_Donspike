@@ -21,7 +21,7 @@ const AddMealPage = () => {
       // }
 
       const res = await axios.post(`${BASE_URL}/api/diet/add-food`, {
-        foodId: 1,
+        foodId: food_id,
         date: '2024-08-02', // 날짜 데이터 형식 이거 맞는지
       });
 
