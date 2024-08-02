@@ -10,7 +10,7 @@ const LandingPage = () => {
   const SectionStyle1 = {
     height: '100vh',
     width: '100%',
-    backgroundImage: `url('/LandingBG.svg')`,
+    backgroundImage: `url('https://raw.githubusercontent.com/yminjuu/DONTSPIKE_FE/328516018febe495fa3f66b464cc9b82e25d8344/public/LandingBG.svg')`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
   };

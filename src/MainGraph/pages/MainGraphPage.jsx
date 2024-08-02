@@ -43,7 +43,7 @@ const MainGraphPage = () => {
 };
 
 const PageBackground = styled.div`
-  background-image: url('/MainBG.svg');
+  background-image: url('https://raw.githubusercontent.com/yminjuu/DONTSPIKE_FE/328516018febe495fa3f66b464cc9b82e25d8344/public/MainBG.svg');
   background-size: cover;
 `;
 
