@@ -1,6 +1,5 @@
 import React from 'react';
 import Fullpage, { FullPageSections, FullpageSection, FullpageNavigation } from '@ap.cx/react-fullpage';
-import bg1 from '../assets/background.svg';
 import styled from 'styled-components';
 import Section1 from '../components/Section1';
 import Section2 from '../components/Section2';
@@ -11,7 +10,7 @@ const LandingPage = () => {
   const SectionStyle1 = {
     height: '100vh',
     width: '100%',
-    backgroundImage: `url(${bg1})`,
+    backgroundImage: `url('/LandingBG.svg')`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
   };

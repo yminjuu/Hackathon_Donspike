@@ -7,7 +7,7 @@ const FoodWikiItem = props => {
 
   const onItemClick = () => {
     // API GET => 존재하는 경우에만 FoodInfoPage로 넘어감
-    navigate(`/foodWiki/search?query=${props.food_name}`);
+    navigate(`/foodWiki/search?query=${props.foodname}`);
   };
 
   return (

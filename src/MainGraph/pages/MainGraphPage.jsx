@@ -4,7 +4,6 @@ import AverageBloodSugar from '../../Sec3_AverageBloodSugar/AverageBloodSugar';
 import FoodBar from '../../Sec2_FoodBar/FoodBar';
 
 import styled from 'styled-components';
-import background from '../assets/background.svg';
 import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -44,7 +43,7 @@ const MainGraphPage = () => {
 };
 
 const PageBackground = styled.div`
-  background-image: url(${background});
+  background-image: url('/MainBG.svg');
   background-size: cover;
 `;
 

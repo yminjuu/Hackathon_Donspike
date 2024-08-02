@@ -1,5 +1,4 @@
 import MainHeader from '../../common/components/MainHeader';
-import Background from '../assets/Background.svg';
 import styled from 'styled-components';
 import FoodWikiSearch from '../components/FoodWiki/FoodWikiSearch';
 import FoodCarousel from '../components/FoodWiki/FoodCarousel';
@@ -20,7 +19,7 @@ const FoodWikiPage = () => {
 };
 
 const PageBackground = styled.div`
-  background-image: url(${Background});
+  background-image: url('/FoodWikiBG.svg');
   background-size: cover;
 `;
 
