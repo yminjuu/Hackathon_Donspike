@@ -19,14 +19,27 @@ const RecordBloodSugar = ({ setBS }) => {
     setText(e.target.value);
   };
 
+  function formatDateToISOString(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+  }
+
   // 혈당 입력 확인시 데이터 fetch
   const fetchNewBS = async () => {
     try {
-      console.log('혈당입력: ', text, selectedDate.toISOString());
-      const res = await axios.post(`${BASE_URL}/api/${user_id}/blood-sugar`, {
-        bloodsugar: text,
-        date: selectedDate.toISOString(),
-      });
+      //http://api.donspike.store/api/1/blood-sugar?date=2024-08-02T12:00:00&bloodsugar=120.1
+      console.log('혈당입력: ', formatDateToISOString(selectedDate));
+      const isoDate = new Date(selectedDate).toISOString();
+      console.log(isoDate);
+      const res = await axios.post(
+        `${BASE_URL}/api/${user_id}/blood-sugar?date=${formatDateToISOString(selectedDate)}&bloodsugar=${text}`,
+      );
 
       if (res.status === 200) {
         console.log('혈당 입력 완료');
