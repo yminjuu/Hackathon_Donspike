@@ -98,9 +98,9 @@ const MainGraphPage = () => {
       // 임의의 예상값 추가 => 실제 예상하도록 고쳐야함
       const newData = [
         ...res.data,
-        { bloodsugar: 135, recorddate: '2024-08-04T20:03:30', foodBsMappingId: ['감자탕', '짜장면'], expect: 135 },
+        // { bloodsugar: 135, recorddate: '2024-08-04T20:03:30', foodBsMappingId: ['감자탕', '짜장면'], expect: 135 },
         // 예상 혈당 구분을 위해서 혈당을 0으로 set
-        { bloodsugar: NaN, recorddate: '2024-08-05T20:03:30', foodBsMappingId: [], expect: 140 },
+        // { bloodsugar: NaN, recorddate: '2024-08-05T20:03:30', foodBsMappingId: [], expect: 140 },
       ];
       setMainData(newData.sort(compare));
     } catch (error) {

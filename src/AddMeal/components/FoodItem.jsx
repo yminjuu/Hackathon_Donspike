@@ -3,9 +3,9 @@ import AddBtn from '../assets/AddButton.svg?react';
 import AddDoneBtn from '../assets/AfterAddButton.svg?react';
 import { useState } from 'react';
 
-// props: food_id, food_name, food_info, addedState
+// props: foodId, foodName, addedStatem fetchMeal
 
-const FoodItem = ({ foodId, foodname, addedState, fetchMeal }) => {
+const FoodItem = ({ foodId, foodName, addedState, fetchMeal }) => {
   const [added, setAdd] = useState(addedState);
 
   // 음식 추가됨
@@ -21,7 +21,7 @@ const FoodItem = ({ foodId, foodname, addedState, fetchMeal }) => {
   return (
     <>
       <InfoWrapper>
-        <FoodTitle>{foodname}</FoodTitle>
+        <FoodTitle>{foodName}</FoodTitle>
       </InfoWrapper>
       <AddBtnWrapper onClick={onAddBtnClick}>
         {added === true ? <AddDoneBtn></AddDoneBtn> : <AddBtn></AddBtn>}

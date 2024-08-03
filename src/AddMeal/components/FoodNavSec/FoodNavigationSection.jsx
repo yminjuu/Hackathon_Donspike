@@ -16,24 +16,11 @@ const FoodNavigationSection = ({ selectedDate, fetchMeal }) => {
       const { data } = await axios.get(`${BASE_URL}/api/food/favorites?month=2024-07`);
       console.log('자주 먹은 음식 API 결과 : ', data);
 
-      // const updatedData = data.map(item => ({
-      //   ...item,
-      //   addedState: false
-      // }));
-
-      // 필요한 데이터의 키값들: foodname, food_id, count 받을 예정
-      // 내가 추가해야 하는 state: addedState default로 false로 추가
-
-      // addedState를 처음엔 false로 해서 받고 => 추가되면 true로 바꾸어 리랜더링해야됨
-
-      // 더미데이터
-      const updatedData = [
-        { foodname: '밥', count: 10, food_id: 1, addedState: false },
-        { foodname: '사과', count: 8, food_id: 2, addedState: false },
-        { foodname: '낙지볶음', count: 7, food_id: 3, addedState: false },
-        { foodname: '김치찜', count: 6, food_id: 4, addedState: false },
-        { foodname: '샐러드', count: 6, food_id: 5, addedState: false },
-      ];
+      const updatedData = data.map(item => ({
+        ...item,
+        foodId: item.foodDataId,
+        addedState: false,
+      }));
 
       setFavFood(updatedData);
     } catch (error) {
@@ -104,7 +91,7 @@ const FoodNavigationSection = ({ selectedDate, fetchMeal }) => {
         </NavWrapper>
         <ItemsWrapper $navstate={navstate}>
           {navstate === 'freq' ? (
-            favFood.map(item => <OftFoodItem key={item.food_id} {...item} fetchMeal={fetchMeal}></OftFoodItem>)
+            favFood.map(item => <OftFoodItem key={item.foodDataId} {...item} fetchMeal={fetchMeal}></OftFoodItem>)
           ) : (
             <AddFoodInfo onClick={onFoodReg}></AddFoodInfo>
           )}

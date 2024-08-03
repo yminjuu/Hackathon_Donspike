@@ -42,7 +42,8 @@ const RecordBloodSugar = ({ setBS }) => {
   // 혈당 입력 확인시 데이터 fetch
   const fetchNewBS = async () => {
     try {
-      const isoDate = new Date(selectedDate).toISOString();
+      console.log('fetch');
+      console.log(selectedDate);
       const res = await axios.post(
         `${BASE_URL}/api/${user_id}/blood-sugar?date=${formatDateToISOString(selectedDate)}&bloodsugar=${text}`,
       );

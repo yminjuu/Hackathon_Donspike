@@ -18,7 +18,7 @@ const AverageBloodSugarChart = ({ fetchAverageData, averageData }) => {
           height={270}
           data={averageData}
           margin={{
-            top: 20,
+            top: 40,
             right: 30,
             left: 20,
             bottom: 5,

@@ -8,17 +8,18 @@ import MainTooltip from '../assets/MainToolTip.svg?react';
 
 const MainBSTooltip = ({ active, payload, label }) => {
   // 예상 혈당값이 있을 때 먼저 처리
-  if (active && payload && payload[0].payload.expect > 0 && !payload[0].payload.bloodsugar) {
-    return (
-      <ExpectToolTipWrapper>
-        <Container>
-          {' '}
-          <ExpectTooltip></ExpectTooltip>
-          <BSText>{payload[0].payload.expect}</BSText>
-        </Container>
-      </ExpectToolTipWrapper>
-    );
-  } else if (active && payload) {
+  // if (active && payload && payload[0].payload.expect > 0 && !payload[0].payload.bloodsugar) {
+  //   return (
+  //     <ExpectToolTipWrapper>
+  //       <Container>
+  //         {' '}
+  //         <ExpectTooltip></ExpectTooltip>
+  //         <BSText>{payload[0].payload.expect}</BSText>
+  //       </Container>
+  //     </ExpectToolTipWrapper>
+  //   );
+  // } else
+  if (active && payload && payload[0].payload.bloodsugar > 0) {
     const data = payload[0].payload;
     return (
       <ToolTipWrapper>

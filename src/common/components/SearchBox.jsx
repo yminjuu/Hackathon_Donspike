@@ -68,15 +68,15 @@ const SearchBox = ({ type, fetchMeal }) => {
 
       if (res.status === 200 && res.data.length > 0) {
         setSuccess(true); // 검색 성공
-        console.log('addmeal api 검색 결과', res);
-        // const rawData = res.data[0];
+        console.log('addmeal api 검색 결과', res.data[0]);
+        const rawData = res.data[0];
 
-        // const updatedData = rawData.map(item => ({
-        //   ...item,
-        //   addedState: false,
-        // }));
-        // setResult(updatedData); // state 변경 => 리렌더링
-        setResult(res.data[0]);
+        const updatedData = {
+          ...rawData,
+          addedState: false,
+        };
+
+        setResult(updatedData); // state 변경 => 리렌더링
       } else {
         console.log('검색 실패', res);
         setSuccess(false);
@@ -143,7 +143,7 @@ const SearchBox = ({ type, fetchMeal }) => {
           ) : type === 'SearchSection' ? (
             <SearchItem
               foodId={searchResult.foodId}
-              foodname={searchResult.foodname}
+              foodName={searchResult.foodname}
               addedState={false}
               fetchMeal={fetchMeal} // 음식 추가시
             ></SearchItem>
@@ -253,12 +253,12 @@ const InputBoxWrapper = styled.div`
 const StyledInput = styled.input`
   width: 80%;
   height: 3rem;
-  color: #a0a0a0;
+  color: #111111;
 
   /* Pretendard/Reg/20 */
 
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 500;
   border: none;
   outline: none;
 
