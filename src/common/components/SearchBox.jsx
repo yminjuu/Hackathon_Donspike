@@ -39,7 +39,7 @@ const SearchBox = ({ type, fetchMeal }) => {
   const fetchFoodWikiSearchResult = async () => {
     try {
       console.log('검색 : ', searchText);
-      const res = await axios.get(`https://api.donspike.store/api/foodwiki?search_food=${searchText}`);
+      const res = await axios.get(`${BASE_URL}/api/foodwiki?search_food=${searchText}`);
 
       if (res.status === 200 && res.data.length > 0) {
         setSuccess(true); // 검색 성공
@@ -69,8 +69,13 @@ const SearchBox = ({ type, fetchMeal }) => {
       if (res.status === 200 && res.data.length > 0) {
         setSuccess(true); // 검색 성공
         console.log('addmeal api 검색 결과', res);
-        console.log(res.data[0]);
-        setResult(res.data[0]); // state 변경 => 리렌더링
+        const rawData = res.data[0];
+
+        const updatedData = rawData.map(item => ({
+          ...item,
+          addedState: false,
+        }));
+        setResult(updatedData); // state 변경 => 리렌더링
       } else {
         console.log('검색 실패', res);
         setSuccess(false);

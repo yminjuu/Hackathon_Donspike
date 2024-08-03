@@ -20,7 +20,6 @@ const MainBSTooltip = ({ active, payload, label }) => {
     );
   } else if (active && payload) {
     const data = payload[0].payload;
-
     return (
       <ToolTipWrapper>
         <MainTooltip></MainTooltip>
@@ -28,7 +27,7 @@ const MainBSTooltip = ({ active, payload, label }) => {
         <MealWrapper>
           {/* 식단 데이터가 있을 때에만 map하도록 */}
           {payload[0].payload.foodBsMappingId.length != 0 ? (
-            data.foodBsMappingId.map(item => <MealText key={data.item}>{item}</MealText>)
+            data.foodBsMappingId.map(item => <MealText key={item.id}>{item}</MealText>)
           ) : (
             <></>
           )}
@@ -81,16 +80,8 @@ const BSText = styled.div`
   font-size: 0.875rem;
   font-weight: 600;
 
-  ${props =>
-    props.bloodsugar > 0
-      ? css`
-          top: 25%;
-          left: 60%;
-        `
-      : css`
-          top: 40%;
-          left: 60%;
-        `}
+  top: 25%;
+  left: 60%;
 `;
 
 const DateText = styled.div`

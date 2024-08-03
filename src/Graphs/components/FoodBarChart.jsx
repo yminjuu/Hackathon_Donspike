@@ -26,10 +26,11 @@ const FoodBarChart = () => {
   const fetchFavFoodData = async () => {
     try {
       // 현재 7월값으로 요청하고 있음
-      const res = await axios.get(`${BASE_URL}/api/food/favorites?month=2024-07`);
+      const res = await axios.get(`${BASE_URL}/api/food/favorites?month=2024-08`);
       console.log('foodbar chart GET: ', res);
       // 받아온 데이터 state에 반영 아직 안 함
       // foodname, food_id, count 받을 예정
+      // setFavData(res.data[0]);
     } catch (error) {
       console.log(error);
     }

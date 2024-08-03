@@ -1,5 +1,5 @@
 // LineChartComponent.jsx
-import { useEffect, React } from 'react';
+import { useEffect, React, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label, LabelList } from 'recharts';
 import '../styles/CustomScroll.css';
 import CustomLabel from '../AverageBS/CustomLabel';
@@ -26,8 +26,11 @@ const AverageBloodSugarChart = () => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const user_id = 1;
 
+  // const [data, setData] = useState(data); // 메인 그래프 데이터
+  // API 연결시 초기값 빈배열로 지우기
+
   useEffect(() => {
-    fetchAverageData();
+    // fetchAverageData(); //API 연결시 주석 제거
   }, []);
 
   const fetchAverageData = async () => {
@@ -36,11 +39,13 @@ const AverageBloodSugarChart = () => {
 
       if (res.status === 200) {
         console.log('평균 API 연동 결과: ', res);
+        setData(res.data[0]);
+        // name은 달 이름으로, average는 평균 혈당값으로
       }
     } catch (error) {
       if (error.response && error.response.status === 404) {
       }
-      console.log(error);
+      console.log('평균 혈당 오류 발생: ', error);
     }
   };
 
