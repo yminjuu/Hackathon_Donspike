@@ -69,13 +69,14 @@ const SearchBox = ({ type, fetchMeal }) => {
       if (res.status === 200 && res.data.length > 0) {
         setSuccess(true); // 검색 성공
         console.log('addmeal api 검색 결과', res);
-        const rawData = res.data[0];
+        // const rawData = res.data[0];
 
-        const updatedData = rawData.map(item => ({
-          ...item,
-          addedState: false,
-        }));
-        setResult(updatedData); // state 변경 => 리렌더링
+        // const updatedData = rawData.map(item => ({
+        //   ...item,
+        //   addedState: false,
+        // }));
+        // setResult(updatedData); // state 변경 => 리렌더링
+        setResult(res.data[0]);
       } else {
         console.log('검색 실패', res);
         setSuccess(false);

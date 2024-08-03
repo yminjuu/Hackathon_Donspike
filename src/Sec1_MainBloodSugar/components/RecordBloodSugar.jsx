@@ -41,8 +41,6 @@ const RecordBloodSugar = ({ setBS }) => {
       );
 
       if (res.status === 200) {
-        console.log('혈당 입력 완료');
-
         setBS(text); // props로 전달받은 state 변경함수 실행 => 그래프 리렌더링되도록
         setText(''); // 입력 혈당 초기화
         setDate(new Date()); // 선택 날짜 초기화

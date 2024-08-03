@@ -25,11 +25,22 @@ const AddMealPage = () => {
     console.log('포맷된 날짜형식', formatDate(date));
     console.log('userId: ', userId);
     try {
-      const res = await axios.post(`${BASE_URL}/api/diet/add-food`, {
-        foodId: foodId,
-        date: formatDate(date),
-        userId,
-      });
+      // ~/api/diet/add-food
+
+      // const res = await axios.post(
+      //   `${BASE_URL}/api/${user_id}/blood-sugar?date=${formatDateToISOString(selectedDate)}&bloodsugar=${text}`,
+      // );
+
+      //~/api/blood-sugar/average?user_id={userid}&year=2024
+      const res = await axios.post(
+        `${BASE_URL}/api/diet/add-food?userId=1&foodId=${foodId}&recordDate=${formatDate(date)}`,
+        // , {
+        //   userId: 1,
+        //   foodId: foodId,
+        //   date: formatDate(date),
+        // }
+      );
+
       console.log('식단에 추가 API 결과 : ', res);
       if (res.status === 200) {
         console.log('식단 추가 성공');

@@ -13,7 +13,7 @@ const FoodNavigationSection = ({ selectedDate, fetchMeal }) => {
   const fetchData = async () => {
     try {
       // 자주 먹었어요: month는 우선 7월로 받고(더미데이터) 나중에 8월로 바꾸면 됨.
-      const { data } = await axios.get(`${BASE_URL}/api/food/favorites?month=2024-08`);
+      const { data } = await axios.get(`${BASE_URL}/api/food/favorites?month=2024-07`);
       console.log('자주 먹은 음식 API 결과 : ', data);
 
       // const updatedData = data.map(item => ({
@@ -62,17 +62,15 @@ const FoodNavigationSection = ({ selectedDate, fetchMeal }) => {
   // 직접 음식 등록
   const onFoodReg = async ({ foodname }) => {
     // 여기서 매개변수를 받아서 axios.post 호출
-    console.log('음식 등록', foodname);
-    const food = foodname;
+    //~/api/blood-sugar/average?user_id={userid}&year=2024
     try {
+      console.log('음식 등록', foodname);
+      const food = foodname;
       const res = await axios.post(`${BASE_URL}/api/food`, {
         foodname: food,
       });
 
-      if (res.status === 200) {
-        console.log(res);
-        console.log('음식 등록 완료 ', res);
-      }
+      console.log('음식 등록 완료 ', res);
     } catch (error) {
       console.log('에러 발생: ', error);
       if (error.response && error.response.status === 404) {

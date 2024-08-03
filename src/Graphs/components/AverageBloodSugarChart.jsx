@@ -26,16 +26,16 @@ const AverageBloodSugarChart = () => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const user_id = 1;
 
-  // const [data, setData] = useState(data); // 메인 그래프 데이터
+  const [data, setData] = useState([]); // 메인 그래프 데이터
   // API 연결시 초기값 빈배열로 지우기
 
   useEffect(() => {
-    // fetchAverageData(); //API 연결시 주석 제거
+    fetchAverageData();
   }, []);
 
   const fetchAverageData = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/api/${user_id}/blood-sugar/average`);
+      const res = await axios.get(`${BASE_URL}/api/blood-sugar/average?user_id=${user_id}&year=2024`);
 
       if (res.status === 200) {
         console.log('평균 API 연동 결과: ', res);
