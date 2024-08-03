@@ -5,16 +5,15 @@ import { useState } from 'react';
 
 // props: food_id, food_name, food_info, addedState
 
-const FoodItem = ({ food_id, foodname, count, addedState, fetchMeal }) => {
-  console.log(food_id, foodname, count, addedState);
-
+const FoodItem = ({ foodId, foodname, addedState, fetchMeal }) => {
   const [added, setAdd] = useState(addedState);
 
   // 음식 추가됨
   const onAddBtnClick = () => {
+    console.log(foodId);
     if (added === false) {
       setAdd(true); // true로 변경하여 버튼 변경
-      fetchMeal(food_id);
+      fetchMeal(foodId);
       // 식단 추가 버튼이 눌린 경우임 => 식단 추가 POST
     }
   };

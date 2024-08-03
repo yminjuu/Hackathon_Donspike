@@ -3,8 +3,6 @@ import SearchBox from '../../../common/components/SearchBox';
 import Datepicker from '../SearchSec/components/DatePicker';
 
 const SearchSection = ({ setSelectedDate, fetchMeal }) => {
-  let today = new Date();
-
   const onDateChange = startDate => {
     console.log(startDate);
     setSelectedDate(startDate);

@@ -136,11 +136,10 @@ const SearchBox = ({ type, fetchMeal }) => {
             <StyledNoResult>일치하는 결과가 없습니다.</StyledNoResult>
           ) : type === 'SearchSection' ? (
             <SearchItem
-              food_id={searchResult.food_id}
+              foodId={searchResult.foodId}
               foodname={searchResult.foodname}
-              food_info={searchResult.food_info}
-              addedState={searchResult.addedState}
-              onClick={fetchMeal} // 음식 추가시
+              addedState={false}
+              fetchMeal={fetchMeal} // 음식 추가시
             ></SearchItem>
           ) : (
             <FoodWikiItem {...searchResult}></FoodWikiItem>

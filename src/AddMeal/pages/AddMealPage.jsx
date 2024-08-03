@@ -5,17 +5,29 @@ import SubPageHeader from '../../common/components/SubPageHeader';
 import { useState } from 'react';
 import axios from 'axios';
 
+const formatDate = date => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더합니다.
+  const day = String(date.getDate()).padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
+};
+
 const AddMealPage = () => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const userId = 1;
   // SearchSection에서 선택된 날짜 관리
   const [selectedDate, setSelectedDate] = useState();
 
-  const fetchMeal = async food_id => {
+  const fetchMeal = async foodId => {
+    const date = new Date(selectedDate);
+    console.log('food id: ', foodId);
+    console.log('포맷된 날짜형식', formatDate(date));
+    console.log('userId: ', userId);
     try {
       const res = await axios.post(`${BASE_URL}/api/diet/add-food`, {
-        foodId: food_id,
-        date: '2024-08-02', // 날짜 데이터 형식 이거 맞는지
+        foodId: foodId,
+        date: formatDate(date),
         userId,
       });
       console.log('식단에 추가 API 결과 : ', res);

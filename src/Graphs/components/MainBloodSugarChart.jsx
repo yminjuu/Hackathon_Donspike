@@ -5,6 +5,15 @@ import MainBSToolTip from '../MainBS/MainBSToolTip';
 import '../styles/CustomScroll.css';
 import axios from 'axios';
 
+// 날짜순 정렬
+const compare = (a, b) => {
+  const dateA = new Date(a.recorddate);
+  const dateB = new Date(b.recorddate);
+
+  return dateA - dateB;
+};
+
+// 8/2 형식
 const formatDate = dateString => {
   const date = new Date(dateString);
   const month = (date.getMonth() + 1).toString();
@@ -12,6 +21,7 @@ const formatDate = dateString => {
   return `${month}/${day}`;
 };
 
+// 2024/08/02 형식
 const tooltipDate = dateString => {
   const date = new Date(dateString);
   const year = date.getFullYear();
@@ -45,6 +55,7 @@ const MainBloodSugarChart = () => {
   const fetchMainChartData = async () => {
     try {
       const res = await axios.get(`${BASE_URL}/api/blood-sugar/food/${user_id}`); // data를 배열 형식으로 새로 받아옴
+      console.log(res);
 
       // 임의의 예상값 추가 => 실제 예상하도록 고쳐야함
       const newData = [
@@ -53,7 +64,7 @@ const MainBloodSugarChart = () => {
         // 예상 혈당 구분을 위해서 혈당을 0으로 set
         { bloodsugar: NaN, recorddate: '2024-12-25T20:03:30', foodBsMappingId: [], expect: 140 },
       ];
-      setData(newData);
+      setData(newData.sort(compare));
     } catch (error) {
       console.log('에러 발생', error);
     }

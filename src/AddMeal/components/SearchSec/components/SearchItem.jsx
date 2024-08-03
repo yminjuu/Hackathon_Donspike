@@ -5,8 +5,9 @@ import { useState } from 'react';
 import FoodItem from '../../FoodItem';
 
 // props로 정보 받아서 띄우기
-// props: food_id, food_name, food_info, addedState, onClick(fetchMeal)
+// props: foodId, food_name, food_info, addedState, onClick(fetchMeal)
 const SearchItem = props => {
+  console.log(props);
   return (
     <>
       <SearchItemWrapper>
