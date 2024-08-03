@@ -36,7 +36,6 @@ const RecordBloodSugar = ({ setBS }) => {
       //http://api.donspike.store/api/1/blood-sugar?date=2024-08-02T12:00:00&bloodsugar=120.1
       console.log('혈당입력: ', formatDateToISOString(selectedDate));
       const isoDate = new Date(selectedDate).toISOString();
-      console.log(isoDate);
       const res = await axios.post(
         `${BASE_URL}/api/${user_id}/blood-sugar?date=${formatDateToISOString(selectedDate)}&bloodsugar=${text}`,
       );
@@ -46,7 +45,7 @@ const RecordBloodSugar = ({ setBS }) => {
 
         setBS(text); // props로 전달받은 state 변경함수 실행 => 그래프 리렌더링되도록
         setText(''); // 입력 혈당 초기화
-        setStartDate(new Date()); // 선택 날짜 초기화
+        setDate(new Date()); // 선택 날짜 초기화
       }
     } catch (error) {
       if (error.response && error.response.status === 404) {
