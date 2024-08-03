@@ -4,8 +4,17 @@ import Button_ok from '../assets/RecordBSBtn_OK.svg?react';
 import Datepicker from './Datepicker';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
 
 const RecordBloodSugar = ({ setBS }) => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const user_id = 1;
   // 입력된 혈당값 관리
@@ -42,6 +51,7 @@ const RecordBloodSugar = ({ setBS }) => {
         setBS(text); // props로 전달받은 state 변경함수 실행 => 그래프 리렌더링되도록
         setText(''); // 입력 혈당 초기화
         setDate(new Date()); // 선택 날짜 초기화
+        setModalIsOpen(true); // 모달 열기
       }
     } catch (error) {
       if (error.response && error.response.status === 404) {
@@ -72,6 +82,32 @@ const RecordBloodSugar = ({ setBS }) => {
           </ButtonWrapper>
         </ButtonContainer>
       </Wrapper>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={{
+          overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.75)',
+          },
+          content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+            padding: '20px',
+            borderRadius: '10px',
+            width: '300px',
+            textAlign: 'center',
+          },
+        }}
+      >
+        <ModalTitle>혈당 입력이 완료됐어요!</ModalTitle>
+        <CloseBtnWrapper>
+          <StyledButton onClick={closeModal}>닫기</StyledButton>
+        </CloseBtnWrapper>
+      </Modal>
     </>
   );
 };
@@ -175,5 +211,28 @@ const StyledBtn_OK = styled(Button_ok)``;
 
 const StyledBtn_Before = styled(Button_before)`
   cursor: default;
+`;
+
+const CloseBtnWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledButton = styled.div`
+  margin-top: 1rem;
+  padding: 0.5rem;
+  width: 5rem;
+  border-radius: 1rem;
+  font-size: 0.9rem;
+
+  background-color: #d6ddfe;
+`;
+
+const ModalTitle = styled.div`
+  color: #111111;
+
+  font-size: 1rem;
+  font-weight: 500;
 `;
 export default RecordBloodSugar;
