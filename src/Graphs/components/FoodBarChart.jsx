@@ -17,8 +17,6 @@ const data = [
 
 const FoodBarChart = () => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
-  const user_id = 1;
-
   const [favData, setFavData] = useState();
 
   const totalCount = data.length;
@@ -30,8 +28,9 @@ const FoodBarChart = () => {
       console.log('foodbar chart GET: ', res);
       // 받아온 데이터 state에 반영 아직 안 함
       // foodname, food_id, count 받을 예정
-      // setFavData(res.data[0]);
-      setFavData(data);
+      console.log(res.data);
+      setFavData(res.data);
+      // setFavData(data);
     } catch (error) {
       console.log(error);
     }
@@ -48,7 +47,7 @@ const FoodBarChart = () => {
         <BarChart
           width={600}
           height={270}
-          data={data}
+          data={favData}
           margin={{
             top: 20,
             right: 30,
@@ -60,7 +59,7 @@ const FoodBarChart = () => {
           <XAxis
             axisLine={false}
             tickLine={false}
-            dataKey="foodname"
+            dataKey="foodName"
             interval={0}
             tick={{ fontSize: 13 }}
             count={length}

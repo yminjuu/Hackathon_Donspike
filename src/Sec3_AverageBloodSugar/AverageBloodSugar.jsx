@@ -5,19 +5,18 @@ import { commonChartTitle } from '../common/styles/commonStyles';
 import AverageGraphToolTip from './components/AverageGraphToolTip';
 import { useEffect } from 'react';
 
-const AverageBloodSugar = () => {
+const AverageBloodSugar = ({ fetchAverageData, averageData }) => {
   const offset = -20;
-
-  useEffect(() => {
-    console.log('AverageBloodSugar 리렌더링');
-  });
 
   return (
     <>
       <ChartWrapper>
         <ChartTitle>월별 공복 혈당 평균</ChartTitle>
         <GraphWrapper>
-          <AverageBloodSugarChart></AverageBloodSugarChart>
+          <AverageBloodSugarChart
+            fetchAverageData={fetchAverageData}
+            averageData={averageData}
+          ></AverageBloodSugarChart>
           <AverageGraphToolTip offset={offset}></AverageGraphToolTip>
         </GraphWrapper>
       </ChartWrapper>

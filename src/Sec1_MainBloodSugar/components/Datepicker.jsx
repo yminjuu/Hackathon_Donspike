@@ -24,6 +24,7 @@ const Datepicker = ({ selectedDate, setDate }) => {
           icon={<CalendarIcon />}
           dateFormat="yyyy. MM. dd" /* 버튼에 명시되는 날짜 형식 커스텀*/
           selected={selectedDate} /* default 선택된 date 값*/
+          maxDate={new Date()}
           onChange={date => setDate(date)} /* 날짜 선택 이벤트 */
           popperPlacement="bottom"
           customInput={<CustomInput className="customInput" />} /* input 디자인을 커스텀 */

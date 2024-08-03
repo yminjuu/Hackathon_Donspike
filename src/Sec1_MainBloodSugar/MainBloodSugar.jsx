@@ -9,7 +9,7 @@ import RecordBloodSugar from './components/RecordBloodSugar';
 import ReactDOM from 'react-dom';
 import { useEffect } from 'react';
 
-const MainBloodSugar = ({ setBS }) => {
+const MainBloodSugar = ({ setBS, fetchMainChartData, mainData }) => {
   // 특정 action이 발생했을 때 어떤 주소로 이동할 수 있게 해준다.
   const navigate = useNavigate();
 
@@ -37,7 +37,7 @@ const MainBloodSugar = ({ setBS }) => {
               <AddMealButton>식단 추가하기</AddMealButton>
             </ButtonWrapper>
           </InfoWrapper>
-          <MainBloodSugarChart />
+          <MainBloodSugarChart fetchMainChartData={fetchMainChartData} mainData={mainData} />
         </Graph_DiscriptSec>
         <RecordBloodSugar setBS={setBS}></RecordBloodSugar>
       </ChartWrapper>

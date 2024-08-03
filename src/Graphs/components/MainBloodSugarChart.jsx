@@ -5,14 +5,6 @@ import MainBSToolTip from '../MainBS/MainBSToolTip';
 import '../styles/CustomScroll.css';
 import axios from 'axios';
 
-// 날짜순 정렬
-const compare = (a, b) => {
-  const dateA = new Date(a.recorddate);
-  const dateB = new Date(b.recorddate);
-
-  return dateA - dateB;
-};
-
 // 8/2 형식
 const formatDate = dateString => {
   const date = new Date(dateString);
@@ -45,42 +37,18 @@ const CustomizedDot = props => {
   } else return <></>;
 };
 
-const MainBloodSugarChart = () => {
-  const user_id = 1;
-
-  const BASE_URL = import.meta.env.VITE_BASE_URL;
-
-  const [data, setData] = useState([]); // 메인 그래프 데이터
-
-  const fetchMainChartData = async () => {
-    try {
-      const res = await axios.get(`${BASE_URL}/api/blood-sugar/food/${user_id}`); // data를 배열 형식으로 새로 받아옴
-      console.log(res);
-
-      // 임의의 예상값 추가 => 실제 예상하도록 고쳐야함
-      const newData = [
-        ...res.data,
-        { bloodsugar: 135, recorddate: '2024-12-24T20:03:30', foodBsMappingId: ['감자탕', '짜장면'], expect: 135 },
-        // 예상 혈당 구분을 위해서 혈당을 0으로 set
-        { bloodsugar: NaN, recorddate: '2024-12-25T20:03:30', foodBsMappingId: [], expect: 140 },
-      ];
-      setData(newData.sort(compare));
-    } catch (error) {
-      console.log('에러 발생', error);
-    }
-  };
-
+const MainBloodSugarChart = ({ fetchMainChartData, mainData }) => {
   // 최초 렌더링시 데이터 가져옴
   useEffect(() => {
     fetchMainChartData();
   }, []);
 
   // 데이터 중 최대 혈당량을 구함 => reference line 위함
-  const dataMax = Math.max(...data.map(d => d.bloodsugar));
-  const dataMin = Math.min(...data.map(d => d.bloodsugar));
+  const dataMax = Math.max(...mainData.map(d => d.bloodsugar));
+  const dataMin = Math.min(...mainData.map(d => d.bloodsugar));
 
   // 포맷데이터를 추가 : key값은 formatDate, tooltip의 날짜는 tooltipDate
-  const updateData = data.map(item => ({
+  const updateData = mainData.map(item => ({
     ...item,
     formatDate: formatDate(item.recorddate),
     tooltipDate: tooltipDate(item.recorddate),
