@@ -7,26 +7,20 @@ import axios from 'axios';
 
 const AddMealPage = () => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
+  const userId = 1;
   // SearchSection에서 선택된 날짜 관리
   const [selectedDate, setSelectedDate] = useState();
 
   const fetchMeal = async food_id => {
     try {
-      console.log('fetchMeal');
-      console.log(food_id); // 알맞게 받아오고 있음
-
-      // {
-      //   "foodId": 2,
-      //   "date": 2024-08-02,
-      // }
-
       const res = await axios.post(`${BASE_URL}/api/diet/add-food`, {
         foodId: food_id,
         date: '2024-08-02', // 날짜 데이터 형식 이거 맞는지
+        userId,
       });
-
+      console.log('식단에 추가 API 결과 : ', res);
       if (res.status === 200) {
-        console.log('식단 추가 성공 ', res);
+        console.log('식단 추가 성공');
       }
     } catch (error) {
       console.log(error);
