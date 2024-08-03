@@ -31,6 +31,7 @@ const FoodBarChart = () => {
       // 받아온 데이터 state에 반영 아직 안 함
       // foodname, food_id, count 받을 예정
       // setFavData(res.data[0]);
+      setFavData(data);
     } catch (error) {
       console.log(error);
     }
@@ -59,7 +60,7 @@ const FoodBarChart = () => {
           <XAxis
             axisLine={false}
             tickLine={false}
-            dataKey="name"
+            dataKey="foodname"
             interval={0}
             tick={{ fontSize: 13 }}
             count={length}

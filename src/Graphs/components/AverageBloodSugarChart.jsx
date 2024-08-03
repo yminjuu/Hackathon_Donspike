@@ -7,7 +7,7 @@ import axios from 'axios';
 
 // 필요한 부분 : 실제 날짜를 name으로 변환하는 과정에서 이번 달에 해당되는 데이터를
 // 구분하기 위한 속성 추가하기
-const data = [
+const dummyData = [
   { name: '1월', average: 130 },
   { name: '2월', average: 150 },
   { name: '3월', average: 110 },
@@ -35,13 +35,13 @@ const AverageBloodSugarChart = () => {
 
   const fetchAverageData = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/api/blood-sugar/average?user_id=${user_id}&year=2024`);
+      // const res = await axios.get(`${BASE_URL}/api/blood-sugar/average?user_id=${user_id}&year=2024`);
 
-      if (res.status === 200) {
-        console.log('평균 API 연동 결과: ', res);
-        setData(res.data[0]);
-        // name은 달 이름으로, average는 평균 혈당값으로
-      }
+      // if (res.status === 200) {
+      //   console.log('평균 API 연동 결과: ', res);
+      //   setData(res.data[0]);
+      setData(dummyData);
+      // name은 달 이름으로, average는 평균 혈당값으로
     } catch (error) {
       if (error.response && error.response.status === 404) {
       }
