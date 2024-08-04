@@ -15,6 +15,10 @@ const data = [
   { foodname: '샐러드', count: 6, food_id: 5 },
 ];
 
+const compare = (a, b) => {
+  return parseInt(b.count) - parseInt(a.count);
+};
+
 const FoodBarChart = () => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const [favData, setFavData] = useState();
@@ -26,10 +30,8 @@ const FoodBarChart = () => {
       // 현재 7월값으로 요청하고 있음
       const res = await axios.get(`${BASE_URL}/api/food/favorites?month=2024-07`);
       console.log('foodbar chart GET: ', res);
-      // 받아온 데이터 state에 반영 아직 안 함
-      // foodname, food_id, count 받을 예정
       console.log(res.data);
-      setFavData(res.data);
+      setFavData(res.data.sort(compare));
       // setFavData(data);
     } catch (error) {
       console.log(error);

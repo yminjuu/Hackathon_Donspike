@@ -20,25 +20,26 @@ const TooltipStyled = styled(Tooltip)`
 const TextContainer = styled.div`
   position: absolute;
   top: 0rem;
-  left: 1.5rem;
+  left: 1.3rem;
   right: 0rem;
   bottom: 0rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  text-align: left;
   pointer-events: none;
 
-  height: 13rem;
-  width: 8rem;
+  height: 14rem;
+  width: 9rem;
   word-break: keep-all; /* 단어 기준 줄바꿈 */
   overflow-wrap: break-word; /* 넘칠 경우 글자 기준 줄바꿈 */
 
   color: #414141;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.15rem;
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.1rem;
+  word-spacing: 0.01rem;
 `;
 
 const BSSpan = styled.span`
@@ -63,17 +64,19 @@ const AverageGraphToolTip = ({ offset }) => (
     <TextContainer>
       {offset > 0 ? (
         <>
-          <span>저번달에 비해 공복 평균 혈당이 </span> <BSSpan>{offset}mg/dl 증가</BSSpan>
-          했어요! <br />
-          <br />
-          혈당 관리에 조금 더 힘 써주세요.
+          <span>
+            저번 달에 비해 공복 평균 혈당이 <BSSpan $offset={offset}>{offset}mg/dl 증가</BSSpan>했네요.<br></br>{' '}
+            생활습관을 다시 점검해보고, 필요한 경우 전문가와 상담하는 것도 좋을 것 같아요. <br></br> 건강을 위해 작은
+            변화부터 시작해보세요!
+          </span>
         </>
       ) : (
         <>
-          <span>저번달에 비해 공복 평균 혈당이 </span> <BSSpan>{-1 * offset}mg/dl 감소</BSSpan>
-          했어요! <br />
-          <br />
-          잘하고 계세요!
+          <span>
+            저번 달에 비해 공복 평균 혈당이 <BSSpan $offset={offset}>{-1 * offset}mg/dl 감소</BSSpan>했어요! <br></br>
+            이번 달 공복 혈당이 많이 낮아졌네요! <br></br>꾸준한 관리 덕분이에요. <br></br>계속 좋은 습관을 유지하면 더
+            건강해질 수 있어요!
+          </span>
         </>
       )}
     </TextContainer>

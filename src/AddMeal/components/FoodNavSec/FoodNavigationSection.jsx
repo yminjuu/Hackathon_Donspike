@@ -4,6 +4,10 @@ import OftFoodItem from '../FoodNavSec/components/OftFoodItem';
 import AddFoodInfo from '../FoodNavSec/components/AddFoodInfo';
 import axios from 'axios';
 
+const compare = (a, b) => {
+  return parseInt(b.count) - parseInt(a.count);
+};
+
 const FoodNavigationSection = ({ selectedDate, fetchMeal }) => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -22,7 +26,9 @@ const FoodNavigationSection = ({ selectedDate, fetchMeal }) => {
         addedState: false,
       }));
 
-      setFavFood(updatedData);
+      const finalData = updatedData.sort(compare);
+
+      setFavFood(finalData);
     } catch (error) {
       console.log(error);
     }
