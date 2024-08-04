@@ -28,7 +28,7 @@ const FoodBarChart = () => {
   const fetchFavFoodData = async () => {
     try {
       // 현재 7월값으로 요청하고 있음
-      const res = await axios.get(`${BASE_URL}/api/food/favorites?month=2024-07`);
+      const res = await axios.get(`${BASE_URL}/api/food/favorites`);
       console.log('foodbar chart GET: ', res);
       console.log(res.data);
       setFavData(res.data.sort(compare));

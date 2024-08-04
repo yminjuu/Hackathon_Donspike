@@ -17,7 +17,7 @@ const FoodNavigationSection = ({ selectedDate, fetchMeal }) => {
   const fetchData = async () => {
     try {
       // 자주 먹었어요: month는 우선 7월로 받고(더미데이터) 나중에 8월로 바꾸면 됨.
-      const { data } = await axios.get(`${BASE_URL}/api/food/favorites?month=2024-07`);
+      const { data } = await axios.get(`${BASE_URL}/api/food/favorites`);
       console.log('자주 먹은 음식 API 결과 : ', data);
 
       const updatedData = data.map(item => ({
