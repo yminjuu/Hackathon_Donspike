@@ -64,6 +64,7 @@ const SearchBox = ({ type, fetchMeal }) => {
   // 바로 추가하려면 food_id 필요!!
   const fetchMealSearchResult = async () => {
     try {
+      console.log(searchText);
       const res = await axios.get(`${BASE_URL}/api/food?search_food=${searchText}`);
 
       if (res.status === 200 && res.data.length > 0) {

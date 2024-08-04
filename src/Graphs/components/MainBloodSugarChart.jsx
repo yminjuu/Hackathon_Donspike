@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine } from 'recharts';
 import MainBSToolTip from '../MainBS/MainBSToolTip';
 import '../styles/CustomScroll.css';
@@ -38,9 +38,14 @@ const CustomizedDot = props => {
 };
 
 const MainBloodSugarChart = ({ fetchMainChartData, mainData }) => {
+  const chartContainerRef = useRef(null);
+
   // 최초 렌더링시 데이터 가져옴
   useEffect(() => {
     fetchMainChartData();
+    if (chartContainerRef.current) {
+      chartContainerRef.current.scrollLeft = chartContainerRef.current.scrollWidth;
+    }
   }, []);
 
   // 데이터 중 최대 혈당량을 구함 => reference line 위함
@@ -55,7 +60,11 @@ const MainBloodSugarChart = ({ fetchMainChartData, mainData }) => {
   }));
 
   return (
-    <div style={{ width: '100%', overflowX: 'auto', overflowY: 'hidden' }} className="custom-scroll">
+    <div
+      style={{ width: '100%', overflowX: 'auto', overflowY: 'hidden' }}
+      className="custom-scroll"
+      ref={chartContainerRef}
+    >
       <div style={{ width: '1000px', height: '275px' }}>
         <LineChart
           width={1000}

@@ -5,8 +5,7 @@ import FoodBar from '../../Sec2_FoodBar/FoodBar';
 
 import styled from 'styled-components';
 import axios from 'axios';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const monthMapping = {
   JANUARY: '1월',
@@ -78,6 +77,8 @@ const MainGraphPage = () => {
   const user_id = 1;
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
+  const pageContainerRef = useRef(null);
+
   const [bloodSugar, setBS] = useState([]);
 
   const [mainData, setMainData] = useState([]); // 메인 그래프 데이터
@@ -88,13 +89,24 @@ const MainGraphPage = () => {
     // 혈당값이 바뀌면 밑의 2가지 그래프 리렌더링 발생
     fetchMainChartData();
     fetchAverageData();
+    // 스크롤 위치 top이도록 관리
+    if (pageContainerRef.current) {
+      pageContainerRef.current.scrollTop = pageContainerRef.current.scrollHeight;
+    }
   }, [bloodSugar]);
+
+  useEffect(() => {
+    // 스크롤 위치 top이도록 관리
+    if (pageContainerRef.current) {
+      pageContainerRef.current.scrollTop = pageContainerRef.current.scrollHeight;
+    }
+  }, []);
 
   // 메인 그래프 data fetch
   const fetchMainChartData = async () => {
     try {
       const res = await axios.get(`${BASE_URL}/api/blood-sugar/food/${user_id}`); // data를 배열 형식으로 새로 받아옴
-
+      console.log(res);
       // 임의의 예상값 추가 => 실제 예상하도록 고쳐야함
       const newData = [
         ...res.data,
@@ -123,34 +135,33 @@ const MainGraphPage = () => {
   };
 
   return (
-    <>
-      <PageBackground>
-        <MainHeader></MainHeader>
-        <SectionsWrapper>
-          {/* 제목 + 혈당 섹션 */}
-          <SectionWrapper>
-            <MainBloodSugar setBS={setBS} mainData={mainData} fetchMainChartData={fetchMainChartData}></MainBloodSugar>
-          </SectionWrapper>
-          {/* 구분선 추가 */}
-          <HorizonWrapper>
-            <svg xmlns="http://www.w3.org/2000/svg" width="1292" height="1" viewBox="0 0 1292 1" fill="none">
-              <path d="M1 0.5L1291 0.5" stroke="#CFCFCF" strokeLinecap="round" />
-            </svg>
-          </HorizonWrapper>
-          {/* 하단 그래프 2개 섹션*/}
-          <SectionWrapper2>
-            <FoodBar></FoodBar>
-            <AverageBloodSugar fetchAverageData={fetchAverageData} averageData={averageData}></AverageBloodSugar>
-          </SectionWrapper2>
-        </SectionsWrapper>
-      </PageBackground>
-    </>
+    <PageBackground ref={pageContainerRef}>
+      <MainHeader></MainHeader>
+      <SectionsWrapper>
+        {/* 제목 + 혈당 섹션 */}
+        <SectionWrapper>
+          <MainBloodSugar setBS={setBS} mainData={mainData} fetchMainChartData={fetchMainChartData}></MainBloodSugar>
+        </SectionWrapper>
+        {/* 구분선 추가 */}
+        <HorizonWrapper>
+          <svg xmlns="http://www.w3.org/2000/svg" width="1292" height="1" viewBox="0 0 1292 1" fill="none">
+            <path d="M1 0.5L1291 0.5" stroke="#CFCFCF" strokeLinecap="round" />
+          </svg>
+        </HorizonWrapper>
+        {/* 하단 그래프 2개 섹션*/}
+        <SectionWrapper2>
+          <FoodBar></FoodBar>
+          <AverageBloodSugar fetchAverageData={fetchAverageData} averageData={averageData}></AverageBloodSugar>
+        </SectionWrapper2>
+      </SectionsWrapper>
+    </PageBackground>
   );
 };
 
 const PageBackground = styled.div`
   background-image: url('https://raw.githubusercontent.com/yminjuu/DONTSPIKE_FE/328516018febe495fa3f66b464cc9b82e25d8344/public/MainBG.svg');
   background-size: cover;
+  overflow-y: auto;
 `;
 
 const SectionsWrapper = styled.div`

@@ -53,6 +53,7 @@ const RecordBloodSugar = ({ setBS }) => {
         setText(''); // 입력 혈당 초기화
         setDate(new Date()); // 선택 날짜 초기화
         setModalIsOpen(true); // 모달 열기
+        console.log(res);
       }
     } catch (error) {
       if (error.response && error.response.status === 404) {
