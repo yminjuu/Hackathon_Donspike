@@ -11,6 +11,7 @@ const SearchSection = ({ setSelectedDate, fetchMeal }) => {
   return (
     <>
       <PageBackground>
+        {/* <DatePickSen>식단을 추가할 날짜를 선택해주세요!</DatePickSen> */}
         <Info>
           <TodayDate>
             <Datepicker onClick={onDateChange} className="datepicker" type="AddMeal" />
@@ -60,7 +61,7 @@ const Info = styled.div`
 
 const TodayDate = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   z-index: 1;
   flex-shrink: 0;
 
@@ -69,11 +70,17 @@ const TodayDate = styled.div`
   font-size: 1.3rem;
   font-weight: 600;
 
-  opacity: var(--sds-size-stroke-border);
   background: #ebeeff;
 
   text-align: center;
   line-height: 2rem;
+`;
+
+const DatePickSen = styled.div`
+  color: #707070;
+
+  font-size: 1rem;
+  font-weight: 500;
 `;
 
 export default SearchSection;

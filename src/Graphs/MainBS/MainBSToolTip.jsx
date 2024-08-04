@@ -6,36 +6,41 @@ import MainTooltip from '../assets/MainToolTip.svg?react';
 // active: hover 이벤트로 툴팁이 활성화된 상황
 // payload: tooltip에 띄울 정보를 props로 받음
 
-const MainBSTooltip = ({ active, payload, label }) => {
-  // 예상 혈당값이 있을 때 먼저 처리
-  // if (active && payload && payload[0].payload.expect > 0 && !payload[0].payload.bloodsugar) {
-  //   return (
-  //     <ExpectToolTipWrapper>
-  //       <Container>
-  //         {' '}
-  //         <ExpectTooltip></ExpectTooltip>
-  //         <BSText>{payload[0].payload.expect}</BSText>
-  //       </Container>
-  //     </ExpectToolTipWrapper>
-  //   );
-  // } else
-  if (active && payload && payload[0].payload.bloodsugar > 0) {
+const MainBSTooltip = ({ active, payload, label, isTomorrow }) => {
+  if (active && payload.length != 0) {
     const data = payload[0].payload;
-    return (
-      <ToolTipWrapper>
-        <MainTooltip></MainTooltip>
-        <DateText>{data.tooltipDate}</DateText>
-        <MealWrapper>
-          {/* 식단 데이터가 있을 때에만 map하도록 */}
-          {payload[0].payload.foodBsMappingId.length != 0 ? (
-            data.foodBsMappingId.map(item => <MealText key={item.id}>{item}</MealText>)
-          ) : (
-            <></>
-          )}
-        </MealWrapper>
-        <BSText bloodsugar={data.bloodsugar}>{data.bloodsugar}</BSText>
-      </ToolTipWrapper>
-    );
+
+    // 내일 날짜인 경우
+    if (isTomorrow(new Date(data.recorddate))) {
+      // 내일 날짜임을 확인 => 예상 혈당으로
+      return (
+        <ExpectToolTipWrapper>
+          <Container>
+            {' '}
+            <ExpectTooltip></ExpectTooltip>
+            <BSText type="expect">{Math.floor(parseInt(payload[0].payload.expect))}</BSText>
+          </Container>
+        </ExpectToolTipWrapper>
+      );
+    }
+    // 정상적으로 혈당/ 식단이 있는 경우
+    else {
+      return (
+        <ToolTipWrapper>
+          <MainTooltip></MainTooltip>
+          <DateText>{data.tooltipDate}</DateText>
+          <MealWrapper>
+            {/* 식단 데이터가 있을 때에만 map하도록 */}
+            {payload[0].payload.foodBsMappingId.length != 0 ? (
+              data.foodBsMappingId.map(item => <MealText key={item.id}>{item}</MealText>)
+            ) : (
+              <></>
+            )}
+          </MealWrapper>
+          <BSText bloodsugar={data.bloodsugar}>{data.bloodsugar}</BSText>
+        </ToolTipWrapper>
+      );
+    }
   }
 
   return null;
@@ -62,8 +67,7 @@ const MealWrapper = styled.div`
   left: 28%;
 
   padding: 0.3rem;
-
-  overflow: scroll;
+  overflow: wrap;
 `;
 
 const Container = styled.div`
@@ -81,8 +85,16 @@ const BSText = styled.div`
   font-size: 0.875rem;
   font-weight: 600;
 
-  top: 25%;
-  left: 60%;
+  ${props =>
+    props.type === 'expect'
+      ? css`
+          top: 35%;
+          left: 60%;
+        `
+      : css`
+          top: 25%;
+          left: 60%;
+        `}
 `;
 
 const DateText = styled.div`
