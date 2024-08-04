@@ -28,10 +28,10 @@ const AverageBloodSugarChart = ({ fetchAverageData, averageData }) => {
           <Line
             type="linear"
             dataKey="average"
-            stroke="#414141"
-            strokeWidth={2}
-            dot={{ r: 3, fill: 'black' }}
-            activeDot={{ r: 6, fill: '#3053f9', strokeWidth: 0 }}
+            stroke="#4C62CA"
+            strokeWidth={3.5}
+            dot={{ r: 4, fill: '#4C62CA' }}
+            activeDot={{ r: 6, fill: '#4C62CA', strokeWidth: 0 }}
             label={<CustomLabel />}
           />
         </LineChart>

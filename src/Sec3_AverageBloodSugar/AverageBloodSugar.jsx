@@ -36,8 +36,8 @@ const ChartWrapper = styled.div`
 
 const ChartTitle = styled.div`
   ${commonChartTitle}
-  font-size: 1.25rem;
-  font-weight: 500;
+  font-size: 1.4rem;
+  font-weight: 700;
   margin: 1.5rem;
 `;
 

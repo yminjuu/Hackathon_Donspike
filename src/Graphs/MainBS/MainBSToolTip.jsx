@@ -67,7 +67,7 @@ const MealWrapper = styled.div`
   left: 28%;
 
   padding: 0.3rem;
-  overflow: wrap;
+  overflow: scroll;
 `;
 
 const Container = styled.div`
