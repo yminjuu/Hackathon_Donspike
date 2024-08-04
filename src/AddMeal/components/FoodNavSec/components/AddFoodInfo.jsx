@@ -35,7 +35,6 @@ const AddFoodInfo = ({ onClick }) => {
   };
 
   const onRegBtn = () => {
-    console.log('등록 버튼 눌림');
     if (foodname !== '') {
       onClick({
         foodname,
@@ -134,7 +133,6 @@ const AddFoodInfo = ({ onClick }) => {
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
 
   display: flex;
   flex-direction: column;
@@ -188,7 +186,7 @@ const TitleTextWrapper = styled.div`
 const HorizonWrapper = styled.div`
   width: 35rem;
   height: 2rem;
-  margin: 1rem 0rem;
+  margin: 0.5rem 0rem;
 
   display: flex;
   justify-content: space-between;
@@ -327,7 +325,6 @@ const Unit = styled.span`
 
 const ButtonWrapper = styled.div`
   cursor: pointer;
-  margin-bottom: 0.3rem;
 `;
 
 export default AddFoodInfo;

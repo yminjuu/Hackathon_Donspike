@@ -4,20 +4,21 @@ import Datepicker from '../SearchSec/components/DatePicker';
 
 const SearchSection = ({ setSelectedDate, fetchMeal }) => {
   const onDateChange = startDate => {
-    console.log(startDate);
     setSelectedDate(startDate);
   };
 
   return (
     <>
       <PageBackground>
-        {/* <DatePickSen>식단을 추가할 날짜를 선택해주세요!</DatePickSen> */}
-        <Info>
-          <TodayDate>
-            <Datepicker onClick={onDateChange} className="datepicker" type="AddMeal" />
-          </TodayDate>
-          에 먹은 음식을 추가해주세요!
-        </Info>
+        <TextWrapper>
+          <DatePickSen>식단을 추가할 날짜를 선택해주세요!</DatePickSen>
+          <Info>
+            <TodayDate>
+              <Datepicker onClick={onDateChange} className="datepicker" type="AddMeal" />
+            </TodayDate>
+            에 먹은 음식을 추가해주세요!
+          </Info>
+        </TextWrapper>
         <SearchBox type="SearchSection" fetchMeal={fetchMeal}></SearchBox>
       </PageBackground>
     </>
@@ -27,7 +28,8 @@ const SearchSection = ({ setSelectedDate, fetchMeal }) => {
 const PageBackground = styled.div`
   width: 100%;
   height: 8.3rem;
-  padding-top: 1rem;
+  padding-top: 0.1rem;
+  padding-bottom: 1rem;
   flex-shrink: 0;
 
   background-color: #ffffff;
@@ -36,9 +38,18 @@ const PageBackground = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
 
   position: relative;
+`;
+
+const TextWrapper = styled.div`
+  width: 21rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  gap: 0.5rem;
 `;
 
 const Info = styled.div`
@@ -54,8 +65,8 @@ const Info = styled.div`
   gap: 0.5rem;
   align-items: center;
 
-  position: absolute;
-  top: -10%;
+  /* position: absolute; */
+  /* top: -10%; */
   z-index: 3;
 `;
 

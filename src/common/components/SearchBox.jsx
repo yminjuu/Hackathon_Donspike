@@ -30,9 +30,7 @@ const SearchBox = ({ type, fetchMeal }) => {
   // 검색 결과 데이터 관리: 성공시 이름과 함께 사진을 띄울 수 있어야 함
   const [searchResult, setResult] = useState({});
   // searchResult가 들어오면 리렌더링, searchSuccess , searchstate 여부 바뀌면 리렌더링
-  useEffect(() => {
-    console.log('useeffect에 의해 리랜더링');
-  }, [searchResult, searchSuccess, searchstate]);
+  useEffect(() => {}, [searchResult, searchSuccess, searchstate]);
 
   // 푸드위키: 검색 관리
   // food_id="1" food_name="사과"
@@ -154,21 +152,6 @@ const SearchBox = ({ type, fetchMeal }) => {
         ) : (
           <></>
         )}
-        {/* {searchstate === true ? <StyledNoResult>일치하는 결과가 없습니다.</StyledNoResult> : <></>} */}
-        {/* searchState===true이고 API 결과가 빈 배열 => 일치하는 결과가 없습니다*/}
-        {/* searchState에 대한 조건 추가 */}
-        {/* {searchstate === true && type === 'SearchSection' ? (
-          <SearchItem
-            food_id={searchResult.food_id}
-            food_name={searchResult.food_name}
-            food_info={searchResult.food_info}
-            addedState={searchResult.addedState}
-            onClick={fetchMeal} // 음식 추가시
-          ></SearchItem> */}
-        {/* <SeachSection> searchState===false이고 API 결과가 있음 => 알맞게 아이템을 만들어서 해당 컴포넌트를 반환 (클릭 이벤트 필요) */}
-        {/* searchState에 대한 조건 추가 */}
-        {/* {searchstate === true ? <FoodWikiItem {...searchResult}></FoodWikiItem> : <></>} */}
-        {/* <FoodWiki> searchState===false이고 API 결과가 있음 => 알맞게 아이템을 만들어서 해당 컴포넌트를 반환 (클릭 이벤트 필요) */}
       </Wrapper>
 
       {/* 위치가 SearchSection 일 때에만 디자인 추가*/}

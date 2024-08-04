@@ -88,8 +88,6 @@ const MainBloodSugarChart = ({ fetchMainChartData, mainData }) => {
       delete sortedData[sortedData.length - 1].bloodsugar;
     }
 
-    console.log(sortedData);
-
     return sortedData;
   };
 

@@ -5,10 +5,6 @@ import { commonChartTitle } from '../common/styles/commonStyles';
 import { useEffect } from 'react';
 
 const FoodBar = () => {
-  useEffect(() => {
-    console.log('FoodBar 리렌더링');
-  });
-
   return (
     <>
       <ChartWrapper>
