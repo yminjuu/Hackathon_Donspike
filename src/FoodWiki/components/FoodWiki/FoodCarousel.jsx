@@ -44,6 +44,8 @@ const StyledDiv = styled.div`
   border: 1px solid black;
   height: 10rem;
   width: 10rem;
+
+  border-radius: 0.5rem;
 `;
 
 export default FoodCarousel;

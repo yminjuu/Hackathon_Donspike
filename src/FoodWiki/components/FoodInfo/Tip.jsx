@@ -1,9 +1,19 @@
 import styled from 'styled-components';
+import Blood from '../../assets/bloodIcon.svg?react';
+import Eat from '../../assets/eatIcon.svg?react';
+import Rec from '../../assets/recIcon.svg?react';
+import Search from '../../assets/searchIcon.svg?react';
 
 const Tip = ({ tip_title, tip_content }) => {
   return (
     <Wrapper>
-      <Title>{tip_title}</Title>
+      <TitleWrapper>
+        {tip_title === '전문가의 소견' ? <Search></Search> : <></>}
+        {tip_title === '적정 섭취량' ? <Eat></Eat> : <></>}
+        {tip_title === '추천 섭취 방법' ? <Rec></Rec> : <></>}
+        {tip_title === '혈당 지수' ? <Blood></Blood> : <></>}
+        <Title>{tip_title}</Title>
+      </TitleWrapper>
       <Content>{tip_content}</Content>
       {/* horizon */}
       {tip_title != '혈당 지수' ? (
@@ -26,6 +36,13 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: left;
   gap: 1rem;
+`;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
 `;
 
 const Title = styled.div`

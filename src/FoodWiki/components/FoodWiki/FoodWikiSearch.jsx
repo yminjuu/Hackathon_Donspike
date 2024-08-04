@@ -26,6 +26,7 @@ const MainWrapper = styled.div`
   align-items: center;
 
   z-index: 0;
+  height: 23rem;
 `;
 
 const Title = styled.div`

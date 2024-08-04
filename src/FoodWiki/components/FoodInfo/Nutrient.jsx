@@ -8,7 +8,7 @@ const Nutrient = ({ foodname, amount, calorie, carbohydrate, protein, fat, sodiu
         <ExImg></ExImg>
         <FoodWrapper>
           <FoodTitle>{foodname}</FoodTitle>
-          <FoodAmount>{amount}</FoodAmount>
+          <FoodAmount>{amount}g</FoodAmount>
         </FoodWrapper>
       </BasicWrapper>
       <NutrientWrapper>
@@ -165,6 +165,7 @@ const Number = styled.span`
 `;
 
 const Unit = styled.span`
+  width: 2rem;
   color: #707070;
 
   font-size: 1rem;

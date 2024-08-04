@@ -9,10 +9,12 @@ const FoodWikiPage = () => {
       <PageBackground>
         <MainHeader></MainHeader>
         <FoodWikiSearch></FoodWikiSearch>
-        <CarouselWrapper>
-          <CarouselTitle>최근 먹은 음식</CarouselTitle>
-          <FoodCarousel></FoodCarousel>
-        </CarouselWrapper>
+        <CarouselBox>
+          <CarouselWrapper>
+            <CarouselTitle>최근 먹은 음식</CarouselTitle>
+            <FoodCarousel></FoodCarousel>
+          </CarouselWrapper>
+        </CarouselBox>
       </PageBackground>
     </>
   );
@@ -21,11 +23,23 @@ const FoodWikiPage = () => {
 const PageBackground = styled.div`
   background-image: url('https://raw.githubusercontent.com/yminjuu/DONTSPIKE_FE/328516018febe495fa3f66b464cc9b82e25d8344/public/FoodWikiBG.svg');
   background-size: cover;
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`;
+
+const CarouselBox = styled.div`
+  width: 100%;
+  background-color: #fafff2;
+
+  flex: 1 0 auto;
+  border-top: 2px solid #e8e8e8;
 `;
 
 const CarouselWrapper = styled.div`
   margin: 0 10rem;
-  margin-top: 6rem;
+  padding-top: 2rem;
 
   flex-shrink: 0;
   text-align: center;
