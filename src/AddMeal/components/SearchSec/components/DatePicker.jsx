@@ -5,15 +5,20 @@ import { styled, css } from 'styled-components';
 import { forwardRef } from 'react';
 import '../styles/Datepicker.css';
 import { ko } from 'date-fns/locale';
+import { IoIosArrowDown } from 'react-icons/io'; // 아이콘 임포트
+import { IoIosArrowUp } from 'react-icons/io';
 
 const Datepicker = ({ onClick }) => {
   // default 값: 현재 날짜
   const [startDate, setStartDate] = useState(new Date());
 
   const CustomInput = forwardRef(({ value, onClick, className }, ref) => (
-    <CustomInputBtn className={className} onClick={onClick} ref={ref}>
-      {value}
-    </CustomInputBtn>
+    <div className={className} style={{ display: 'flex', alignItems: 'center' }}>
+      <CustomInputBtn onClick={onClick} ref={ref}>
+        {value}
+      </CustomInputBtn>
+      <IoIosArrowDown onClick={onClick} style={{ marginLeft: '5px', cursor: 'pointer' }} /> {/* 아이콘 추가 */}
+    </div>
   ));
 
   // 부모 컴포넌트에게 선택된 date 전달
@@ -39,7 +44,7 @@ const Datepicker = ({ onClick }) => {
 };
 
 const AddMealWrapper = styled.div`
-  width: 4.5rem;
+  width: 5.5rem;
   height: 2.5rem;
   background-color: #ebeeff;
   text-align: center;
@@ -51,11 +56,14 @@ const CustomInputBtn = styled.button`
   outline: none;
   border: none;
 
-  background: #f0f1f5;
+  background: #ebeeff;
+  color: #111111;
+  font-size: 1.2rem;
+  font-weight: 600;
 `;
 
 const CustomDatePicker = styled(DatePicker)`
-  width: 4.5rem;
+  width: 5.5rem;
   height: 2.5rem;
 
   background-color: #ebeeff;

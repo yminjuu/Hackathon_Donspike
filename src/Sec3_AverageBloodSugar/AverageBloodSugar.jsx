@@ -6,8 +6,8 @@ import AverageGraphToolTip from './components/AverageGraphToolTip';
 import { useEffect } from 'react';
 
 const AverageBloodSugar = ({ fetchAverageData, averageData }) => {
-  // const offset = parseInt(averageData[5].average) - parseInt(averageData[4].average);
-  const offset = 20;
+  var offset = 0;
+  if (averageData.length != 0) offset = parseInt(averageData[5].average) - parseInt(averageData[4].average);
 
   console.log(averageData);
 
