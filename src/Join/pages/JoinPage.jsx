@@ -3,34 +3,44 @@ import IconImg from '../assets/health.png';
 import LogoButton from '../../common/components/LogoButton';
 import styled from 'styled-components';
 import { MdArrowBackIos } from 'react-icons/md';
-import '../styles/login.css';
 import ActiveBtn from '../assets/active.png';
 import DefaultBtn from '../assets/default.png';
+import LoginBtn from '../assets/login.png';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const LoginPage = () => {
+const JoinPage = () => {
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
+
+  const [joinState, setJoinState] = useState(false);
 
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   const navigate = useNavigate();
 
-  const fetchLoginData = async () => {
-    const res = await axios.post(`${BASE_URL}/api/login`, {
-      username: id,
-      password: pw,
-    });
-    console.log(res);
+  // 회원가입 API
+  const fetchJoinData = async () => {
+    try {
+      const res = await axios.post(`${BASE_URL}/api/createuser`, {
+        username: id,
+        password: pw,
+      });
+      console.log(res.data.message);
+      if (res.data.message === '회원가입 성공') {
+        setJoinState(true);
+      }
+    } catch (error) {
+      setJoinState(false);
+      alert('중복된 이름입니다. 다른 이름을 입력해주세요');
+    }
+    // 회원가입 완료 처리 => 로그인 화면으로
   };
 
   const checkValidJoin = () => {
     if (id && pw) {
-      // axios : login post
-      // navigate
-      fetchLoginData();
-      navigate('/main');
+      fetchJoinData();
+      // navigate('/main');
     } else {
       if (!id) {
         alert('ID를 입력하세요');
@@ -65,7 +75,7 @@ const LoginPage = () => {
       {/* 텍스트 Wrapper */}
       <TextWrapper>
         <div style={{ color: '#FFFFFF', fontSize: '1.875rem', fontWeight: '600' }}>
-          이름과 비밀번호를 입력하면 로그인이 완료됩니다.{' '}
+          회원가입을 위해 정보를 입력해주세요.{' '}
         </div>
         <div style={{ color: '#D6DDFE', fontSize: '1.175rem', fontWeight: '400' }}>
           돈스파이크 에서 더욱 스마트한 혈당 관리를 시작해보세요.{' '}
@@ -73,62 +83,74 @@ const LoginPage = () => {
       </TextWrapper>
       {/* 로그인 창 */}
       <Icon src={IconImg}></Icon>
-      <LoginWrapper>
-        <LoginText>로그인</LoginText>
-        <InputsWrapper>
-          <InputWrapper>
-            <InputTitle>이름</InputTitle>
-            <StyledInput
-              name="id"
-              value={id}
-              onChange={e => {
-                setId(e.target.value);
-              }}
-              type="text"
-              placeholder="이름을 입력하세요."
-            ></StyledInput>
-          </InputWrapper>
-          <InputWrapper>
-            <InputTitle>비밀번호</InputTitle>
-            <StyledInput
-              value={pw}
-              onChange={e => {
-                setPw(e.target.value);
-              }}
-              type="password"
-              placeholder="비밀번호를 입력하세요."
-            ></StyledInput>
-          </InputWrapper>
-        </InputsWrapper>
-        <ButtonWrapper>
-          {id == '' || pw == '' ? (
-            <Button src={DefaultBtn}></Button>
-          ) : (
-            <Button src={ActiveBtn} onClick={checkValidJoin}></Button>
-          )}
-        </ButtonWrapper>
-        <JoinWrapper>
+      {joinState === false ? (
+        <LoginWrapper>
+          <LoginText>회원가입</LoginText>
+          <InputsWrapper>
+            <InputWrapper>
+              <InputTitle>이름</InputTitle>
+              <StyledInput
+                name="id"
+                value={id}
+                onChange={e => {
+                  setId(e.target.value);
+                }}
+                type="text"
+                placeholder="이름을 입력하세요."
+              ></StyledInput>
+            </InputWrapper>
+            <InputWrapper>
+              <InputTitle>비밀번호</InputTitle>
+              <StyledInput
+                value={pw}
+                onChange={e => {
+                  setPw(e.target.value);
+                }}
+                type="password"
+                placeholder="비밀번호를 입력하세요."
+              ></StyledInput>
+            </InputWrapper>
+          </InputsWrapper>
+          <ButtonWrapper>
+            {id == '' || pw == '' ? (
+              <Button src={DefaultBtn}></Button>
+            ) : (
+              <Button src={ActiveBtn} onClick={checkValidJoin}></Button>
+            )}
+          </ButtonWrapper>
+        </LoginWrapper>
+      ) : (
+        <LoginWrapper>
+          <IconWrapper>
+            <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="25" cy="25" r="25" fill="#3053F9" />
+              <path d="M15 24.7461L22.1825 31.9286" stroke="white" stroke-width="2.87302" stroke-linecap="round" />
+              <path d="M35.1113 19L22.1828 31.9286" stroke="white" stroke-width="2.87302" stroke-linecap="round" />
+            </svg>
+            <div style={{ color: '#3053F9', fontSize: '1.6rem', fontWeight: '600' }}>회원가입 완료</div>
+          </IconWrapper>
           <div
             style={{
-              color: '#A0A0A0',
-              fontSize: '0.75rem',
+              color: '#414141',
+              fontSize: '1.1rem',
               fontWeight: '400',
               textAlign: 'center',
-              height: '1.2rem',
-              lineHeight: '1.2rem',
+              lineHeight: '1.5rem',
             }}
           >
-            계정이 없으신가요?{' '}
+            돈스파이크 계정 생성이 완료되었습니다.
+            <br />
+            지금 바로 혈당 정보를 기록하고 음식을 등록해보세요!
           </div>
-          <TransparentBtn
+          <ButtonWrapper
             onClick={() => {
-              navigate('/join');
+              navigate('/login');
             }}
           >
-            가입하기
-          </TransparentBtn>
-        </JoinWrapper>
-      </LoginWrapper>
+            <Button src={LoginBtn}></Button>
+          </ButtonWrapper>
+        </LoginWrapper>
+      )}
     </Wrapper>
   );
 };
@@ -204,11 +226,6 @@ const LoginWrapper = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-`;
-
-const JoinWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
 `;
 
 const LoginText = styled.div`
@@ -307,4 +324,13 @@ const TransparentBtn = styled.button`
   line-height: 1.2rem;
 `;
 
-export default LoginPage;
+const IconWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 1rem;
+`;
+
+export default JoinPage;
