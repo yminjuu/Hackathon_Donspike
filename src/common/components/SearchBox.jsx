@@ -127,7 +127,7 @@ const SearchBox = ({ type, fetchMeal }) => {
             }}
             ref={searchInput} /* focus effect를 사용하기 위해서 useRef 사용 */
             value={searchText}
-            placeholder="예) 흰쌀밥, 생오이"
+            placeholder="예) 포케, 현미밥"
             $searchstate={searchstate} /* props 전달 */
           ></StyledInput>
           <BtnWrapper onClick={onSearchBtnClick}>
