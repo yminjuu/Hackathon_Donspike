@@ -1,11 +1,13 @@
 import styled from 'styled-components';
-import ExImg from '../../assets/exImg.svg?react';
+
+const BUCKET_NAME = import.meta.env.VITE_BUCKET_NAME;
+const BUCKET_REGION = import.meta.env.VITE_BUCKET_REGION;
 
 const Nutrient = ({ foodname, amount, calorie, carbohydrate, protein, fat, sodium, cholesterol }) => {
   return (
     <Wrapper>
       <BasicWrapper>
-        <ExImg></ExImg>
+        <ImgWrapper src={`https://${BUCKET_NAME}.s3.${BUCKET_REGION}.amazonaws.com/${foodname}.jpg`}></ImgWrapper>
         <FoodWrapper>
           <FoodTitle>{foodname}</FoodTitle>
           <FoodAmount>{amount}g</FoodAmount>
@@ -88,6 +90,14 @@ const BasicWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 1rem;
+`;
+
+const ImgWrapper = styled.img`
+  width: 8.75rem;
+  height: 8.75rem;
+  flex-shrink: 0;
+
+  border-radius: 0.375rem;
 `;
 
 const NutrientWrapper = styled.div`

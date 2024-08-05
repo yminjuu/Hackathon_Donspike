@@ -1,30 +1,19 @@
 import styled, { css } from 'styled-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ExampleImg from '../../../FoodWiki/assets/exSearchImg.svg?react';
 import { useNavigate } from 'react-router-dom';
-
-const bucketName = 'dontspikeimg';
-const region = 'ap-southeast-2';
 
 const FoodWikiItem = props => {
   const navigate = useNavigate();
 
-  const handleSearch = () => {
-    const fileName = `${props.foodname}.jpg`;
-    const url = `https://${bucketName}.s3.${region}.amazonaws.com/${fileName}`;
-    // setImageUrl(url);
-    console.log(url);
-  };
-
   const onItemClick = () => {
-    handleSearch();
     navigate(`/foodWiki/search?query=${props.foodname}`);
   };
 
   return (
     <>
       <InfoWrapper onClick={onItemClick}>
-        <FoodImg url={`https://${bucketName}.s3.${region}.amazonaws.com/${props.foodname}.jpg`}></FoodImg>
+        <FoodImg src={props.url}></FoodImg>
         <FoodTitle>{props.foodname}</FoodTitle>
       </InfoWrapper>
     </>

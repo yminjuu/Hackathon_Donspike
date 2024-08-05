@@ -10,6 +10,9 @@ import axios from 'axios';
 
 const SearchBox = ({ type, fetchMeal }) => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
+  const BUCKET_NAME = import.meta.env.VITE_BUCKET_NAME;
+  const BUCKET_REGION = import.meta.env.VITE_BUCKET_REGION;
+
   const user_id = 1;
 
   // 검색 상태 관리 : 검색 가능(false) / 검색 이미 완료 상태(true)
@@ -127,7 +130,7 @@ const SearchBox = ({ type, fetchMeal }) => {
             }}
             ref={searchInput} /* focus effect를 사용하기 위해서 useRef 사용 */
             value={searchText}
-            placeholder="예) 흰쌀밥, 생오이"
+            placeholder="예) 포케, 사과"
             $searchstate={searchstate} /* props 전달 */
           ></StyledInput>
           <BtnWrapper onClick={onSearchBtnClick}>
@@ -147,7 +150,10 @@ const SearchBox = ({ type, fetchMeal }) => {
               fetchMeal={fetchMeal} // 음식 추가시
             ></SearchItem>
           ) : (
-            <FoodWikiItem {...searchResult}></FoodWikiItem>
+            <FoodWikiItem
+              url={`https://${BUCKET_NAME}.s3.${BUCKET_REGION}.amazonaws.com/${searchResult.foodname}.jpg`}
+              {...searchResult}
+            ></FoodWikiItem>
           )
         ) : (
           <></>

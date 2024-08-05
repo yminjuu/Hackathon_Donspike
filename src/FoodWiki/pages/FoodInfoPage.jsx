@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const FoodInfoPage = () => {
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
   const [foodSearch] = useSearchParams();
   const query = foodSearch.get('query');
 
@@ -15,7 +16,7 @@ const FoodInfoPage = () => {
 
   const fetchFoodWikiSearchResult = async () => {
     try {
-      const res = await axios.get(`https://api.donspike.store/api/foodwiki?search_food=${query}`);
+      const res = await axios.get(`${BASE_URL}/api/foodwiki?search_food=${query}`);
 
       setData(res.data[0]); // state 변경 => 리렌더링
       console.log(data);
