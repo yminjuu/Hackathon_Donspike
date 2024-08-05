@@ -30,17 +30,14 @@ const FirstPage = styled.div`
 
 const SecPage = styled.div`
   height: 100vh;
-  background-color: red;
 `;
 
 const ThrdPage = styled.div`
   height: 100vh;
-  background-color: blue;
 `;
 
 const FourthPage = styled.div`
   height: 100vh;
-  background-color: green;
 `;
 
 // 200 vh 하나
