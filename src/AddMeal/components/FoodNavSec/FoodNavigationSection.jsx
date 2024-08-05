@@ -10,13 +10,14 @@ const compare = (a, b) => {
 
 const FoodNavigationSection = ({ selectedDate, fetchMeal }) => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
+  const user_id = 1;
 
   // 자주 먹은 음식 데이터
   const [favFood, setFavFood] = useState([]);
 
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(`${BASE_URL}/api/food/favorites`);
+      const { data } = await axios.get(`${BASE_URL}/api/food/favorites/${user_id}`);
       console.log('자주 먹은 음식 API 결과 : ', data);
 
       const updatedData = data.map(item => ({

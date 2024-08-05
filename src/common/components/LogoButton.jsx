@@ -9,7 +9,7 @@ const LogoButton = ({ type }) => {
   return (
     <Button
       onClick={() => {
-        if (type != 'loginPage') navigate('/main');
+        navigate('/');
       }}
     >
       <Logo></Logo>

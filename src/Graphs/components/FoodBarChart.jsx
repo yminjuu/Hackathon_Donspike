@@ -14,10 +14,12 @@ const FoodBarChart = () => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const [favData, setFavData] = useState();
 
+  const user_id = 1;
+
   const fetchFavFoodData = async () => {
     try {
       // 현재 7월값으로 요청하고 있음
-      const res = await axios.get(`${BASE_URL}/api/food/favorites`);
+      const res = await axios.get(`${BASE_URL}/api/food/favorites/${user_id}`);
       setFavData(res.data.sort(compare));
     } catch (error) {
       console.log(error);

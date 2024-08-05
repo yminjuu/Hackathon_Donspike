@@ -18,11 +18,18 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const fetchLoginData = async () => {
-    const res = await axios.post(`${BASE_URL}/api/login`, {
-      username: id,
-      password: pw,
-    });
-    console.log(res);
+    try {
+      const res = await axios.post(`${BASE_URL}/api/login`, {
+        username: id,
+        password: pw,
+      });
+      console.log(res);
+      navigate('/main');
+    } catch (error) {
+      alert('로그인에 실패했습니다. 다시 시도해주세요');
+      setId('');
+      setPw('');
+    }
   };
 
   const checkValidJoin = () => {
@@ -30,7 +37,6 @@ const LoginPage = () => {
       // axios : login post
       // navigate
       fetchLoginData();
-      navigate('/main');
     } else {
       if (!id) {
         alert('ID를 입력하세요');
