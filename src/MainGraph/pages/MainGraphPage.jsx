@@ -61,6 +61,7 @@ const parseData = data => {
 };
 
 const calculateDifference = data => {
+  console.log(data);
   if (data.length < 2) {
     throw new Error('Not enough data to calculate the difference');
   }
@@ -69,7 +70,6 @@ const calculateDifference = data => {
   const lastAverage = data[lastIndex].average;
   const secondLastAverage = data[lastIndex - 1].average;
 
-  console.log(lastAverage - secondLastAverage);
   return lastAverage - secondLastAverage;
 };
 
@@ -88,7 +88,7 @@ const MainGraphPage = () => {
 
   const [averageData, setAverageData] = useState([]); // 평균 그래프 데이터
 
-  const [averageOffset, setOffset] = useState();
+  const [averageOffset, setOffset] = useState(null);
 
   useEffect(() => {
     // 혈당값이 바뀌면 밑의 2가지 그래프 리렌더링 발생
@@ -126,8 +126,13 @@ const MainGraphPage = () => {
       const res = await axios.get(`${BASE_URL}/api/blood-sugar/average?user_id=${id}&year=2024`);
 
       if (res.status === 200) {
-        setAverageData(parseData(res.data.monthly_averages));
-        setOffset(calculateDifference(averageData));
+        const parsedData = parseData(res.data.monthly_averages);
+        setAverageData(parsedData);
+
+        // 차이 계산 후 offset 설정
+        const difference = calculateDifference(parsedData);
+        setOffset(difference);
+        console.log('계산: ', difference);
       }
     } catch (error) {
       console.log(error);
