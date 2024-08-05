@@ -22,17 +22,17 @@ const router = createBrowserRouter([
     element: <LandingPage></LandingPage>,
   },
   {
-    path: '/main',
+    path: '/main/:id',
     element: <MainGraphPage></MainGraphPage>,
     // 추후 바로 Main으로 연결하되, 로그인 안되어있으면 login page로 route
   },
-  { path: '/addMeal', element: <AddMealPage></AddMealPage> },
+  { path: '/addMeal/:id', element: <AddMealPage></AddMealPage> },
   {
-    path: '/foodWiki/search',
+    path: '/foodWiki/:id/search',
     element: <FoodInfoPage></FoodInfoPage>,
   },
   {
-    path: '/foodWiki',
+    path: '/foodWiki/:id',
     element: <FoodWikiPage></FoodWikiPage>,
   },
 ]);

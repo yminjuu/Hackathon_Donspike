@@ -2,10 +2,16 @@ import MainHeader from '../../common/components/MainHeader';
 import styled from 'styled-components';
 import FoodWikiSearch from '../components/FoodWiki/FoodWikiSearch';
 import FoodCarousel from '../components/FoodWiki/FoodCarousel';
+import { useParams } from 'react-router-dom';
+import React from 'react';
+
+export const FoodWikiIdContext = React.createContext();
 
 const FoodWikiPage = () => {
+  const { id } = useParams();
+
   return (
-    <>
+    <FoodWikiIdContext.Provider value={id}>
       <PageBackground>
         <MainHeader currState="foodwiki"></MainHeader>
         <FoodWikiSearch></FoodWikiSearch>
@@ -16,7 +22,7 @@ const FoodWikiPage = () => {
           </CarouselWrapper>
         </CarouselBox>
       </PageBackground>
-    </>
+    </FoodWikiIdContext.Provider>
   );
 };
 

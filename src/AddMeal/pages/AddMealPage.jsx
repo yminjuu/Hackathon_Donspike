@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import SubPageHeader from '../../common/components/SubPageHeader';
 import { useState } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import React from 'react';
 
 const formatDate = date => {
   const year = date.getFullYear();
@@ -13,20 +15,20 @@ const formatDate = date => {
   return `${year}-${month}-${day}`;
 };
 
+export const AddMealIdContext = React.createContext();
+
 const AddMealPage = () => {
+  const { id } = useParams();
+
   const BASE_URL = import.meta.env.VITE_BASE_URL;
-  const userId = 1;
   // SearchSection에서 선택된 날짜 관리
   const [selectedDate, setSelectedDate] = useState();
 
   const fetchMeal = async foodId => {
     const date = new Date(selectedDate);
-    console.log('food id: ', foodId);
-    console.log('포맷된 날짜형식', formatDate(date));
-    console.log('userId: ', userId);
     try {
       const res = await axios.post(
-        `${BASE_URL}/api/diet/add-food?userId=1&foodId=${foodId}&recordDate=${formatDate(date)}`,
+        `${BASE_URL}/api/diet/add-food?userId=${id}&foodId=${foodId}&recordDate=${formatDate(date)}`,
       );
 
       console.log('식단에 추가 API 결과 : ', res);
@@ -39,7 +41,7 @@ const AddMealPage = () => {
   };
 
   return (
-    <>
+    <AddMealIdContext.Provider value={id}>
       <PageBackground>
         <SubPageHeader></SubPageHeader>
         <ContentWrapper>
@@ -47,7 +49,7 @@ const AddMealPage = () => {
           <FoodNavigationSection selectedDate={selectedDate} fetchMeal={fetchMeal}></FoodNavigationSection>
         </ContentWrapper>
       </PageBackground>
-    </>
+    </AddMealIdContext.Provider>
   );
 };
 // 1. 검색창

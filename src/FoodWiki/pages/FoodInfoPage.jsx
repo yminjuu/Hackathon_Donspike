@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import SubPageHeader from '../../common/components/SubPageHeader';
 import FoodWikiLogo from '../assets/FoodWikiLogo.svg?react';
@@ -6,8 +6,13 @@ import Tip from '../components/FoodInfo/Tip';
 import Nutrient from '../components/FoodInfo/Nutrient';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import React from 'react';
+
+export const FoodInfoIdContext = React.createContext();
 
 const FoodInfoPage = () => {
+  const { id } = useParams();
+
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const [foodSearch] = useSearchParams();
   const query = foodSearch.get('query');
@@ -34,25 +39,27 @@ const FoodInfoPage = () => {
   }, []);
 
   return (
-    <Wrapper>
-      <HeaderWrapper>
-        <SubPageHeader type="FoodInfo"></SubPageHeader>
-        <LogoWrapper>
-          <FoodWikiLogo></FoodWikiLogo>
-        </LogoWrapper>
-      </HeaderWrapper>
-      <ContentWrapper>
-        <InfoWrapper>
-          <Nutrient {...data}></Nutrient>
-        </InfoWrapper>
-        <TipWrapper>
-          <Tip tip_title="전문가의 소견" tip_content={data.expertOpinion} />
-          <Tip tip_title="적정 섭취량" tip_content={data.properIntake} />
-          <Tip tip_title="추천 섭취 방법" tip_content={data.ingestionMethod} />
-          <Tip tip_title="혈당 지수" tip_content={data.gi} />
-        </TipWrapper>
-      </ContentWrapper>
-    </Wrapper>
+    <FoodInfoIdContext.Provider value={id}>
+      <Wrapper>
+        <HeaderWrapper>
+          <SubPageHeader type="FoodInfo"></SubPageHeader>
+          <LogoWrapper>
+            <FoodWikiLogo></FoodWikiLogo>
+          </LogoWrapper>
+        </HeaderWrapper>
+        <ContentWrapper>
+          <InfoWrapper>
+            <Nutrient {...data}></Nutrient>
+          </InfoWrapper>
+          <TipWrapper>
+            <Tip tip_title="전문가의 소견" tip_content={data.expertOpinion} />
+            <Tip tip_title="적정 섭취량" tip_content={data.properIntake} />
+            <Tip tip_title="추천 섭취 방법" tip_content={data.ingestionMethod} />
+            <Tip tip_title="혈당 지수" tip_content={data.gi} />
+          </TipWrapper>
+        </ContentWrapper>
+      </Wrapper>
+    </FoodInfoIdContext.Provider>
   );
 };
 

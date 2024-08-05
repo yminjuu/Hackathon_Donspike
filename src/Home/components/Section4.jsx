@@ -84,8 +84,7 @@ const Section4 = () => {
         <Text>혈당 스파이크를 방지할 작은 시작,</Text>
         <ImgBtn
           onClick={() => {
-            navigate('/login');
-            // 고쳐야함
+            navigate('/login', { replace: 'true' });
           }}
         >
           <Btn></Btn>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -7,6 +7,7 @@ import './styles/FoodCarousel.css';
 import PrevArrow from './PrevArrow';
 import NextArrow from './NextArrow';
 import { useNavigate } from 'react-router-dom';
+import { FoodWikiIdContext } from '../../pages/FoodWikiPage';
 
 const removeSpaces = str => {
   return str.replace(/\s+/g, '');
@@ -14,17 +15,17 @@ const removeSpaces = str => {
 
 const FoodSlide = ({ index, foodname }) => {
   const navigate = useNavigate();
+  const id = useContext(FoodWikiIdContext);
 
   const BUCKET_NAME = import.meta.env.VITE_BUCKET_NAME;
   const BUCKET_REGION = import.meta.env.VITE_BUCKET_REGION;
-  // url={`https://${BUCKET_NAME}.s3.${BUCKET_REGION}.amazonaws.com/${searchResult.foodname}.jpg`}
 
   return (
     <Wrapper>
       <StyledImg
         src={`https://${BUCKET_NAME}.s3.${BUCKET_REGION}.amazonaws.com/${removeSpaces(foodname)}.jpg`}
         onClick={() => {
-          navigate(`/foodWiki/search?query=${foodname}`);
+          navigate(`/foodWiki/${id}/search?query=${foodname}`);
         }}
       ></StyledImg>
       <StyledFoodName>{foodname}</StyledFoodName>

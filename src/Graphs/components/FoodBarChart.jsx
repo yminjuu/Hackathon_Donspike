@@ -1,10 +1,11 @@
 // BarChartComponent.jsx
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, LabelList } from 'recharts';
 import CustomBarShape from '../FoodBar/CustomBarShape';
 import CustomLabel from '../FoodBar/CustomLabel';
 import '../styles/CustomScroll.css';
 import axios from 'axios';
+import { MainGraphIdContext } from '../../MainGraph/pages/MainGraphPage';
 
 const compare = (a, b) => {
   return parseInt(b.count) - parseInt(a.count);
@@ -14,12 +15,12 @@ const FoodBarChart = () => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const [favData, setFavData] = useState();
 
-  const user_id = 1;
+  const id = useContext(MainGraphIdContext);
 
   const fetchFavFoodData = async () => {
     try {
       // 현재 7월값으로 요청하고 있음
-      const res = await axios.get(`${BASE_URL}/api/food/favorites/${user_id}`);
+      const res = await axios.get(`${BASE_URL}/api/food/favorites/${id}`);
       setFavData(res.data.sort(compare));
     } catch (error) {
       console.log(error);

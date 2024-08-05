@@ -7,11 +7,14 @@ import AddMealButton from './assets/AddMealButton.svg?react';
 import { useNavigate } from 'react-router-dom';
 import RecordBloodSugar from './components/RecordBloodSugar';
 import ReactDOM from 'react-dom';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
+import { MainGraphIdContext } from '../MainGraph/pages/MainGraphPage';
 
 const MainBloodSugar = ({ setBS, fetchMainChartData, mainData }) => {
   // 특정 action이 발생했을 때 어떤 주소로 이동할 수 있게 해준다.
   const navigate = useNavigate();
+
+  const id = useContext(MainGraphIdContext);
 
   return (
     <>
@@ -31,7 +34,7 @@ const MainBloodSugar = ({ setBS, fetchMainChartData, mainData }) => {
             <ButtonWrapper
               role="button"
               onClick={() => {
-                navigate('/addMeal');
+                navigate(`/addMeal/${id}`);
               }}
             >
               <AddMealButton>식단 추가하기</AddMealButton>

@@ -40,7 +40,6 @@ const JoinPage = () => {
   const checkValidJoin = () => {
     if (id && pw) {
       fetchJoinData();
-      // navigate('/main');
     } else {
       if (!id) {
         alert('ID를 입력하세요');

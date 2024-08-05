@@ -23,8 +23,7 @@ const LoginPage = () => {
         username: id,
         password: pw,
       });
-      console.log(res);
-      navigate('/main');
+      navigate(`/main/${res.data.user_id}`, { replace: true }); // 뒤로가기 방지
     } catch (error) {
       alert('로그인에 실패했습니다. 다시 시도해주세요');
       setId('');
@@ -34,8 +33,6 @@ const LoginPage = () => {
 
   const checkValidJoin = () => {
     if (id && pw) {
-      // axios : login post
-      // navigate
       fetchLoginData();
     } else {
       if (!id) {
