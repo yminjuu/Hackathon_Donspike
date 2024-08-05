@@ -7,7 +7,10 @@ import { useEffect } from 'react';
 
 const AverageBloodSugar = ({ fetchAverageData, averageData }) => {
   var offset = 0;
-  if (averageData.length != 0) offset = parseInt(averageData[5].average) - parseInt(averageData[4].average);
+  if (averageData.length > 1) {
+    const length = averageData.length;
+    offset = parseInt(averageData[length - 1] - averageData[length - 2]);
+  }
 
   return (
     <>
@@ -18,7 +21,7 @@ const AverageBloodSugar = ({ fetchAverageData, averageData }) => {
             fetchAverageData={fetchAverageData}
             averageData={averageData}
           ></AverageBloodSugarChart>
-          <AverageGraphToolTip offset={offset}></AverageGraphToolTip>
+          {averageData.length > 2 ? <AverageGraphToolTip offset={offset}></AverageGraphToolTip> : <></>}
         </GraphWrapper>
       </ChartWrapper>
     </>

@@ -1,24 +1,61 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import LogoButton from './LogoButton';
 import { useNavigate } from 'react-router-dom';
+import { useState, useContext } from 'react';
+import Blackfoodwiki from '../assets/Blackfoodwiki.svg?react';
+import Blackgraph from '../assets/Blackgraph.svg?react';
+import Whitefoodwiki from '../assets/Whitefoodwiki.svg?react';
+import Whitegraph from '../assets/Whitegraph.svg?react';
+import LogoutSection from './LogoutSection';
 
-const MainHeader = () => {
+// MainHeader이 사용되는 위치 중 id context가 존재하는 2가지
+import { FoodWikiIdContext } from '../../FoodWiki/pages/FoodWikiPage';
+import { MainGraphIdContext } from '../../MainGraph/pages/MainGraphPage';
+
+const MainHeader = ({ currState }) => {
   const navigate = useNavigate();
+
+  const [navState, setNavstate] = useState(currState);
+  // 기본값 graphState
+
+  const user_id = useContext(FoodWikiIdContext) || useContext(MainGraphIdContext);
+
+  // nav 변경 관리
+  const onNavClick = navkey => {
+    if (navState === 'graph' && navkey === 'foodwiki') {
+      // 현재 그래프 상태이고 foodwiki를 눌렀을 때
+      navigate(`/foodWiki/${user_id}`);
+    } else if (navState === 'foodwiki' && navkey === 'graph') {
+      // 현재 푸드위키 상태이고 graph를 눌렀을 때
+      setNavstate('freq');
+      navigate(`/main/${user_id}`);
+    }
+  };
 
   return (
     <>
       <StyledMainHeader>
         <LogoButton></LogoButton>
-        <StyledNav>
-          <FoodWikiButtonWrapper onClick={() => navigate('/foodWiki')}>
-            {/* 검색 아이콘 svg */}
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
-              <circle cx="6.08703" cy="6.08703" r="5.32615" stroke="white" strokeWidth="1.52176" />
-              <path d="M12.1741 12.1738L16 15.9998" stroke="white" strokeWidth="1.52176" strokeLinecap="round" />
-            </svg>
-            혈당백과
-          </FoodWikiButtonWrapper>
-        </StyledNav>
+        {/* 클릭시 그래프 페이지로 이동함 */}
+        <PageStateSection>
+          <ButtonsWrapper>
+            <GraphNavigateButtonWrapper
+              $navState={navState}
+              onClick={() => {
+                onNavClick('graph');
+              }}
+            >
+              {navState === 'graph' ? <Whitegraph></Whitegraph> : <Blackgraph></Blackgraph>}
+              마이그래프
+            </GraphNavigateButtonWrapper>
+            <FoodWikiButtonWrapper $navState={navState} onClick={() => onNavClick('foodwiki')}>
+              {/* 검색 아이콘 svg */}
+              {navState === 'foodwiki' ? <Whitefoodwiki></Whitefoodwiki> : <Blackfoodwiki></Blackfoodwiki>}
+              혈당백과
+            </FoodWikiButtonWrapper>
+          </ButtonsWrapper>
+        </PageStateSection>
+        <LogoutSection></LogoutSection>
       </StyledMainHeader>
     </>
   );
@@ -26,7 +63,7 @@ const MainHeader = () => {
 
 const StyledMainHeader = styled.header`
   width: 100%;
-  height: 8%;
+  height: 8vh;
   position: sticky;
   top: 0;
   z-index: 1;
@@ -42,30 +79,70 @@ const StyledMainHeader = styled.header`
   background: rgba(255, 255, 255, 0.2);
 `;
 
-const StyledNav = styled.nav`
-  margin-right: 2.5rem;
+const PageStateSection = styled.div``;
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 0.7rem;
 `;
 
-const FoodWikiButtonWrapper = styled.button`
-  width: 5.7rem;
-  height: 1.8rem;
+const GraphNavigateButtonWrapper = styled.button`
+  width: 7rem;
+  height: 2.5rem;
   flex-shrink: 0;
   border-radius: 1.875rem;
   opacity: var(--sds-size-stroke-border);
   background: #000;
-  padding-left: 0.8rem;
   cursor: pointer;
 
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  gap: 0.2rem;
+  gap: 0.3rem;
 
   color: var(--Grayscale-White, #fff);
   /* Pretendard/Sb/16 */
 
-  font-size: 0.8rem;
+  font-size: 0.83rem;
   font-weight: 600;
+
+  ${props =>
+    props.$navState !== 'graph'
+      ? css`
+          background: transparent;
+          color: black;
+        `
+      : css``}
+`;
+
+const FoodWikiButtonWrapper = styled.button`
+  width: 7rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  border-radius: 1.875rem;
+  opacity: var(--sds-size-stroke-border);
+  background: #000;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+
+  color: var(--Grayscale-White, #fff);
+  /* Pretendard/Sb/16 */
+
+  font-size: 0.83rem;
+  font-weight: 600;
+
+  ${props =>
+    props.$navState !== 'foodwiki'
+      ? css`
+          background: transparent;
+          color: black;
+        `
+      : css``}
 `;
 
 export default MainHeader;

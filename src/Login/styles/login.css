@@ -1,0 +1,9 @@
+input:-internal-autofill-selected {
+    appearance: none; /* Reset the appearance */
+    background-image: none !important;
+    background-color: initial !important;
+    color: initial !important;
+  }
+
+  /* Change the color to your own background color */
+  input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus,input:-webkit-autofill:active {transition: background-color 5000s; -webkit-text-fill-color: #111111 !important;}

@@ -70,7 +70,7 @@ const AverageGraphToolTip = ({ offset }) => (
             변화부터 시작해보세요!
           </span>
         </>
-      ) : (
+      ) : offset < 0 ? (
         <>
           <span>
             저번 달에 비해 공복 평균 혈당이 <BSSpan $offset={offset}>{-1 * offset}mg/dl 감소</BSSpan>했어요! <br></br>
@@ -78,6 +78,10 @@ const AverageGraphToolTip = ({ offset }) => (
             건강해질 수 있어요!
           </span>
         </>
+      ) : (
+        <span>
+          저번 달과 공복 평균 혈당이 동일해요! <br></br> 좋은 식습관을 통해 더 건강해질까요?
+        </span>
       )}
     </TextContainer>
   </BalloonContainer>

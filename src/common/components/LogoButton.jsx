@@ -3,15 +3,9 @@ import styled from 'styled-components';
 import Logo from '../assets/Logo.svg?react';
 import { useNavigate } from 'react-router-dom';
 
-const LogoButton = () => {
-  const navigate = useNavigate();
-
+const LogoButton = ({ type }) => {
   return (
-    <Button
-      onClick={() => {
-        navigate('/main');
-      }}
-    >
+    <Button>
       <Logo></Logo>
     </Button>
   );
@@ -20,7 +14,7 @@ const LogoButton = () => {
 const Button = styled.button`
   border: none;
   padding: 0;
-  cursor: pointer;
+  /* cursor: pointer; */
 
   width: 5.375rem;
   height: 5rem;

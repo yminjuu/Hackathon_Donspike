@@ -2,9 +2,10 @@ import styled from 'styled-components';
 import Button_before from '../assets/RecordBSBtn_Before.svg?react';
 import Button_ok from '../assets/RecordBSBtn_OK.svg?react';
 import Datepicker from './Datepicker';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
+import { MainGraphIdContext } from '../../MainGraph/pages/MainGraphPage';
 
 Modal.setAppElement('#root');
 
@@ -16,7 +17,7 @@ const RecordBloodSugar = ({ setBS }) => {
   };
 
   const BASE_URL = import.meta.env.VITE_BASE_URL;
-  const user_id = 1;
+  const id = useContext(MainGraphIdContext);
   // 입력된 혈당값 관리
   const [text, setText] = useState('');
 
@@ -45,7 +46,7 @@ const RecordBloodSugar = ({ setBS }) => {
       console.log('fetch');
       console.log(selectedDate);
       const res = await axios.post(
-        `${BASE_URL}/api/${user_id}/blood-sugar?date=${formatDateToISOString(selectedDate)}&bloodsugar=${text}`,
+        `${BASE_URL}/api/${id}/blood-sugar?date=${formatDateToISOString(selectedDate)}&bloodsugar=${text}`,
       );
 
       if (res.status === 200) {

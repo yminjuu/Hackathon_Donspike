@@ -7,7 +7,8 @@ import MainTooltip from '../assets/MainToolTip.svg?react';
 // payload: tooltip에 띄울 정보를 props로 받음
 
 const MainBSTooltip = ({ active, payload, label, isTomorrow }) => {
-  if (active && payload.length != 0) {
+  console.log(payload);
+  if (active && payload.length > 0) {
     const data = payload[0].payload;
 
     // 내일 날짜인 경우

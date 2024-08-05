@@ -6,6 +6,8 @@ import FoodBar from '../../Sec2_FoodBar/FoodBar';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import React from 'react';
 
 const monthMapping = {
   JANUARY: '1월',
@@ -37,21 +39,6 @@ const monthOrder = [
   'DECEMBER',
 ];
 
-const data = {
-  APRIL: 0,
-  AUGUST: 166.18571428571428,
-  DECEMBER: 0,
-  FEBRUARY: 0,
-  JANUARY: 0,
-  JULY: 129.75833333333333,
-  JUNE: 0,
-  MARCH: 0,
-  MAY: 0,
-  NOVEMBER: 0,
-  OCTOBER: 0,
-  SEPTEMBER: 0,
-};
-
 // 날짜순 정렬
 const compare = (a, b) => {
   const dateA = new Date(a.recorddate);
@@ -73,8 +60,11 @@ const parseData = data => {
   }, []);
 };
 
+export const MainGraphIdContext = React.createContext();
+
 const MainGraphPage = () => {
-  const user_id = 1;
+  const { id } = useParams();
+
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   const pageContainerRef = useRef(null);
@@ -105,15 +95,10 @@ const MainGraphPage = () => {
   // 메인 그래프 data fetch
   const fetchMainChartData = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/api/blood-sugar/food/${user_id}`); // data를 배열 형식으로 새로 받아옴
+      const res = await axios.get(`${BASE_URL}/api/blood-sugar/food/${id}`); // data를 배열 형식으로 새로 받아옴
       console.log('메인 데이터: ', res);
       // 임의의 예상값 추가 => 실제 예상하도록 고쳐야함
-      const newData = [
-        ...res.data,
-        // { bloodsugar: 135, recorddate: '2024-08-04T20:03:30', foodBsMappingId: ['감자탕', '짜장면'], expect: 135 },
-        // 예상 혈당 구분을 위해서 혈당을 0으로 set
-        // { bloodsugar: NaN, recorddate: '2024-08-05T20:03:30', foodBsMappingId: [], expect: 140 },
-      ];
+      const newData = [...res.data];
       setMainData(newData.sort(compare));
     } catch (error) {
       console.log('에러 발생', error);
@@ -123,11 +108,10 @@ const MainGraphPage = () => {
   // 평균 혈당 그래프 data fetch
   const fetchAverageData = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/api/blood-sugar/average?user_id=${user_id}&year=2024`);
+      const res = await axios.get(`${BASE_URL}/api/blood-sugar/average?user_id=${id}&year=2024`);
 
       if (res.status === 200) {
         setAverageData(parseData(res.data.monthly_averages));
-        // setAverageData(dummyData);
       }
     } catch (error) {
       console.log(error);
@@ -135,26 +119,28 @@ const MainGraphPage = () => {
   };
 
   return (
-    <PageBackground ref={pageContainerRef}>
-      <MainHeader></MainHeader>
-      <SectionsWrapper>
-        {/* 제목 + 혈당 섹션 */}
-        <SectionWrapper>
-          <MainBloodSugar setBS={setBS} mainData={mainData} fetchMainChartData={fetchMainChartData}></MainBloodSugar>
-        </SectionWrapper>
-        {/* 구분선 추가 */}
-        <HorizonWrapper>
-          <svg xmlns="http://www.w3.org/2000/svg" width="1292" height="1" viewBox="0 0 1292 1" fill="none">
-            <path d="M1 0.5L1291 0.5" stroke="#CFCFCF" strokeLinecap="round" />
-          </svg>
-        </HorizonWrapper>
-        {/* 하단 그래프 2개 섹션*/}
-        <SectionWrapper2>
-          <FoodBar></FoodBar>
-          <AverageBloodSugar fetchAverageData={fetchAverageData} averageData={averageData}></AverageBloodSugar>
-        </SectionWrapper2>
-      </SectionsWrapper>
-    </PageBackground>
+    <MainGraphIdContext.Provider value={id}>
+      <PageBackground ref={pageContainerRef}>
+        <MainHeader currState="graph"></MainHeader>
+        <SectionsWrapper>
+          {/* 제목 + 혈당 섹션 */}
+          <SectionWrapper>
+            <MainBloodSugar setBS={setBS} mainData={mainData} fetchMainChartData={fetchMainChartData}></MainBloodSugar>
+          </SectionWrapper>
+          {/* 구분선 추가 */}
+          <HorizonWrapper>
+            <svg xmlns="http://www.w3.org/2000/svg" width="1292" height="1" viewBox="0 0 1292 1" fill="none">
+              <path d="M1 0.5L1291 0.5" stroke="#CFCFCF" strokeLinecap="round" />
+            </svg>
+          </HorizonWrapper>
+          {/* 하단 그래프 2개 섹션*/}
+          <SectionWrapper2>
+            <FoodBar></FoodBar>
+            <AverageBloodSugar fetchAverageData={fetchAverageData} averageData={averageData}></AverageBloodSugar>
+          </SectionWrapper2>
+        </SectionsWrapper>
+      </PageBackground>
+    </MainGraphIdContext.Provider>
   );
 };
 

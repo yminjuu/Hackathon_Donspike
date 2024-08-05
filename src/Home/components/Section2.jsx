@@ -1,26 +1,28 @@
 import { React, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import pencil from '../assets/pencil.png';
+import pencil from '../assets/Section2/pencil.png';
 import { css } from 'styled-components';
-import Content1 from '../assets/SubContent1_1.svg?react';
-import Content2 from '../assets/SubContent1_2.svg?react';
-import Content3 from '../assets/SubContent1_3.svg?react';
-import Arrow1 from '../assets/arrow1.svg?react';
-import Arrow2 from '../assets/arrow2.svg?react';
-import Arrow3 from '../assets/arrow3.svg?react';
-import Arrow4 from '../assets/arrow4.svg?react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Content1 from '../assets/Section2/2_1.png';
+import Content2 from '../assets/Section2/2_2.png';
+import Content3 from '../assets/Section2/2_3.png';
+import Icon1 from '../assets/Section2/Icon1.svg?react';
+import Icon2 from '../assets/Section2/Icon2.svg?react';
+import Icon3 from '../assets/Section2/Icon3.svg?react';
 
 gsap.registerPlugin(ScrollTrigger); // ScrollTrigger Trigger 호출
 
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100%; // 100vh를 차지
+`;
+
 const PageHeader = styled.div`
   width: 100%;
-  height: 7rem;
+  height: 15vh;
   flex-shrink: 0;
 
-  border-top-left-radius: 2rem;
-  border-top-right-radius: 2rem;
   border-top: 10rem;
   background: #fff;
 
@@ -32,11 +34,41 @@ const PageHeader = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-  padding: 4rem 18rem 4rem 18rem;
+  height: 85vh;
+  width: 100%;
+`;
+
+const RealContentWrapper = styled.div`
+  margin: 0rem 8rem;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 1.6rem;
+`;
+
+const Content1Wrap = styled.div`
+  border-radius: 1.875rem;
+  background-color: #f0f1f5;
+  height: 47%;
+  padding: 0 3rem;
+
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+`;
+
+const Content2and3Wrap = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.75rem;
+
+  height: 53%;
 `;
 
 const TextWrapper = styled.div`
@@ -72,86 +104,89 @@ const Text = styled.span`
   color: #3053f9;
 `;
 
-const Wrapper1 = styled.div`
-  box-sizing: content-box;
-  width: 19.625rem;
-  height: 17.6875rem;
+// Content1의 Wrapper
+const ContentSubWrapper1_1 = styled.img`
+  width: 30rem;
+  height: 16rem;
   flex-shrink: 0;
-  position: relative;
+  object-fit: cover;
+
+  border-radius: 1.25rem;
 `;
 
-const Wrapper2 = styled.div`
-  box-sizing: content-box;
-  width: 32.1875rem;
-  height: 17.6875rem;
-  flex-shrink: 0;
-  position: relative;
+const ContentSubWrapper1_2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+
+  gap: 1rem;
+
+  padding: 2.5rem;
 `;
 
-const Wrapper3 = styled.div`
-  box-sizing: content-box;
-  width: 29rem;
-  height: 14.4375rem;
-  flex-shrink: 0;
-  position: relative;
+const ContentSubText = styled.div`
+  color: #111111;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.5rem;
 `;
 
-const ArrowWrapper1 = styled.div`
-  position: absolute;
-  top: -10%;
-  left: -6%;
-`;
-
-const ArrowWrapper2 = styled.div`
-  position: absolute;
-  top: -8%;
-  left: 57%;
-`;
-
-const ArrowWrapper3 = styled.div`
-  position: absolute;
-  top: 41.5%;
-  left: 96%;
-`;
-
-const ArrowWrapper4 = styled.div`
-  position: absolute;
-  top: 94%;
-  left: 90%;
-`;
-
-const ArrowDesc = styled.div`
-  width: 12rem;
-  height: 2.375rem;
-  flex-shrink: 0;
-
-  color: #414141;
-  font-size: 0.875rem;
+const ContentSubSubText = styled.div`
+  color: #707070;
+  font-size: 0.8rem;
   font-weight: 400;
-  word-break: keep-all;
+  line-height: 1.1rem;
 `;
 
-const ArrowDesc1 = styled(ArrowDesc)`
-  position: absolute;
-  top: -10%;
-  left: -400%;
+// 2번째 컨텐츠 시작
+const Content2Wrap = styled.div`
+  border-radius: 1.875rem;
+  background-color: #f0f1f5;
+
+  width: 100%;
+  padding-top: 1rem;
 `;
 
-const ArrowDesc2 = styled(ArrowDesc)`
-  position: absolute;
-  top: -50%;
-  left: 120%;
+const ContentSubWrapper2_1 = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+
+  gap: 0.5rem;
+  padding: 0 2rem;
 `;
 
-const ArrowDesc3 = styled(ArrowDesc)`
-  position: absolute;
-  top: -30%;
-  left: 120%;
+const ContentSubWrapper2_3 = styled.img`
+  width: 16rem;
+  height: 14.375rem;
+  flex-shrink: 0;
+  object-fit: cover;
+
+  border-radius: 1.25rem;
 `;
-const ArrowDesc4 = styled(ArrowDesc)`
-  position: absolute;
-  top: 70%;
-  left: 110%;
+
+const ImgWrapper2_2 = styled.div`
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Content3Wrap = styled.div`
+  border-radius: 1.875rem;
+  background-color: #f0f1f5;
+
+  width: 100%;
+  padding-top: 1rem;
+`;
+
+const ContentSubWrapper3_2 = styled.img`
+  width: 29rem;
+  height: 14.375rem;
+  flex-shrink: 0;
 `;
 
 const Section2 = () => {
@@ -169,13 +204,13 @@ const Section2 = () => {
       },
     });
 
-    tl.from(wrapper1Ref.current, { opacity: 0, y: -50, duration: 0.8 })
-      .from(wrapper2Ref.current, { opacity: 0, y: -50, duration: 0.8 }, '+=0.01')
-      .from(wrapper3Ref.current, { opacity: 0, y: -50, duration: 0.8 }, '+=0.01');
+    tl.from(wrapper1Ref.current, { opacity: 0, y: -50, duration: 0.5 })
+      .from(wrapper2Ref.current, { opacity: 0, y: -50, duration: 0.5 }, '+=0.01')
+      .from(wrapper3Ref.current, { opacity: 0, y: -50, duration: 0.5 }, '+=0.01');
   }, []);
 
   return (
-    <>
+    <Wrapper>
       <PageHeader>
         <Icon src={pencil}></Icon>
         <TextWrapper>
@@ -186,33 +221,48 @@ const Section2 = () => {
         </TextWrapper>
       </PageHeader>
       <ContentWrapper>
-        <Wrapper1 ref={wrapper1Ref}>
-          <Content1></Content1>
-          <ArrowWrapper1>
-            <Arrow1></Arrow1>
-            <ArrowDesc1>매일매일 측정한 혈당을 기록하고 그래프에 추가할 수 있어요.</ArrowDesc1>
-          </ArrowWrapper1>
-        </Wrapper1>
-        <Wrapper2 ref={wrapper2Ref}>
-          <Content2></Content2>
-          <ArrowWrapper2>
-            <Arrow2></Arrow2>
-            <ArrowDesc2>혈당과 식단을 날짜별로 기록해주시면 한눈에 그래프로 보여드릴게요.</ArrowDesc2>
-          </ArrowWrapper2>
-          <ArrowWrapper3>
-            <Arrow3></Arrow3>
-            <ArrowDesc3>기록해주신 혈당 수치를 기반으로 다음 날의 예상 혈당을 확인 할 수 있어요.</ArrowDesc3>
-          </ArrowWrapper3>
-        </Wrapper2>
-        <Wrapper3 ref={wrapper3Ref}>
-          <Content3></Content3>
-          <ArrowWrapper4>
-            <Arrow4></Arrow4>
-            <ArrowDesc4>월별 혈당 평균 그래프를 비교해서 혈당 관리 팁을 제공해드릴게요.</ArrowDesc4>
-          </ArrowWrapper4>
-        </Wrapper3>
+        <RealContentWrapper>
+          <Content1Wrap ref={wrapper1Ref}>
+            <ContentSubWrapper1_1 src={Content1}></ContentSubWrapper1_1>
+            <ContentSubWrapper1_2>
+              <Icon1></Icon1>
+              <ContentSubText>
+                혈당과 식단을 날짜별로 기록해주시면
+                <br /> 한눈에 그래프로 보여드릴게요.
+              </ContentSubText>
+              <ContentSubSubText>
+                기록해주신 혈당 수치를 기반으로 <br />
+                다음 날의 예상 혈당을 확인 할 수 있어요.
+              </ContentSubSubText>
+            </ContentSubWrapper1_2>
+          </Content1Wrap>
+          <Content2and3Wrap>
+            <Content2Wrap ref={wrapper2Ref}>
+              <ContentSubWrapper2_1>
+                <Icon2></Icon2>
+                <ContentSubText>
+                  매일매일 측정한 혈당을 <br></br>그래프에 추가할 수 있어요.
+                </ContentSubText>
+              </ContentSubWrapper2_1>
+              <ImgWrapper2_2>
+                <ContentSubWrapper2_3 src={Content2}></ContentSubWrapper2_3>
+              </ImgWrapper2_2>
+            </Content2Wrap>
+            <Content3Wrap ref={wrapper3Ref}>
+              <ContentSubWrapper2_1>
+                <Icon3></Icon3>
+                <ContentSubText>
+                  월별 혈당 평균 그래프를 비교해서 <br></br>혈당 관리 방향을 제시해 드릴게요.
+                </ContentSubText>
+              </ContentSubWrapper2_1>
+              <ImgWrapper2_2>
+                <ContentSubWrapper3_2 src={Content3}></ContentSubWrapper3_2>
+              </ImgWrapper2_2>
+            </Content3Wrap>
+          </Content2and3Wrap>
+        </RealContentWrapper>
       </ContentWrapper>
-    </>
+    </Wrapper>
   );
 };
 

@@ -1,19 +1,21 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { useEffect, useState, useContext } from 'react';
 import ExampleImg from '../../../FoodWiki/assets/exSearchImg.svg?react';
 import { useNavigate } from 'react-router-dom';
+import { FoodWikiIdContext } from '../../pages/FoodWikiPage';
 
 const FoodWikiItem = props => {
   const navigate = useNavigate();
+  const id = useContext(FoodWikiIdContext);
 
   const onItemClick = () => {
-    // API GET => 존재하는 경우에만 FoodInfoPage로 넘어감
-    navigate(`/foodWiki/search?query=${props.foodname}`);
+    navigate(`/foodWiki/${id}/search?query=${props.foodname}`);
   };
 
   return (
     <>
       <InfoWrapper onClick={onItemClick}>
-        <FoodImg></FoodImg>
+        <FoodImg src={props.url}></FoodImg>
         <FoodTitle>{props.foodname}</FoodTitle>
       </InfoWrapper>
     </>
@@ -40,8 +42,14 @@ const FoodImg = styled.img`
   width: 4.375rem;
   height: 4.375rem;
   flex-shrink: 0;
+  object-fit: cover;
 
-  background: url(${ExampleImg});
+  ${props =>
+    props.url != ''
+      ? css`
+          src: url(props.url);
+        `
+      : css``}
 `;
 const FoodTitle = styled.div`
   color: #111111;

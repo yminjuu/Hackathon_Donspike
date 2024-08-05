@@ -2,15 +2,25 @@ import styled from 'styled-components';
 import Salad from '../../AddMeal/components/SearchSec/assets/salad.jpg';
 import SearchButton from '../assets/SearchButton.svg?react';
 import SearchReset from '../assets/SearchReset.svg?react';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import { css } from 'styled-components';
 import SearchItem from '../../AddMeal/components/SearchSec/components/SearchItem';
 import FoodWikiItem from '../../FoodWiki/components/FoodWiki/FoodWikiItem';
 import axios from 'axios';
+import { FoodWikiIdContext } from '../../FoodWiki/pages/FoodWikiPage';
+import { AddMealIdContext } from '../../AddMeal/pages/AddMealPage';
+
+// 음식 이름에 공백이 있으면 없애줌
+const removeSpaces = str => {
+  return str.replace(/\s+/g, '');
+};
 
 const SearchBox = ({ type, fetchMeal }) => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
-  const user_id = 1;
+  const BUCKET_NAME = import.meta.env.VITE_BUCKET_NAME;
+  const BUCKET_REGION = import.meta.env.VITE_BUCKET_REGION;
+
+  const id = useContext(FoodWikiIdContext) || useContext(AddMealIdContext);
 
   // 검색 상태 관리 : 검색 가능(false) / 검색 이미 완료 상태(true)
   const [searchstate, toggleSearchState] = useState(false); //초기 상태: false
@@ -127,7 +137,7 @@ const SearchBox = ({ type, fetchMeal }) => {
             }}
             ref={searchInput} /* focus effect를 사용하기 위해서 useRef 사용 */
             value={searchText}
-            placeholder="예) 포케, 현미밥"
+            placeholder="예) 포케, 사과"
             $searchstate={searchstate} /* props 전달 */
           ></StyledInput>
           <BtnWrapper onClick={onSearchBtnClick}>
@@ -147,7 +157,12 @@ const SearchBox = ({ type, fetchMeal }) => {
               fetchMeal={fetchMeal} // 음식 추가시
             ></SearchItem>
           ) : (
-            <FoodWikiItem {...searchResult}></FoodWikiItem>
+            <FoodWikiItem
+              url={`https://${BUCKET_NAME}.s3.${BUCKET_REGION}.amazonaws.com/${removeSpaces(
+                searchResult.foodname,
+              )}.jpg`}
+              {...searchResult}
+            ></FoodWikiItem>
           )
         ) : (
           <></>
