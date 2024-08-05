@@ -11,6 +11,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger); // ScrollTrigger Trigger 호출
 
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100%; // 100vh를 차지
+`;
+
 const PageHeader = styled.div`
   width: 100%;
   height: 7rem;
@@ -182,7 +187,7 @@ const Section3 = () => {
   }, []);
 
   return (
-    <>
+    <Wrapper>
       <PageHeader>
         <Icon src={buritto}></Icon>
         <TextWrapper>
@@ -225,7 +230,7 @@ const Section3 = () => {
           </ArrowWrapper3>
         </Wrapper3>
       </ContentWrapper>
-    </>
+    </Wrapper>
   );
 };
 
