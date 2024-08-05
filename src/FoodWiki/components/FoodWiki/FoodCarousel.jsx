@@ -47,7 +47,6 @@ const FoodCarousel = () => {
     <Slider {...settings}>
       <FoodSlide index={1} foodname="제육볶음"></FoodSlide>
       <FoodSlide index={2} foodname="낙지볶음"></FoodSlide>
-      <FoodSlide index={3} foodname="연어초밥"></FoodSlide>
       <FoodSlide index={4} foodname="피자"></FoodSlide>
       <FoodSlide index={5} foodname="포케"></FoodSlide>
       <FoodSlide index={6} foodname="닭가슴살 샐러드"></FoodSlide>
