@@ -60,6 +60,19 @@ const parseData = data => {
   }, []);
 };
 
+const calculateDifference = data => {
+  if (data.length < 2) {
+    throw new Error('Not enough data to calculate the difference');
+  }
+
+  const lastIndex = data.length - 1;
+  const lastAverage = data[lastIndex].average;
+  const secondLastAverage = data[lastIndex - 1].average;
+
+  console.log(lastAverage - secondLastAverage);
+  return lastAverage - secondLastAverage;
+};
+
 export const MainGraphIdContext = React.createContext();
 
 const MainGraphPage = () => {
@@ -74,6 +87,8 @@ const MainGraphPage = () => {
   const [mainData, setMainData] = useState([]); // 메인 그래프 데이터
 
   const [averageData, setAverageData] = useState([]); // 평균 그래프 데이터
+
+  const [averageOffset, setOffset] = useState();
 
   useEffect(() => {
     // 혈당값이 바뀌면 밑의 2가지 그래프 리렌더링 발생
@@ -112,6 +127,7 @@ const MainGraphPage = () => {
 
       if (res.status === 200) {
         setAverageData(parseData(res.data.monthly_averages));
+        setOffset(calculateDifference(averageData));
       }
     } catch (error) {
       console.log(error);
@@ -136,7 +152,11 @@ const MainGraphPage = () => {
           {/* 하단 그래프 2개 섹션*/}
           <SectionWrapper2>
             <FoodBar></FoodBar>
-            <AverageBloodSugar fetchAverageData={fetchAverageData} averageData={averageData}></AverageBloodSugar>
+            <AverageBloodSugar
+              fetchAverageData={fetchAverageData}
+              averageData={averageData}
+              offset={averageOffset}
+            ></AverageBloodSugar>
           </SectionWrapper2>
         </SectionsWrapper>
       </PageBackground>

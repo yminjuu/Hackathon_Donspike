@@ -5,13 +5,8 @@ import { commonChartTitle } from '../common/styles/commonStyles';
 import AverageGraphToolTip from './components/AverageGraphToolTip';
 import { useEffect } from 'react';
 
-const AverageBloodSugar = ({ fetchAverageData, averageData }) => {
-  var offset = 0;
-  if (averageData.length > 1) {
-    const length = averageData.length;
-    offset = parseInt(averageData[length - 1] - averageData[length - 2]);
-  }
-
+const AverageBloodSugar = ({ fetchAverageData, averageData, offset }) => {
+  useEffect(() => {}, [offset]);
   return (
     <>
       <ChartWrapper>

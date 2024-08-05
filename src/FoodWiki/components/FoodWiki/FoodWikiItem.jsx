@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 import { useEffect, useState, useContext } from 'react';
-import ExampleImg from '../../../FoodWiki/assets/exSearchImg.svg?react';
 import { useNavigate } from 'react-router-dom';
 import { FoodWikiIdContext } from '../../pages/FoodWikiPage';
 
