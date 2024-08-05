@@ -34,7 +34,7 @@ const FoodInfoPage = () => {
   }, []);
 
   return (
-    <>
+    <Wrapper>
       <HeaderWrapper>
         <SubPageHeader type="FoodInfo"></SubPageHeader>
         <LogoWrapper>
@@ -52,16 +52,23 @@ const FoodInfoPage = () => {
           <Tip tip_title="혈당 지수" tip_content={data.gi} />
         </TipWrapper>
       </ContentWrapper>
-    </>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+`;
 
 const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding-bottom: 1rem;
+  padding-bottom: 1vh;
 
   background-color: #fafff2;
+
+  height: 15vh;
 `;
 
 const ContentWrapper = styled.div`
@@ -69,21 +76,24 @@ const ContentWrapper = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  gap: 5vw;
+  width: 95vw;
 
-  margin: 0 3rem;
+  height: 85vh;
 `;
 
 const InfoWrapper = styled.div`
-  width: 38rem;
-  height: 38rem;
+  width: 46vw;
+  height: 81vh;
   flex-shrink: 0;
+
+  /* margin: 2vw 2vh; */
 `;
 
 const TipWrapper = styled.div`
-  width: 38rem;
-  height: 33rem;
+  width: 45vw;
+  height: 82vh;
   flex-shrink: 0;
-  margin: 3rem 0;
 
   border-radius: 0.625rem;
   border: 1px solid #cfcfcf;

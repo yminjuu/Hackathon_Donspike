@@ -28,14 +28,15 @@ const Tip = ({ tip_title, tip_content }) => {
 };
 
 const Wrapper = styled.div`
-  width: 35rem;
+  width: auto;
   height: auto;
-  margin: 1rem 2rem;
+  margin: 1vh 2vw;
 
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: left;
-  gap: 1rem;
+  gap: 3vh;
 `;
 
 const TitleWrapper = styled.div`

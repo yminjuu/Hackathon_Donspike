@@ -81,15 +81,14 @@ const Wrapper = styled.div`
 `;
 
 const BasicWrapper = styled.div`
-  width: 15rem;
-  height: 6rem;
+  height: 20vh;
   flex-shrink: 0;
-  margin-top: 1rem;
+  margin-top: 1vh;
 
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 1rem;
+  gap: 1vw;
 `;
 
 const ImgWrapper = styled.img`
@@ -101,7 +100,7 @@ const ImgWrapper = styled.img`
 `;
 
 const NutrientWrapper = styled.div`
-  width: 30rem;
+  width: 35vw;
   flex-shrink: 0;
 
   border-radius: 1.25rem;
@@ -159,7 +158,7 @@ const ValueWrapper = styled.div`
 `;
 
 const Number = styled.span`
-  width: 4.375rem;
+  width: 5vw;
   height: 1.875rem;
   flex-shrink: 0;
 
