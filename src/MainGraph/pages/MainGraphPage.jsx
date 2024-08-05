@@ -136,7 +136,7 @@ const MainGraphPage = () => {
 
   return (
     <PageBackground ref={pageContainerRef}>
-      <MainHeader></MainHeader>
+      <MainHeader currState="graph"></MainHeader>
       <SectionsWrapper>
         {/* 제목 + 혈당 섹션 */}
         <SectionWrapper>

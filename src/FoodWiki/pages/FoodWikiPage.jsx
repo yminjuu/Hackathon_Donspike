@@ -7,7 +7,7 @@ const FoodWikiPage = () => {
   return (
     <>
       <PageBackground>
-        <MainHeader></MainHeader>
+        <MainHeader currState="foodwiki"></MainHeader>
         <FoodWikiSearch></FoodWikiSearch>
         <CarouselBox>
           <CarouselWrapper>
