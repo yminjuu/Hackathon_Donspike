@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -7,6 +7,7 @@ import './styles/FoodCarousel.css';
 import PrevArrow from './PrevArrow';
 import NextArrow from './NextArrow';
 import { useNavigate } from 'react-router-dom';
+import { FoodWikiIdContext } from '../../pages/FoodWikiPage';
 
 const removeSpaces = str => {
   return str.replace(/\s+/g, '');
@@ -14,18 +15,21 @@ const removeSpaces = str => {
 
 const FoodSlide = ({ index, foodname }) => {
   const navigate = useNavigate();
+  const id = useContext(FoodWikiIdContext);
 
   const BUCKET_NAME = import.meta.env.VITE_BUCKET_NAME;
   const BUCKET_REGION = import.meta.env.VITE_BUCKET_REGION;
-  // url={`https://${BUCKET_NAME}.s3.${BUCKET_REGION}.amazonaws.com/${searchResult.foodname}.jpg`}
 
   return (
-    <StyledImg
-      src={`https://${BUCKET_NAME}.s3.${BUCKET_REGION}.amazonaws.com/${removeSpaces(foodname)}.jpg`}
-      onClick={() => {
-        navigate(`/foodWiki/search?query=${foodname}`);
-      }}
-    ></StyledImg>
+    <Wrapper>
+      <StyledImg
+        src={`https://${BUCKET_NAME}.s3.${BUCKET_REGION}.amazonaws.com/${removeSpaces(foodname)}.jpg`}
+        onClick={() => {
+          navigate(`/foodWiki/${id}/search?query=${foodname}`);
+        }}
+      ></StyledImg>
+      <StyledFoodName>{foodname}</StyledFoodName>
+    </Wrapper>
   );
 };
 
@@ -47,7 +51,6 @@ const FoodCarousel = () => {
     <Slider {...settings}>
       <FoodSlide index={1} foodname="제육볶음"></FoodSlide>
       <FoodSlide index={2} foodname="낙지볶음"></FoodSlide>
-      <FoodSlide index={3} foodname="연어초밥"></FoodSlide>
       <FoodSlide index={4} foodname="피자"></FoodSlide>
       <FoodSlide index={5} foodname="포케"></FoodSlide>
       <FoodSlide index={6} foodname="닭가슴살 샐러드"></FoodSlide>
@@ -90,6 +93,13 @@ const FoodCarousel = () => {
   );
 };
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
 const StyledImg = styled.img`
   height: 10rem;
   width: 10rem;
@@ -97,6 +107,12 @@ const StyledImg = styled.img`
   border-radius: 0.5rem;
 
   cursor: pointer;
+`;
+
+const StyledFoodName = styled.div`
+  color: #000;
+  font-size: 1rem;
+  font-weight: 500;
 `;
 
 export default FoodCarousel;

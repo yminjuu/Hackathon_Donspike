@@ -134,15 +134,19 @@ const MainBloodSugarChart = ({ fetchMainChartData, mainData }) => {
           <Tooltip content={<MainBSToolTip isTomorrow={isTomorrow} />} wrapperStyle={{ overflow: 'visible' }} />
           <ReferenceLine y={dataMax} stroke="red" strokeDasharray="3 10"></ReferenceLine>
           <ReferenceLine y={dataMin} stroke="#A0A0A0" strokeDasharray="3 10"></ReferenceLine>
-          <Line
-            type="linear"
-            dataKey="expect"
-            stroke="#D6DDFE"
-            strokeWidth={2}
-            strokeDasharray="5 5" // 점선 설정
-            dot={<CustomizedDot />}
-            activeDot={{ r: 6, fill: '#3053f9', strokeWidth: 0 }}
-          />
+          {mainData.length > 0 ? (
+            <Line
+              type="linear"
+              dataKey="expect"
+              stroke="#D6DDFE"
+              strokeWidth={2}
+              strokeDasharray="5 5" // 점선 설정
+              dot={<CustomizedDot />}
+              activeDot={{ r: 6, fill: '#3053f9', strokeWidth: 0 }}
+            />
+          ) : (
+            <></>
+          )}
           <Line
             type="linear"
             dataKey="bloodsugar"

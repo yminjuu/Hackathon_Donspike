@@ -1,13 +1,15 @@
 import styled, { css } from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import ExampleImg from '../../../FoodWiki/assets/exSearchImg.svg?react';
 import { useNavigate } from 'react-router-dom';
+import { FoodWikiIdContext } from '../../pages/FoodWikiPage';
 
 const FoodWikiItem = props => {
   const navigate = useNavigate();
+  const id = useContext(FoodWikiIdContext);
 
   const onItemClick = () => {
-    navigate(`/foodWiki/search?query=${props.foodname}`);
+    navigate(`/foodWiki/${id}/search?query=${props.foodname}`);
   };
 
   return (

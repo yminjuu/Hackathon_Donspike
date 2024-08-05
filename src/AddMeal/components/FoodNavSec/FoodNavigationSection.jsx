@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { css, styled } from 'styled-components';
 import OftFoodItem from '../FoodNavSec/components/OftFoodItem';
 import AddFoodInfo from '../FoodNavSec/components/AddFoodInfo';
 import axios from 'axios';
+import { AddMealIdContext } from '../../pages/AddMealPage';
 
 const compare = (a, b) => {
   return parseInt(b.count) - parseInt(a.count);
@@ -10,14 +11,14 @@ const compare = (a, b) => {
 
 const FoodNavigationSection = ({ selectedDate, fetchMeal }) => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
-  const user_id = 1;
+  const id = useContext(AddMealIdContext);
 
   // 자주 먹은 음식 데이터
   const [favFood, setFavFood] = useState([]);
 
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(`${BASE_URL}/api/food/favorites/${user_id}`);
+      const { data } = await axios.get(`${BASE_URL}/api/food/favorites/${id}`);
       console.log('자주 먹은 음식 API 결과 : ', data);
 
       const updatedData = data.map(item => ({
@@ -54,8 +55,6 @@ const FoodNavigationSection = ({ selectedDate, fetchMeal }) => {
 
   // 직접 음식 등록
   const onFoodReg = async ({ foodname }) => {
-    // 여기서 매개변수를 받아서 axios.post 호출
-    //~/api/blood-sugar/average?user_id={userid}&year=2024
     try {
       console.log('음식 등록', foodname);
       const food = foodname;

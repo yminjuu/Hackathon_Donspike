@@ -11,7 +11,7 @@ import Logo from '../assets/Section1_1/Logo.png';
 import BookIcon from '../assets/Section1_2/Book.svg?react';
 import GraphIcon from '../assets/Section1_2/Graph.svg?react';
 import { SlLogin } from 'react-icons/sl';
-import { useNavigate } from 'react-router-dom';
+import { replace, useNavigate } from 'react-router-dom';
 
 const Section1 = () => {
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ const Section1 = () => {
             <LogoButton></LogoButton>
             <LoginWrapper
               onClick={() => {
-                navigate('/login');
+                navigate('/login', { replace: 'true' });
               }}
             >
               {' '}
