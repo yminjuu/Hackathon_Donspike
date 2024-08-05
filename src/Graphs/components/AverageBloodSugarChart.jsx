@@ -1,17 +1,26 @@
 // LineChartComponent.jsx
-import { useEffect, React, useState } from 'react';
+import { useEffect, React, useState, useRef } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label, LabelList } from 'recharts';
 import '../styles/CustomScroll.css';
 import CustomLabel from '../AverageBS/CustomLabel';
 import axios from 'axios';
 
 const AverageBloodSugarChart = ({ fetchAverageData, averageData }) => {
+  const chartContainerRef = useRef(null);
+
   useEffect(() => {
     fetchAverageData();
+    if (chartContainerRef.current) {
+      chartContainerRef.current.scrollLeft = chartContainerRef.current.scrollWidth;
+    }
   }, []);
 
   return (
-    <div style={{ width: '100%', overflowX: 'auto', overflowY: 'hidden' }} className="custom-scroll">
+    <div
+      style={{ width: '100%', overflowX: 'auto', overflowY: 'hidden' }}
+      className="custom-scroll"
+      ref={chartContainerRef}
+    >
       <div style={{ width: '900px', height: '270px' }}>
         <LineChart
           width={900}

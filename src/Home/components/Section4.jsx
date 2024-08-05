@@ -1,10 +1,11 @@
 import { React, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import Search from '../assets/search.png';
+import Icon from '../assets/Section4/Icon.svg?react';
 import Btn from '../assets/NavBtn.svg?react';
 import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Vec1 from '../assets/background/backVector2.png';
 
 gsap.registerPlugin(ScrollTrigger); // ScrollTrigger Trigger 호출
 
@@ -16,6 +17,17 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  position: relative;
+`;
+
+const BGVector = styled.img`
+  width: 100%;
+  height: 100%;
+  overflow-y: hidden;
+  position: absolute; // Wrapper에 대해 절대적인 위치로 설정
+  top: 0%;
+  z-index: 0; // 가장 하위에 위치하도록
 `;
 
 const MainWrapper = styled.div`
@@ -25,12 +37,7 @@ const MainWrapper = styled.div`
   align-items: center;
 
   background-color: transparent;
-`;
-
-const Icon = styled.img`
-  width: 4.0625rem;
-  height: 4.625rem;
-  flex-shrink: 0;
+  z-index: 1;
 `;
 
 const Text = styled.div`
@@ -71,12 +78,14 @@ const Section4 = () => {
 
   return (
     <Wrapper>
+      <BGVector src={Vec1}></BGVector>
       <MainWrapper ref={wrapperRef}>
-        <Icon src={Search}></Icon>
+        <Icon></Icon>
         <Text>혈당 스파이크를 방지할 작은 시작,</Text>
         <ImgBtn
           onClick={() => {
             navigate('/main');
+            // 고쳐야함
           }}
         >
           <Btn></Btn>
