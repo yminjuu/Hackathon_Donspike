@@ -53,7 +53,7 @@ const LoginPage = () => {
       {/* 텍스트 Wrapper */}
       <TextWrapper>
         <div style={{ color: '#FFFFFF', fontSize: '1.875rem', fontWeight: '600' }}>
-          이름과 이메일을 입력하면 로그인이 완료됩니다.{' '}
+          이름과 비밀번호를 입력하면 로그인이 완료됩니다.{' '}
         </div>
         <div style={{ color: '#D6DDFE', fontSize: '1.175rem', fontWeight: '400' }}>
           돈스파이크 에서 더욱 스마트한 혈당 관리를 시작해보세요.{' '}
@@ -95,6 +95,27 @@ const LoginPage = () => {
             <Button src={ActiveBtn} onClick={checkValidJoin}></Button>
           )}
         </ButtonWrapper>
+        <JoinWrapper>
+          <div
+            style={{
+              color: '#A0A0A0',
+              fontSize: '0.75rem',
+              fontWeight: '400',
+              textAlign: 'center',
+              height: '1.2rem',
+              lineHeight: '1.2rem',
+            }}
+          >
+            계정이 없으신가요?{' '}
+          </div>
+          <TransparentBtn
+            onClick={() => {
+              navigate('/join');
+            }}
+          >
+            가입하기
+          </TransparentBtn>
+        </JoinWrapper>
       </LoginWrapper>
     </Wrapper>
   );
@@ -173,6 +194,11 @@ const LoginWrapper = styled.div`
   align-items: center;
 `;
 
+const JoinWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 const LoginText = styled.div`
   width: 100%;
   height: 10vh;
@@ -237,13 +263,13 @@ const StyledInput = styled.input`
 `;
 
 const ButtonWrapper = styled.div`
-  margin-bottom: 5vh;
+  margin-top: 5vh;
   width: 100%;
   height: 7vh;
 
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: end;
 `;
 
 const Button = styled.img`
@@ -252,6 +278,21 @@ const Button = styled.img`
   flex-shrink: 0;
 
   cursor: pointer;
+`;
+
+const TransparentBtn = styled.button`
+  border: none;
+  outline: none;
+  background-color: transparent;
+  height: 1.2rem;
+
+  cursor: pointer;
+  color: #3053f9;
+  font-size: 0.875rem;
+  font-weight: 600;
+
+  text-align: center;
+  line-height: 1.2rem;
 `;
 
 export default LoginPage;
