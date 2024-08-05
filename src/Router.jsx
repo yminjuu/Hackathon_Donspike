@@ -1,7 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import LoginPage from './Login/pages/LoginPage';
-import JoinPage from './Join/pages/JoinPage';
 import MainGraphPage from './MainGraph/pages/MainGraphPage';
 import FoodInfoPage from './FoodWiki/pages/FoodInfoPage';
 import AddMealPage from './AddMeal/pages/AddMealPage';
@@ -12,10 +11,6 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <LoginPage></LoginPage>,
-  },
-  {
-    path: '/join',
-    element: <JoinPage></JoinPage>,
   },
   {
     path: '/',

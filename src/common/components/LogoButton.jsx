@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import Logo from '../assets/Logo.svg?react';
 import { useNavigate } from 'react-router-dom';
 
-const LogoButton = () => {
+const LogoButton = ({ type }) => {
   const navigate = useNavigate();
 
   return (
     <Button
       onClick={() => {
-        navigate('/main');
+        if (type != 'loginPage') navigate('/main');
       }}
     >
       <Logo></Logo>

@@ -1,6 +1,6 @@
 import { React, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import buritto from '../assets/buritto.png';
+import buritto from '../assets/Section3/buritto.png';
 import { css } from 'styled-components';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -43,6 +43,10 @@ const TitleTextWrapper = styled.div`
   flex-direction: column;
   align-items: left;
   gap: 0.5rem;
+`;
+
+const Text = styled.span`
+  color: #3053f9;
 `;
 
 const TitleIcon = styled.img`
@@ -225,7 +229,9 @@ const Section3 = () => {
       <PageHeader>
         <TitleIcon src={buritto}></TitleIcon>
         <TitleTextWrapper>
-          <TitleTextDiv type="big">날짜별 먹은 음식을 기록하고 식단을 건강하게 관리 해보세요</TitleTextDiv>
+          <TitleTextDiv type="big">
+            날짜별 <Text>먹은 음식을 기록</Text>하고 식단을 건강하게 관리 해보세요
+          </TitleTextDiv>
           <TextDiv type="small">‘혈당 백과’ 에서는 음식의 영양소와 섭취 팁을 확인할 수 있어요.</TextDiv>
         </TitleTextWrapper>
       </PageHeader>
