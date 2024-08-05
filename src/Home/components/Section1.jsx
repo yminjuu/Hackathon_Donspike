@@ -10,8 +10,11 @@ import Mac2 from '../assets/Section1_1/Mac2.png';
 import Logo from '../assets/Section1_1/Logo.png';
 import BookIcon from '../assets/Section1_2/Book.svg?react';
 import GraphIcon from '../assets/Section1_2/Graph.svg?react';
+import { SlLogin } from 'react-icons/sl';
+import { useNavigate } from 'react-router-dom';
 
 const Section1 = () => {
+  const navigate = useNavigate();
   useEffect(() => {
     gsap.fromTo('.person1', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.5 });
     gsap.fromTo('.person2', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.8 });
@@ -29,6 +32,15 @@ const Section1 = () => {
         <MainContent1>
           <MainHeader>
             <LogoButton></LogoButton>
+            <LoginWrapper
+              onClick={() => {
+                navigate('/login');
+              }}
+            >
+              {' '}
+              <SlLogin></SlLogin>
+              <div style={{ color: '#111111', fontWeight: '500', fontSize: '1rem' }}>로그인</div>
+            </LoginWrapper>
           </MainHeader>
           <Content1_1Wrap>
             <MacWrap>
@@ -153,6 +165,15 @@ const MainHeader = styled.div`
   /* // 헤더의 border */
   border-bottom: 1px solid #cfcfcf;
   background: rgba(255, 255, 255, 0.2);
+`;
+
+const LoginWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  padding: 0.5rem 2rem;
+
+  cursor: pointer;
 `;
 
 // Section1의 첫번째 100vh

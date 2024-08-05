@@ -6,11 +6,16 @@ import FoodInfoPage from './FoodWiki/pages/FoodInfoPage';
 import AddMealPage from './AddMeal/pages/AddMealPage';
 import FoodWikiPage from './FoodWiki/pages/FoodWikiPage';
 import LandingPage from './Home/page/LandingPage';
+import JoinPage from './Join/pages/JoinPage';
 
 const router = createBrowserRouter([
   {
     path: '/login',
     element: <LoginPage></LoginPage>,
+  },
+  {
+    path: '/join',
+    element: <JoinPage></JoinPage>,
   },
   {
     path: '/',
