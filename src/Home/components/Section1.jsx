@@ -36,6 +36,7 @@ const Section1 = () => {
               <MacImg2 src={Mac2}></MacImg2>
             </MacWrap>
             <MainWrap>
+              feat/#11/LoginPage
               <MainText>혈당 스파이크를 방지할 작은 시작,</MainText>
               <LogoWrap src={Logo} />
             </MainWrap>
