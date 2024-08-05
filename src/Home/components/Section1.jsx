@@ -23,7 +23,7 @@ const Section1 = () => {
     <Wrapper>
       {/* 배경의 absolute 벡터 */}
       <BGVector src={Vec1}></BGVector>
-      {/* 200vh */}
+      {/* 200vh sdf*/}
       <ContentWrapper>
         {/* 100vh */}
         <MainContent1>
