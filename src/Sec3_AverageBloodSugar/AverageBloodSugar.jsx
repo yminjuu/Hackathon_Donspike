@@ -16,7 +16,7 @@ const AverageBloodSugar = ({ fetchAverageData, averageData, offset }) => {
             fetchAverageData={fetchAverageData}
             averageData={averageData}
           ></AverageBloodSugarChart>
-          <AverageGraphToolTip offset={offset}></AverageGraphToolTip> : <></>
+          {averageData.length > 1 ? <AverageGraphToolTip offset={offset}></AverageGraphToolTip> : <></>}
         </GraphWrapper>
       </ChartWrapper>
     </>
