@@ -1,7 +1,7 @@
 import { React, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import Icon from '../assets/Section4/Icon.svg?react';
-import Btn from '../assets/NavBtn.svg?react';
+import Btn from '../assets/Section4/NavBtn.svg?react';
 import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -84,7 +84,7 @@ const Section4 = () => {
         <Text>혈당 스파이크를 방지할 작은 시작,</Text>
         <ImgBtn
           onClick={() => {
-            navigate('/main');
+            navigate('/login');
             // 고쳐야함
           }}
         >

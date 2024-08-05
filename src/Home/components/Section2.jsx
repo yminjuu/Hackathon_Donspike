@@ -1,6 +1,6 @@
 import { React, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import pencil from '../assets/pencil.png';
+import pencil from '../assets/Section2/pencil.png';
 import { css } from 'styled-components';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -135,7 +135,8 @@ const ContentSubText = styled.div`
 const ContentSubSubText = styled.div`
   color: #707070;
   font-size: 0.8rem;
-  font-weight: 500;
+  font-weight: 400;
+  line-height: 1.1rem;
 `;
 
 // 2번째 컨텐츠 시작
