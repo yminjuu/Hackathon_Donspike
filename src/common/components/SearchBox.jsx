@@ -8,6 +8,11 @@ import SearchItem from '../../AddMeal/components/SearchSec/components/SearchItem
 import FoodWikiItem from '../../FoodWiki/components/FoodWiki/FoodWikiItem';
 import axios from 'axios';
 
+// 음식 이름에 공백이 있으면 없애줌
+const removeSpaces = str => {
+  return str.replace(/\s+/g, '');
+};
+
 const SearchBox = ({ type, fetchMeal }) => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const BUCKET_NAME = import.meta.env.VITE_BUCKET_NAME;
@@ -151,7 +156,9 @@ const SearchBox = ({ type, fetchMeal }) => {
             ></SearchItem>
           ) : (
             <FoodWikiItem
-              url={`https://${BUCKET_NAME}.s3.${BUCKET_REGION}.amazonaws.com/${searchResult.foodname}.jpg`}
+              url={`https://${BUCKET_NAME}.s3.${BUCKET_REGION}.amazonaws.com/${removeSpaces(
+                searchResult.foodname,
+              )}.jpg`}
               {...searchResult}
             ></FoodWikiItem>
           )
