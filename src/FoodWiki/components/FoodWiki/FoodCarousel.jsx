@@ -20,12 +20,15 @@ const FoodSlide = ({ index, foodname }) => {
   // url={`https://${BUCKET_NAME}.s3.${BUCKET_REGION}.amazonaws.com/${searchResult.foodname}.jpg`}
 
   return (
-    <StyledImg
-      src={`https://${BUCKET_NAME}.s3.${BUCKET_REGION}.amazonaws.com/${removeSpaces(foodname)}.jpg`}
-      onClick={() => {
-        navigate(`/foodWiki/search?query=${foodname}`);
-      }}
-    ></StyledImg>
+    <Wrapper>
+      <StyledImg
+        src={`https://${BUCKET_NAME}.s3.${BUCKET_REGION}.amazonaws.com/${removeSpaces(foodname)}.jpg`}
+        onClick={() => {
+          navigate(`/foodWiki/search?query=${foodname}`);
+        }}
+      ></StyledImg>
+      <StyledFoodName>{foodname}</StyledFoodName>
+    </Wrapper>
   );
 };
 
@@ -89,6 +92,13 @@ const FoodCarousel = () => {
   );
 };
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
 const StyledImg = styled.img`
   height: 10rem;
   width: 10rem;
@@ -96,6 +106,12 @@ const StyledImg = styled.img`
   border-radius: 0.5rem;
 
   cursor: pointer;
+`;
+
+const StyledFoodName = styled.div`
+  color: #000;
+  font-size: 1rem;
+  font-weight: 500;
 `;
 
 export default FoodCarousel;
