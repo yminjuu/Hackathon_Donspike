@@ -49,9 +49,7 @@ const MainBSTooltip = ({ active, payload, label, isTomorrow }) => {
 const ToolTipWrapper = styled.div`
   position: relative;
   width: 10rem;
-  height: 15rem;
-
-  background-color: #f0f1f5;
+  height: 10rem;
 `;
 
 const ExpectToolTipWrapper = styled.div`
