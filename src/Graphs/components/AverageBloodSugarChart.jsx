@@ -15,6 +15,29 @@ const AverageBloodSugarChart = ({ fetchAverageData, averageData }) => {
     }
   }, []);
 
+  // interval을 동적으로 계산하기 위해서 존재
+  const calculateInterval = dataLength => {
+    if (dataLength < 10) {
+      return 0;
+    } else if (dataLength < 20) {
+      return 1;
+    } else if (dataLength < 50) {
+      return 2;
+    } else {
+      return Math.floor(dataLength / 25);
+    }
+  };
+
+  const calculateChartWidth = dataLength => {
+    if (dataLength <= 5) {
+      return '500';
+      // 기본 너비
+    }
+    return `${dataLength * 100}px`;
+  };
+
+  const chartWidth = calculateChartWidth(averageData.length); // 동적으로 차트의 너비 계산
+
   if (averageData.length != 0) {
     return (
       <div
@@ -22,9 +45,9 @@ const AverageBloodSugarChart = ({ fetchAverageData, averageData }) => {
         className="custom-scroll"
         ref={chartContainerRef}
       >
-        <div style={{ width: '900px', height: '270px' }}>
+        <div style={{ width: `${chartWidth}px`, height: '270px' }}>
           <LineChart
-            width={900}
+            width={averageData.length <= 5 ? 500 : averageData.length * 100}
             height={270}
             data={averageData}
             margin={{

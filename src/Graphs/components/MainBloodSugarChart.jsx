@@ -110,7 +110,7 @@ const MainBloodSugarChart = ({ fetchMainChartData, mainData }) => {
       return '700';
       // 기본 너비
     }
-    return `${dataLength * 50}px`; // 데이터 포인트 하나당 50px의 너비를 할당
+    return `${dataLength * 100}px`;
   };
 
   // 최초 렌더링시 데이터 가져옴
@@ -126,7 +126,6 @@ const MainBloodSugarChart = ({ fetchMainChartData, mainData }) => {
   const dataMax = Math.max(...mainData.map(d => d.bloodsugar));
   const dataMin = Math.min(...mainData.map(d => d.bloodsugar));
   const chartWidth = calculateChartWidth(mainData.length); // 동적으로 차트의 너비 계산
-  console.log(chartWidth);
 
   if (mainData.length > 1) {
     return (
@@ -137,7 +136,7 @@ const MainBloodSugarChart = ({ fetchMainChartData, mainData }) => {
       >
         <div style={{ width: `${chartWidth}px`, height: '275px' }}>
           <LineChart
-            width={mainData.length <= 10 ? 700 : mainData.length * 50}
+            width={mainData.length <= 10 ? 700 : mainData.length * 100}
             px
             height={275}
             data={getProcessedDataList(mainData)}
