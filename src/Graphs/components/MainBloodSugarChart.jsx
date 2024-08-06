@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, LabelList } from 'recharts';
 import MainBSToolTip from '../MainBS/MainBSToolTip';
 import '../styles/CustomScroll.css';
 import styled from 'styled-components';
@@ -325,7 +325,7 @@ const MainBloodSugarChart = ({ fetchMainChartData, mainData }) => {
               strokeWidth={2}
               dot={<CustomizedRegularDot />}
               activeDot={<CustomizedActiveDot />}
-            />
+            ></Line>
           </LineChart>
         </div>
       </div>

@@ -33,7 +33,7 @@ const AverageBloodSugarChart = ({ fetchAverageData, averageData }) => {
       return '500';
       // 기본 너비
     }
-    return `${dataLength * 100}px`;
+    return `${dataLength * 100}px`; // 데이터 포인트 하나당 50px의 너비를 할당
   };
 
   const chartWidth = calculateChartWidth(averageData.length); // 동적으로 차트의 너비 계산

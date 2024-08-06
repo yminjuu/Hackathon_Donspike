@@ -19,7 +19,6 @@ const FoodBarChart = () => {
 
   const fetchFavFoodData = async () => {
     try {
-      // 현재 7월값으로 요청하고 있음
       const res = await axios.get(`${BASE_URL}/api/food/favorites/${id}`);
       setFavData(res.data.sort(compare));
     } catch (error) {
@@ -40,7 +39,7 @@ const FoodBarChart = () => {
           height={270}
           data={favData}
           margin={{
-            top: 20,
+            top: 30,
             right: 30,
             left: 20,
             bottom: 5,
