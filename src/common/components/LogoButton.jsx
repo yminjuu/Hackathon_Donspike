@@ -40,8 +40,8 @@ const Button = styled.button`
           cursor: pointer;
         `
       : css``}
-  width: 5.375rem;
-  height: 5rem;
+  width: 7rem;
+  height: 7rem;
   margin-left: 2.5rem;
   flex-shrink: 0;
 

@@ -5,7 +5,6 @@ const LogoutSection = () => {
   const navigate = useNavigate();
 
   const onLogout = () => {
-    console.log('로그아웃');
     navigate('/login', { replace: 'true' }); //뒤로가기 방지
   };
 
@@ -23,7 +22,7 @@ const LogoutSection = () => {
 };
 
 const Wrapper = styled.div`
-  width: 10vw;
+  width: 8vw;
   display: flex;
   flex-direction: row;
   gap: 0.3rem;

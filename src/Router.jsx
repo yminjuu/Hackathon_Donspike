@@ -7,6 +7,7 @@ import AddMealPage from './AddMeal/pages/AddMealPage';
 import FoodWikiPage from './FoodWiki/pages/FoodWikiPage';
 import LandingPage from './Home/page/LandingPage';
 import JoinPage from './Join/pages/JoinPage';
+import LandingPageCopy from './Home_copy/page/LandingPageCopy';
 
 const router = createBrowserRouter([
   {
@@ -36,8 +37,8 @@ const router = createBrowserRouter([
     element: <FoodWikiPage></FoodWikiPage>,
   },
   {
-    path: '/Landing/:id',
-    element: <LandingPage></LandingPage>,
+    path: '/landing/:id',
+    element: <LandingPageCopy></LandingPageCopy>,
   },
 ]);
 

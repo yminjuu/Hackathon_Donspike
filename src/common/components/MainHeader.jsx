@@ -11,6 +11,7 @@ import LogoutSection from './LogoutSection';
 // MainHeader이 사용되는 위치 중 id context가 존재하는 2가지
 import { FoodWikiIdContext } from '../../FoodWiki/pages/FoodWikiPage';
 import { MainGraphIdContext } from '../../MainGraph/pages/MainGraphPage';
+import DescriptionBtn from './DescriptionBtn';
 
 const MainHeader = ({ currState }) => {
   const navigate = useNavigate();
@@ -56,7 +57,10 @@ const MainHeader = ({ currState }) => {
             </FoodWikiButtonWrapper>
           </ButtonsWrapper>
         </PageStateSection>
-        <LogoutSection></LogoutSection>
+        <RightWrapper>
+          {navState === 'foodwiki' || navState === 'graph' ? <DescriptionBtn></DescriptionBtn> : <></>}
+          <LogoutSection></LogoutSection>
+        </RightWrapper>
       </StyledMainHeader>
     </>
   );
@@ -81,6 +85,11 @@ const StyledMainHeader = styled.header`
 `;
 
 const PageStateSection = styled.div``;
+
+const RightWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
 const ButtonsWrapper = styled.div`
   display: flex;
