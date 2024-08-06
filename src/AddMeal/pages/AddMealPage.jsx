@@ -38,6 +38,7 @@ const AddMealPage = () => {
         alert('주어진 날짜의 혈당값이 존재하지 않습니다. 혈당을 먼저 입력하세요!');
       }
     } catch (error) {
+      alert('주어진 날짜의 혈당값이 존재하지 않습니다. 혈당을 먼저 입력하세요!');
       console.log(error);
     }
   };
