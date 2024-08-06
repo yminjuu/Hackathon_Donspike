@@ -2,6 +2,7 @@ import { css, styled } from 'styled-components';
 import Logo from '../components/LogoButton';
 import LogoButton from '../components/LogoButton';
 import { useNavigate } from 'react-router-dom';
+import Icon from '../assets/delete.png';
 
 const SubPageHeader = ({ type }) => {
   const navigate = useNavigate();
@@ -15,10 +16,7 @@ const SubPageHeader = ({ type }) => {
       <LogoButton></LogoButton>
       {/* x 버튼 svg 태그 */}
       <ButtonWrapper onClick={onBtnClick}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M15 1.03955L1.08631 14.9998" stroke="#414141" strokeWidth="1.96769" strokeLinecap="round" />
-          <path d="M14.9136 14.9604L0.999885 1.00018" stroke="#414141" strokeWidth="1.96769" strokeLinecap="round" />
-        </svg>
+        <Img src={Icon}></Img>
       </ButtonWrapper>
     </HeaderWrapper>
   );
@@ -53,4 +51,10 @@ const ButtonWrapper = styled.div`
   justify-content: center;
 `;
 
+const Img = styled.img`
+  width: 2rem;
+  height: 2rem;
+  object-fit: cover;
+  margin: 2rem;
+`;
 export default SubPageHeader;
