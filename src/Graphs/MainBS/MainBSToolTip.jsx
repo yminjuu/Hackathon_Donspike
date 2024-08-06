@@ -27,6 +27,7 @@ const MainBSTooltip = ({ active, payload, label, isTomorrow }) => {
     else {
       return (
         <ToolTipWrapper>
+          <MainTooltip></MainTooltip>
           <DateText>{data.tooltipDate}</DateText>
           <MealWrapper>
             {/* 식단 데이터가 있을 때에만 map하도록 */}
