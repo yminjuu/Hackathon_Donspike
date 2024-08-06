@@ -4,6 +4,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine } 
 import MainBSToolTip from '../MainBS/MainBSToolTip';
 import '../styles/CustomScroll.css';
 import axios from 'axios';
+import styled from 'styled-components';
 
 const isTomorrow = date => {
   const today = new Date();
@@ -91,74 +92,130 @@ const MainBloodSugarChart = ({ fetchMainChartData, mainData }) => {
     return sortedData;
   };
 
+  // interval을 동적으로 계산하기 위해서 존재
+  const calculateInterval = dataLength => {
+    if (dataLength < 10) {
+      return 0;
+    } else if (dataLength < 20) {
+      return 1;
+    } else if (dataLength < 50) {
+      return 2;
+    } else {
+      return Math.floor(dataLength / 25);
+    }
+  };
+
+  const calculateChartWidth = dataLength => {
+    if (dataLength <= 10) {
+      return '700';
+      // 기본 너비
+    }
+    return `${dataLength * 50}px`; // 데이터 포인트 하나당 50px의 너비를 할당
+  };
+
   // 최초 렌더링시 데이터 가져옴
   useEffect(() => {
     fetchMainChartData();
     if (chartContainerRef.current) {
       chartContainerRef.current.scrollLeft = chartContainerRef.current.scrollWidth;
     }
+    console.log(mainData);
   }, []);
 
   // 데이터 중 최대 혈당량을 구함 => reference line 위함
   const dataMax = Math.max(...mainData.map(d => d.bloodsugar));
   const dataMin = Math.min(...mainData.map(d => d.bloodsugar));
+  const chartWidth = calculateChartWidth(mainData.length); // 동적으로 차트의 너비 계산
+  console.log(chartWidth);
 
-  return (
-    <div
-      style={{ width: '100%', overflowX: 'auto', overflowY: 'hidden' }}
-      className="custom-scroll"
-      ref={chartContainerRef}
-    >
-      <div style={{ width: '1000px', height: '275px' }}>
-        <LineChart
-          width={1000}
-          height={275}
-          data={getProcessedDataList(mainData)}
-          margin={{
-            top: 10,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid horizontal={true} vertical={false} />
-          <XAxis
-            dataKey="recorddate"
-            interval={0}
-            tick={{ fontSize: 13 }}
-            padding={{ left: 20, right: 20 }}
-            tickFormatter={formatDate}
-          />
-          <YAxis domain={['dataMin-20', 'dataMax+5']} tickCount={6} allowDecimals={false} orientation="right" />
-          {/* y축 인덱스의 최대/최소값은 혈당의 실제 최대/최소값-20 */}
-          <Tooltip content={<MainBSToolTip isTomorrow={isTomorrow} />} wrapperStyle={{ overflow: 'visible' }} />
-          <ReferenceLine y={dataMax} stroke="red" strokeDasharray="3 10"></ReferenceLine>
-          <ReferenceLine y={dataMin} stroke="#A0A0A0" strokeDasharray="3 10"></ReferenceLine>
-          {mainData.length > 0 ? (
+  if (mainData.length > 1) {
+    return (
+      <div
+        style={{ width: '100%', overflowX: 'auto', overflowY: 'hidden' }}
+        className="custom-scroll"
+        ref={chartContainerRef}
+      >
+        <div style={{ width: `${chartWidth}px`, height: '275px' }}>
+          <LineChart
+            width={mainData.length <= 10 ? 700 : mainData.length * 50}
+            px
+            height={275}
+            data={getProcessedDataList(mainData)}
+            margin={{
+              top: 10,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid horizontal={true} vertical={false} />
+            <XAxis
+              dataKey="recorddate"
+              interval={calculateInterval(mainData.length)} // X축 간격을 동적으로 설정
+              tick={{ fontSize: 13 }}
+              padding={{ left: 20, right: 20 }}
+              tickFormatter={formatDate}
+            />
+            <YAxis domain={['dataMin-20', 'dataMax+5']} tickCount={6} allowDecimals={false} orientation="right" />
+            {/* y축 인덱스의 최대/최소값은 혈당의 실제 최대/최소값-20 */}
+            <Tooltip content={<MainBSToolTip isTomorrow={isTomorrow} />} wrapperStyle={{ overflow: 'visible' }} />
+            <ReferenceLine y={dataMax} stroke="red" strokeDasharray="3 10"></ReferenceLine>
+            <ReferenceLine y={dataMin} stroke="#A0A0A0" strokeDasharray="3 10"></ReferenceLine>
+            {mainData.length > 0 ? (
+              <Line
+                type="linear"
+                dataKey="expect"
+                stroke="#D6DDFE"
+                strokeWidth={2}
+                strokeDasharray="5 5" // 점선 설정
+                dot={<CustomizedDot />}
+                activeDot={{ r: 6, fill: '#3053f9', strokeWidth: 0 }}
+              />
+            ) : (
+              <></>
+            )}
             <Line
               type="linear"
-              dataKey="expect"
-              stroke="#D6DDFE"
+              dataKey="bloodsugar"
+              stroke="#414141"
               strokeWidth={2}
-              strokeDasharray="5 5" // 점선 설정
-              dot={<CustomizedDot />}
+              dot={<CustomizedRegularDot />}
               activeDot={{ r: 6, fill: '#3053f9', strokeWidth: 0 }}
             />
-          ) : (
-            <></>
-          )}
-          <Line
-            type="linear"
-            dataKey="bloodsugar"
-            stroke="#414141"
-            strokeWidth={2}
-            dot={<CustomizedRegularDot />}
-            activeDot={{ r: 6, fill: '#3053f9', strokeWidth: 0 }}
-          />
-        </LineChart>
+          </LineChart>
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div
+        style={{ width: '100%', overflowX: 'auto', overflowY: 'hidden' }}
+        className="custom-scroll"
+        ref={chartContainerRef}
+      >
+        <div style={{ width: { chartWidth }, height: '275px' }}>
+          <AddBS>혈당 데이터를 추가해주세요!</AddBS>
+        </div>
+      </div>
+    );
+  }
 };
+
+const AddBS = styled.div`
+  width: 100%;
+  height: 100%;
+
+  font-weight: 700;
+  font-size: 2rem;
+  text-align: center;
+  vertical-align: middle;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: #111111;
+`;
 
 export default MainBloodSugarChart;

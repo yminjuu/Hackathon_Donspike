@@ -98,6 +98,7 @@ const MainGraphPage = () => {
     if (pageContainerRef.current) {
       pageContainerRef.current.scrollTop = pageContainerRef.current.scrollHeight;
     }
+    console.log(mainData);
   }, [bloodSugar]);
 
   useEffect(() => {
@@ -111,8 +112,6 @@ const MainGraphPage = () => {
   const fetchMainChartData = async () => {
     try {
       const res = await axios.get(`${BASE_URL}/api/blood-sugar/food/${id}`); // data를 배열 형식으로 새로 받아옴
-      console.log('메인 데이터: ', res);
-      // 임의의 예상값 추가 => 실제 예상하도록 고쳐야함
       const newData = [...res.data];
       setMainData(newData.sort(compare));
     } catch (error) {

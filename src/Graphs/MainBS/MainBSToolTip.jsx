@@ -7,7 +7,6 @@ import MainTooltip from '../assets/MainToolTip.svg?react';
 // payload: tooltip에 띄울 정보를 props로 받음
 
 const MainBSTooltip = ({ active, payload, label, isTomorrow }) => {
-  console.log(payload);
   if (active && payload.length > 0) {
     const data = payload[0].payload;
 

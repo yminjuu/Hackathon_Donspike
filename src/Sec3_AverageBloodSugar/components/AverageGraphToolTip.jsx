@@ -60,7 +60,6 @@ const BSSpan = styled.span`
 // 0이면 => 저번달과 공복 평균 혈당이 동일해요!
 // 음수면 => 저번달에 비해 공복 평균 혈당이 {offset}mg/dl 감소했어요! 잘하고 계시네요.
 const AverageGraphToolTip = ({ offset }) => {
-  console.log(offset);
   return (
     <BalloonContainer>
       <TooltipStyled />
