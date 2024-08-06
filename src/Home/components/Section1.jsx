@@ -11,7 +11,7 @@ import Logo from '../assets/Section1_1/Logo.png';
 import BookIcon from '../assets/Section1_2/Book.svg?react';
 import GraphIcon from '../assets/Section1_2/Graph.svg?react';
 import { SlLogin } from 'react-icons/sl';
-import { replace, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Section1 = () => {
   const navigate = useNavigate();
@@ -24,20 +24,16 @@ const Section1 = () => {
 
   return (
     <Wrapper>
-      {/* 배경의 absolute 벡터 */}
       <BGVector src={Vec1}></BGVector>
-      {/* 200vh sdf*/}
       <ContentWrapper>
-        {/* 100vh */}
         <MainContent1>
           <MainHeader>
             <LogoButton></LogoButton>
             <LoginWrapper
               onClick={() => {
-                navigate('/login', { replace: 'true' });
+                navigate('/login', { replace: true });
               }}
             >
-              {' '}
               <SlLogin></SlLogin>
               <div style={{ color: '#111111', fontWeight: '500', fontSize: '1rem' }}>로그인</div>
             </LoginWrapper>
@@ -69,12 +65,10 @@ const Section1 = () => {
             </Person2>
           </Content1_2Wrap>
           <Footer>
-            DON’T 스파이크는 당뇨병 환자들을 위한 맞춤형 정보제공 및 데이터 시각화를 통해 올바른 당뇨 관리를 돕는 서비스
-            입니다.
+            DON’T 스파이크는 당뇨병 환자들을 위한 맞춤형 정보제공 및 데이터 시각화를 통해 올바른 당뇨 관리를 돕는
+            서비스입니다.
           </Footer>
         </MainContent1>
-
-        {/* 100vh */}
         <MainContent2>
           <Content2_Wrap>
             <Content2_1Wrap>
@@ -125,29 +119,25 @@ const Section1 = () => {
 };
 
 const Wrapper = styled.div`
-  width: 100%;
-  height: 100%; // 200vh를 차지
-
+  width: 100vw;
+  height: 200vh; // Adjust the total height
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-
   position: relative;
 `;
 
 const BGVector = styled.img`
   width: 100%;
-  position: absolute; // Wrapper에 대해 절대적인 위치로 설정
+  position: absolute;
   top: 5%;
-  z-index: 0; // 가장 하위에 위치하도록
+  z-index: 0;
 `;
 
 const ContentWrapper = styled.div`
-  height: 100%;
   width: 100%;
-
-  z-index: 1; // 배경보다 상위에 위치하도록
+  z-index: 1;
 `;
 
 const MainHeader = styled.div`
@@ -155,16 +145,12 @@ const MainHeader = styled.div`
   position: sticky;
   top: 0;
   height: 10vh;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 1rem;
-  background: transparent;
-
-  /* // 헤더의 border */
-  border-bottom: 1px solid #cfcfcf;
   background: rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid #cfcfcf;
 `;
 
 const LoginWrapper = styled.div`
@@ -172,94 +158,93 @@ const LoginWrapper = styled.div`
   flex-direction: row;
   gap: 0.5rem;
   padding: 0.5rem 2rem;
-
   cursor: pointer;
 `;
 
-// Section1의 첫번째 100vh
 const MainContent1 = styled.div`
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 const Content1_1Wrap = styled.div`
-  height: 70vh;
-
+  flex: 1;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-around;
+  }
 `;
 
 const Content1_2Wrap = styled.div`
-  height: 15vh;
-
+  flex: 1;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding: 0 5rem;
+  padding: 0 2rem;
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 5rem;
+  }
 `;
 
 const Footer = styled.footer`
   width: 100%;
   height: 5vh;
   color: #707070;
-
   font-size: 0.8rem;
   font-weight: 500;
-  vertical-align: bottom;
   line-height: 5vh;
-
   text-align: center;
 `;
 
-// 1_1 서브 요소
-
 const MacWrap = styled.div`
   position: relative;
-
-  width: 50rem;
-  height: 30rem;
-
+  width: 80%;
+  max-width: 50rem;
+  height: 20rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media (min-width: 768px) {
+    height: 30rem;
+  }
 `;
 
 const MacImg1 = styled.img`
-  width: 23.8715rem;
-  height: 14.92388rem;
-  flex-shrink: 0;
-
+  width: 60%;
+  max-width: 23.8715rem;
   position: absolute;
   top: 30%;
   left: 35%;
-
   z-index: 3;
 `;
 
 const MacImg2 = styled.img`
-  width: 23.8715rem;
-  height: 14.92388rem;
-  flex-shrink: 0;
-
+  width: 60%;
+  max-width: 23.8715rem;
   position: absolute;
   top: 10%;
   left: 15%;
-
   z-index: 2;
 `;
 
 const MainWrap = styled.div`
-  width: 40rem;
-  height: 20rem;
-  padding: 5rem 5rem;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: left;
+  width: 80%;
+  max-width: 40rem;
+  padding: 2rem;
+  text-align: center;
+  @media (min-width: 768px) {
+    padding: 5rem;
+    text-align: left;
+  }
 `;
 
 const MainText = styled.div`
@@ -269,36 +254,47 @@ const MainText = styled.div`
 `;
 
 const LogoWrap = styled.img`
-  width: 24.5rem;
-  height: 5.22444rem;
+  width: 80%;
+  max-width: 24.5rem;
 `;
 
 const Person1 = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 1rem;
+  align-items: center;
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: flex-start;
+  }
 `;
 
 const Person2 = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 1rem;
+  align-items: center;
+  @media (min-width: 768px) {
+    flex-direction: row-reverse;
+    align-items: flex-start;
+  }
 `;
 
 const PersonImg = styled.img`
   width: 4.8rem;
   height: 7.6rem;
-  flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    width: 0;
+    height: 0;
+  }
 `;
 
 const PersonContent = styled.div`
-  width: 28rem;
-  height: 2.8rem;
-  flex-shrink: 0;
+  width: 80%;
+  max-width: 28rem;
   padding: 1.75rem;
   text-align: center;
-  vertical-align: middle;
-
   background-color: #ffffff;
   ${props =>
     props.direction === 'left'
@@ -309,7 +305,6 @@ const PersonContent = styled.div`
           border-radius: 3.75rem 3.75rem 0rem 3.75rem;
         `}
   box-shadow: 2px 4px 10px 2px #e8e8e8;
-
   color: #111111;
   font-size: 0.9rem;
   font-weight: 450;
@@ -322,7 +317,6 @@ const PersonSpan = styled.span`
   color: #3053f9;
 `;
 
-// Section2의 두번째 100vh
 const MainContent2 = styled.div`
   width: 100%;
   height: 100vh;
@@ -330,59 +324,64 @@ const MainContent2 = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 2rem;
 `;
 
 const Content2_Wrap = styled.div`
-  width: 53.75rem;
-  height: 36.25rem;
-  flex-shrink: 0;
-
+  width: 100%;
+  max-width: 53.75rem;
+  height: 100%;
+  max-height: 36.25rem;
   border-radius: 0.625rem;
   background-color: rgba(255, 255, 255, 0.4);
-
   display: flex;
   flex-direction: column;
 `;
 
-// 2 서브 요소
 const Content2_1Wrap = styled.div`
   width: 100%;
-  height: 30%;
-
-  vertical-align: middle;
-  text-align: center;
-
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
 `;
+
 const Content2_2Wrap = styled.div`
   width: 100%;
-  height: 70%;
+  flex: 2;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 `;
+
 const GraphWrap = styled.div`
   width: 100%;
-  height: 100%;
-
+  height: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  @media (min-width: 768px) {
+    height: 100%;
+  }
 `;
+
 const BookWrap = styled.div`
   width: 100%;
-  height: 100%;
-
+  height: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  @media (min-width: 768px) {
+    height: 100%;
+  }
 `;
 
 export default Section1;

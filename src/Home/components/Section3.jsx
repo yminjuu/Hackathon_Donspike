@@ -14,28 +14,35 @@ import Icon3 from '../assets/Section3/Icon3.svg?react';
 gsap.registerPlugin(ScrollTrigger); // ScrollTrigger Trigger 호출
 
 const Wrapper = styled.div`
-  width: 100%;
-  height: 100%; // 100vh를 차지
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 `;
 
 const PageHeader = styled.div`
   width: 100%;
   height: 15vh;
   flex-shrink: 0;
-
-  border-top: 10rem;
   background: #fff;
-
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 2rem;
+  padding: 0 1rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    height: auto;
+    padding: 1rem 0;
+  }
 `;
 
 const ContentWrapper = styled.div`
   height: 85vh;
   width: 100%;
+  overflow-y: auto;
 `;
 
 const TitleTextWrapper = styled.div`
@@ -53,11 +60,15 @@ const TitleIcon = styled.img`
   width: 4.0625rem;
   height: 4.625rem;
   flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    width: 0;
+    height: 0;
+  }
 `;
 
 const TitleTextDiv = styled.div`
-  height: 1.5rem;
-  flex-shrink: 0;
+  height: auto;
   color: #111111;
   ${props =>
     props.type === 'big'
@@ -72,40 +83,53 @@ const TitleTextDiv = styled.div`
 `;
 
 const RealContentWrapper = styled.div`
-  margin: 0rem 8rem;
+  margin: 0rem 2rem;
   height: 100%;
-
   display: flex;
   flex-direction: column;
-
   gap: 1.3rem;
+
+  @media (min-width: 768px) {
+    margin: 0rem 8rem;
+  }
 `;
 
 const Content1Wrap = styled.div`
   border-radius: 1.875rem;
   background-color: #f0f1f5;
   height: 35%;
-  padding: 0 3rem;
-
+  padding: 1rem 1.5rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    padding: 0 3rem;
+  }
+
+  @media (max-width: 768px) {
+    height: auto;
+  }
 `;
 
 const Content2and3Wrap = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
   gap: 1.75rem;
-
   height: 55%;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 `;
 
 const TextDiv = styled.div`
-  height: 1.5rem;
-  flex-shrink: 0;
+  height: auto;
   color: #111111;
   ${props =>
     props.type === 'big'
@@ -119,14 +143,17 @@ const TextDiv = styled.div`
         `};
 `;
 
-// Content1의 Wrapper
 const ContentSubWrapper1_1 = styled.img`
   width: 34.25rem;
   height: 10rem;
   flex-shrink: 0;
   object-fit: cover;
-
   border-radius: 1.25rem;
+
+  @media (max-width: 768px) {
+    width: 0rem;
+    height: 0rem;
+  }
 `;
 
 const ContentSubWrapper1_2 = styled.div`
@@ -134,10 +161,17 @@ const ContentSubWrapper1_2 = styled.div`
   flex-direction: column;
   justify-content: left;
   align-items: left;
-
   gap: 1rem;
+  padding: 1rem;
 
-  padding: 2.5rem;
+  @media (min-width: 768px) {
+    padding: 2.5rem;
+  }
+
+  @media (max-width: 768px) {
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const ContentSubText = styled.div`
@@ -154,13 +188,15 @@ const ContentSubSubText = styled.div`
   line-height: 1.3rem;
 `;
 
-// 2번째 컨텐츠 시작
 const Content2Wrap = styled.div`
   border-radius: 1.875rem;
   background-color: #f0f1f5;
-
   width: 100%;
-  padding-top: 1rem;
+  padding: 1rem;
+
+  @media (min-width: 768px) {
+    padding-top: 1rem;
+  }
 `;
 
 const ContentSubWrapper2_1 = styled.div`
@@ -168,9 +204,17 @@ const ContentSubWrapper2_1 = styled.div`
   flex-direction: column;
   justify-content: left;
   align-items: left;
-
   gap: 0.5rem;
-  padding: 0 2rem;
+  padding: 0 1rem;
+
+  @media (min-width: 768px) {
+    padding: 0 2rem;
+  }
+
+  @media (max-width: 768px) {
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const ContentSubWrapper2_3 = styled.img`
@@ -178,13 +222,16 @@ const ContentSubWrapper2_3 = styled.img`
   height: 13.9375rem;
   flex-shrink: 0;
   object-fit: cover;
-
   border-radius: 1.25rem;
+
+  @media (max-width: 768px) {
+    width: 0rem;
+    height: 0rem;
+  }
 `;
 
 const ImgWrapper2_2 = styled.div`
   width: 100%;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -193,15 +240,23 @@ const ImgWrapper2_2 = styled.div`
 const Content3Wrap = styled.div`
   border-radius: 1.875rem;
   background-color: #f0f1f5;
-
   width: 100%;
-  padding-top: 1rem;
+  padding: 1rem;
+
+  @media (min-width: 768px) {
+    padding-top: 1rem;
+  }
 `;
 
 const ContentSubWrapper3_2 = styled.img`
   width: 26.79644rem;
   height: 13.875rem;
   flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    width: 0rem;
+    height: 0rem;
+  }
 `;
 
 const Section3 = () => {
