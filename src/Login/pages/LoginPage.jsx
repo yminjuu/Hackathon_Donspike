@@ -84,11 +84,16 @@ const LoginPage = () => {
             <StyledInput
               name="id"
               value={id}
+              onKeyDown={e => {
+                if (e.key === 'Enter') {
+                  checkValidJoin();
+                }
+              }}
               onChange={e => {
                 setId(e.target.value);
               }}
               type="text"
-              placeholder="이름을 입력하세요."
+              placeholder="블로킹"
             ></StyledInput>
           </InputWrapper>
           <InputWrapper>
@@ -98,8 +103,13 @@ const LoginPage = () => {
               onChange={e => {
                 setPw(e.target.value);
               }}
+              onKeyDown={e => {
+                if (e.key === 'Enter') {
+                  checkValidJoin();
+                }
+              }}
               type="password"
-              placeholder="비밀번호를 입력하세요."
+              placeholder="1234"
             ></StyledInput>
           </InputWrapper>
         </InputsWrapper>

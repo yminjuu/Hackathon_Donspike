@@ -4,6 +4,7 @@ import Logo from '../assets/Logo.svg?react';
 import { useNavigate } from 'react-router-dom';
 
 const LogoButton = ({ type }) => {
+  console.log(type);
   return (
     <Button>
       <Logo></Logo>
