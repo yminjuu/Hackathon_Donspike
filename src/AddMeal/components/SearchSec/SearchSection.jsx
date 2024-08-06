@@ -44,12 +44,13 @@ const PageBackground = styled.div`
 `;
 
 const TextWrapper = styled.div`
-  width: 21rem;
-
   display: flex;
   flex-direction: column;
   justify-content: left;
   gap: 0.5rem;
+
+  position: absolute;
+  top: -25%;
 `;
 
 const Info = styled.div`

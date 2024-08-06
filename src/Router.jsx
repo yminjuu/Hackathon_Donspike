@@ -35,6 +35,10 @@ const router = createBrowserRouter([
     path: '/foodWiki/:id',
     element: <FoodWikiPage></FoodWikiPage>,
   },
+  {
+    path: '/Landing/:id',
+    element: <LandingPage></LandingPage>,
+  },
 ]);
 
 export default router;
