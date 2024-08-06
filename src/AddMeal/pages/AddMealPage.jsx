@@ -34,6 +34,8 @@ const AddMealPage = () => {
       console.log('식단에 추가 API 결과 : ', res);
       if (res.status === 200) {
         console.log('식단 추가 성공');
+      } else {
+        alert('주어진 날짜의 혈당값이 존재하지 않습니다. 혈당을 먼저 입력하세요!');
       }
     } catch (error) {
       console.log(error);
