@@ -92,19 +92,6 @@ const MainBloodSugarChart = ({ fetchMainChartData, mainData }) => {
     return sortedData;
   };
 
-  // interval을 동적으로 계산하기 위해서 존재
-  const calculateInterval = dataLength => {
-    if (dataLength < 10) {
-      return 0;
-    } else if (dataLength < 20) {
-      return 1;
-    } else if (dataLength < 50) {
-      return 2;
-    } else {
-      return Math.floor(dataLength / 25);
-    }
-  };
-
   const calculateChartWidth = dataLength => {
     if (dataLength <= 10) {
       return '700';
@@ -150,7 +137,7 @@ const MainBloodSugarChart = ({ fetchMainChartData, mainData }) => {
             <CartesianGrid horizontal={true} vertical={false} />
             <XAxis
               dataKey="recorddate"
-              interval={calculateInterval(mainData.length)} // X축 간격을 동적으로 설정
+              interval="0"
               tick={{ fontSize: 13 }}
               padding={{ left: 20, right: 20 }}
               tickFormatter={formatDate}
