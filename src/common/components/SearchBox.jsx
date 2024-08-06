@@ -131,6 +131,7 @@ const SearchBox = ({ type, fetchMeal }) => {
             // 키보드 Enter 클릭시 검색 가능
             onKeyDown={e => {
               if (e.key === 'Enter' && searchstate === false) onSearchBtnClick();
+              if (e.key === 'Backspace' && searchstate === true) onSearchFalse();
             }}
             onChange={e => {
               setSearchText(e.target.value);
