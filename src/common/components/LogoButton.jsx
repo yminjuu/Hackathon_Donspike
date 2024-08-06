@@ -1,12 +1,31 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useContext } from 'react';
+import styled, { css } from 'styled-components';
 import Logo from '../assets/Logo.svg?react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
-const LogoButton = ({ type }) => {
-  console.log(type);
+import { FoodWikiIdContext } from '../../FoodWiki/pages/FoodWikiPage';
+import { FoodInfoIdContext } from '../../FoodWiki/pages/FoodInfoPage';
+import { MainGraphIdContext } from '../../MainGraph/pages/MainGraphPage';
+import { AddMealIdContext } from '../../AddMeal/pages/AddMealPage';
+
+const LogoButton = ({ currState }) => {
+  const id =
+    useContext(FoodWikiIdContext) ||
+    useContext(MainGraphIdContext) ||
+    useContext(FoodInfoIdContext) ||
+    useContext(AddMealIdContext);
+
+  const navigate = useNavigate();
   return (
-    <Button>
+    <Button
+      onClick={() => {
+        console.log('클릭');
+        if (currState === 'graph' || currState === 'foodwiki') {
+          navigate(`/main/${id}`);
+        }
+      }}
+      $currState={currState}
+    >
       <Logo></Logo>
     </Button>
   );
@@ -15,8 +34,12 @@ const LogoButton = ({ type }) => {
 const Button = styled.button`
   border: none;
   padding: 0;
-  /* cursor: pointer; */
-
+  ${props =>
+    props.$currState === 'graph' || props.$currState === 'foodwiki'
+      ? css`
+          cursor: pointer;
+        `
+      : css``}
   width: 5.375rem;
   height: 5rem;
   margin-left: 2.5rem;

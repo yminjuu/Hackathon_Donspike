@@ -27,7 +27,6 @@ const MainBSTooltip = ({ active, payload, label, isTomorrow }) => {
     else {
       return (
         <ToolTipWrapper>
-          <MainTooltip></MainTooltip>
           <DateText>{data.tooltipDate}</DateText>
           <MealWrapper>
             {/* 식단 데이터가 있을 때에만 map하도록 */}
@@ -49,7 +48,9 @@ const MainBSTooltip = ({ active, payload, label, isTomorrow }) => {
 const ToolTipWrapper = styled.div`
   position: relative;
   width: 10rem;
-  height: 10rem;
+  height: 15rem;
+
+  background-color: #f0f1f5;
 `;
 
 const ExpectToolTipWrapper = styled.div`

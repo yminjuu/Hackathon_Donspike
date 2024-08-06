@@ -42,7 +42,7 @@ const FoodInfoPage = () => {
     <FoodInfoIdContext.Provider value={id}>
       <Wrapper>
         <HeaderWrapper>
-          <SubPageHeader type="FoodInfo"></SubPageHeader>
+          <SubPageHeader currState="foodwiki"></SubPageHeader>
           <LogoWrapper>
             <FoodWikiLogo></FoodWikiLogo>
           </LogoWrapper>

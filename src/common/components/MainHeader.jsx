@@ -14,9 +14,10 @@ import { MainGraphIdContext } from '../../MainGraph/pages/MainGraphPage';
 
 const MainHeader = ({ currState }) => {
   const navigate = useNavigate();
+  console.log(currState);
 
   const [navState, setNavstate] = useState(currState);
-  // 기본값 graphState
+  // graph 또는 foodwiki => 버튼 눌렀을 때 graph page로 navigate
 
   const user_id = useContext(FoodWikiIdContext) || useContext(MainGraphIdContext);
 
@@ -35,7 +36,7 @@ const MainHeader = ({ currState }) => {
   return (
     <>
       <StyledMainHeader>
-        <LogoButton></LogoButton>
+        <LogoButton currState={currState}></LogoButton>
         {/* 클릭시 그래프 페이지로 이동함 */}
         <PageStateSection>
           <ButtonsWrapper>

@@ -43,7 +43,7 @@ const AddMealPage = () => {
   return (
     <AddMealIdContext.Provider value={id}>
       <PageBackground>
-        <SubPageHeader></SubPageHeader>
+        <SubPageHeader currState="graph"></SubPageHeader>
         <ContentWrapper>
           <SearchSection setSelectedDate={setSelectedDate} fetchMeal={fetchMeal}></SearchSection>
           <FoodNavigationSection selectedDate={selectedDate} fetchMeal={fetchMeal}></FoodNavigationSection>

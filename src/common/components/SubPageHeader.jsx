@@ -4,7 +4,7 @@ import LogoButton from '../components/LogoButton';
 import { useNavigate } from 'react-router-dom';
 import Icon from '../assets/delete.png';
 
-const SubPageHeader = ({ type }) => {
+const SubPageHeader = ({ currState }) => {
   const navigate = useNavigate();
 
   const onBtnClick = () => {
@@ -12,8 +12,8 @@ const SubPageHeader = ({ type }) => {
   };
 
   return (
-    <HeaderWrapper $type={type}>
-      <LogoButton></LogoButton>
+    <HeaderWrapper $currState={currState}>
+      <LogoButton currState={currState}></LogoButton>
       {/* x 버튼 svg 태그 */}
       <ButtonWrapper onClick={onBtnClick}>
         <Img src={Icon}></Img>
@@ -29,7 +29,7 @@ const HeaderWrapper = styled.div`
   justify-content: space-between;
 
   ${props =>
-    props.$type === 'FoodInfo'
+    props.$currState === 'foodwiki'
       ? // 현재 state가 해당 버튼이 눌린 상태라면
         css`
           background-color: #fafff2;
