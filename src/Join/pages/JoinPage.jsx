@@ -143,7 +143,7 @@ const JoinPage = () => {
           </div>
           <ButtonWrapper
             onClick={() => {
-              navigate('/login');
+              navigate(`/main/${id}`);
             }}
           >
             <Button src={LoginBtn}></Button>

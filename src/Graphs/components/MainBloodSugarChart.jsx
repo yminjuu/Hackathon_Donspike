@@ -3,6 +3,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, L
 import MainBSToolTip from '../MainBS/MainBSToolTip';
 import '../styles/CustomScroll.css';
 import styled from 'styled-components';
+import Icon from '../../common/assets/PencilIcon.svg?react';
 
 const isTomorrow = date => {
   const today = new Date();
@@ -343,15 +344,15 @@ const MainBloodSugarChart = ({ fetchMainChartData, mainData }) => {
     );
   } else {
     return (
-      <div
-        style={{ width: '100%', overflowX: 'auto', overflowY: 'hidden' }}
-        className="custom-scroll"
-        ref={chartContainerRef}
-      >
-        <div style={{ width: { chartWidth }, height: '275px' }}>
-          <AddBS>혈당 데이터를 추가해주세요!</AddBS>
-        </div>
-      </div>
+      <NoContentMainWrapper>
+        <NoContentWrapper>
+          <Icon></Icon>
+          <NoContentText>
+            아직 입력된 정보가 없어요. <br />
+            날짜를 선택하고 혈당과 식단을 추가해주세요!
+          </NoContentText>
+        </NoContentWrapper>
+      </NoContentMainWrapper>
     );
   }
 };
@@ -371,6 +372,31 @@ const AddBS = styled.div`
   align-items: center;
 
   color: #111111;
+`;
+
+const NoContentMainWrapper = styled.div`
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #f0f1f5;
+  margin-bottom: 3vh;
+  border-radius: 1rem;
+`;
+
+const NoContentWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+`;
+
+const NoContentText = styled.div`
+  color: #000;
+  font-size: 1rem;
+  font-weight: 500;
 `;
 
 export default MainBloodSugarChart;

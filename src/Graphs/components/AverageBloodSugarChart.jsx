@@ -4,6 +4,8 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label, L
 import '../styles/CustomScroll.css';
 import CustomLabel from '../AverageBS/CustomLabel';
 import axios from 'axios';
+import styled from 'styled-components';
+import Icon from '../../common/assets/PencilIcon.svg?react';
 
 const AverageBloodSugarChart = ({ fetchAverageData, averageData }) => {
   const chartContainerRef = useRef(null);
@@ -71,7 +73,41 @@ const AverageBloodSugarChart = ({ fetchAverageData, averageData }) => {
         </div>
       </div>
     );
-  } else return <></>;
+  } else
+    return (
+      <NoContentMainWrapper>
+        <NoContentWrapper>
+          <Icon></Icon>
+          <NoContentText>아직 입력된 정보가 없어요.</NoContentText>
+        </NoContentWrapper>
+      </NoContentMainWrapper>
+    );
 };
+
+const NoContentMainWrapper = styled.div`
+  width: 100%;
+  height: 270px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 30px;
+
+  background-color: #f0f1f5;
+  border-radius: 10px;
+`;
+
+const NoContentWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+`;
+
+const NoContentText = styled.div`
+  color: #000;
+  font-size: 1rem;
+  font-weight: 500;
+`;
 
 export default AverageBloodSugarChart;

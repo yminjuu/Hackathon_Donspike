@@ -10,8 +10,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const LoginPage = () => {
-  const [id, setId] = useState('');
-  const [pw, setPw] = useState('');
+  const [id, setId] = useState('블로킹');
+  const [pw, setPw] = useState('1234');
 
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -93,7 +93,6 @@ const LoginPage = () => {
                 setId(e.target.value);
               }}
               type="text"
-              placeholder="블로킹"
             ></StyledInput>
           </InputWrapper>
           <InputWrapper>
@@ -109,7 +108,6 @@ const LoginPage = () => {
                 }
               }}
               type="password"
-              placeholder="1234"
             ></StyledInput>
           </InputWrapper>
         </InputsWrapper>
