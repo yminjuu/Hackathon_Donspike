@@ -1,9 +1,7 @@
-/* eslint-disable */
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine } from 'recharts';
 import MainBSToolTip from '../MainBS/MainBSToolTip';
 import '../styles/CustomScroll.css';
-import axios from 'axios';
 import styled from 'styled-components';
 
 const isTomorrow = date => {
@@ -35,6 +33,148 @@ const tooltipDate = dateString => {
   return `${year}.${month}.${day}`;
 };
 
+const CustomActiveDot = ({ cx, cy, fill }) => (
+  <svg
+    x={cx - 16.5}
+    y={cy - 16.5}
+    width="33"
+    height="33"
+    viewBox="0 0 33 33"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g filter="url(#filter0_d_817_1885)">
+      <circle cx="15" cy="15" r="13" fill="#FFD7D7" />
+    </g>
+    <g filter="url(#filter1_if_817_1885)">
+      <path
+        d="M8.53558 15.7964L17.2806 5.28032C17.5457 4.96153 18.0598 5.21754 17.9651 5.6212L16.2234 13.0492C16.1685 13.2833 16.3348 13.5113 16.5745 13.5305L20.2654 13.8258C20.5846 13.8513 20.7408 14.2274 20.5336 14.4716L11.8334 24.7234C11.5648 25.0399 11.0527 24.7777 11.1525 24.3748L12.9968 16.9278C13.0582 16.68 12.8707 16.4405 12.6155 16.4405H8.83764C8.50475 16.4405 8.32273 16.0524 8.53558 15.7964Z"
+        fill="#D33F3F"
+      />
+    </g>
+    <defs>
+      <filter
+        id="filter0_d_817_1885"
+        x="0.625"
+        y="0.625"
+        width="31.5"
+        height="31.5"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <feOffset dx="1.375" dy="1.375" />
+        <feGaussianBlur stdDeviation="1.375" />
+        <feComposite in2="hardAlpha" operator="out" />
+        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_817_1885" />
+        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_817_1885" result="shape" />
+      </filter>
+      <filter
+        id="filter1_if_817_1885"
+        x="8.18337"
+        y="4.87612"
+        width="12.7047"
+        height="21.03"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <feOffset dy="1.04238" />
+        <feGaussianBlur stdDeviation="0.521191" />
+        <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+        <feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.5 0" />
+        <feBlend mode="normal" in2="shape" result="effect1_innerShadow_817_1885" />
+        <feGaussianBlur stdDeviation="0.130298" result="effect2_foregroundBlur_817_1885" />
+      </filter>
+    </defs>
+  </svg>
+);
+
+const SpikeDot = ({ cx, cy, fill }) => (
+  <svg
+    x={cx - 16.5}
+    y={cy - 16.5}
+    width="33"
+    height="33"
+    viewBox="0 0 33 33"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g filter="url(#filter0_d_817_1885)">
+      <circle cx="15" cy="15" r="13" fill="#FFD7D7" />
+    </g>
+    <g filter="url(#filter1_if_817_1885)">
+      <path
+        d="M8.53558 15.7964L17.2806 5.28032C17.5457 4.96153 18.0598 5.21754 17.9651 5.6212L16.2234 13.0492C16.1685 13.2833 16.3348 13.5113 16.5745 13.5305L20.2654 13.8258C20.5846 13.8513 20.7408 14.2274 20.5336 14.4716L11.8334 24.7234C11.5648 25.0399 11.0527 24.7777 11.1525 24.3748L12.9968 16.9278C13.0582 16.68 12.8707 16.4405 12.6155 16.4405H8.83764C8.50475 16.4405 8.32273 16.0524 8.53558 15.7964Z"
+        fill="#D33F3F"
+      />
+    </g>
+    <defs>
+      <filter
+        id="filter0_d_817_1885"
+        x="0.625"
+        y="0.625"
+        width="31.5"
+        height="31.5"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <feOffset dx="1.375" dy="1.375" />
+        <feGaussianBlur stdDeviation="1.375" />
+        <feComposite in2="hardAlpha" operator="out" />
+        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_817_1885" />
+        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_817_1885" result="shape" />
+      </filter>
+      <filter
+        id="filter1_if_817_1885"
+        x="8.18337"
+        y="4.87612"
+        width="12.7047"
+        height="21.03"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <feOffset dy="1.04238" />
+        <feGaussianBlur stdDeviation="0.521191" />
+        <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+        <feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.5 0" />
+        <feBlend mode="normal" in2="shape" result="effect1_innerShadow_817_1885" />
+        <feGaussianBlur stdDeviation="0.130298" result="effect2_foregroundBlur_817_1885" />
+      </filter>
+    </defs>
+  </svg>
+);
+
 const CustomizedDot = props => {
   const { cx, cy, stroke, payload } = props;
   const date = new Date();
@@ -47,9 +187,23 @@ const CustomizedDot = props => {
 };
 
 const CustomizedRegularDot = props => {
-  const { cx, cy, stroke, payload } = props;
+  const { cx, cy, payload, stroke } = props;
+
+  if (payload.significantIncrease) {
+    return <SpikeDot cx={cx} cy={cy} fill="#ff0000" />;
+  }
+
   return <circle cx={cx} cy={cy} r={4} stroke={stroke} strokeWidth={1} fill="#111111" />;
-  // 내일 날짜와 동일하면 띄우도록 설정을 해두었음.
+};
+
+const CustomizedActiveDot = props => {
+  const { cx, cy, payload } = props;
+
+  if (payload.significantIncrease) {
+    return <CustomActiveDot cx={cx} cy={cy} fill="#ff0000" />;
+  }
+
+  return <circle cx={cx} cy={cy} r={6} fill="#3053f9" />;
 };
 
 const MainBloodSugarChart = ({ fetchMainChartData, mainData }) => {
@@ -89,6 +243,11 @@ const MainBloodSugarChart = ({ fetchMainChartData, mainData }) => {
       delete sortedData[sortedData.length - 1].bloodsugar;
     }
 
+    // 혈당 스파이크가 발생했는지 확인하는 키를 넣어줌
+    for (let i = 1; i < sortedData.length; i++) {
+      sortedData[i].significantIncrease = sortedData[i].bloodsugar > sortedData[i - 1].bloodsugar * 1.2; // 20% increase
+    }
+
     return sortedData;
   };
 
@@ -124,7 +283,6 @@ const MainBloodSugarChart = ({ fetchMainChartData, mainData }) => {
         <div style={{ width: `${chartWidth}px`, height: '275px' }}>
           <LineChart
             width={mainData.length <= 10 ? 700 : mainData.length * 100}
-            px
             height={275}
             data={getProcessedDataList(mainData)}
             margin={{
@@ -166,7 +324,7 @@ const MainBloodSugarChart = ({ fetchMainChartData, mainData }) => {
               stroke="#414141"
               strokeWidth={2}
               dot={<CustomizedRegularDot />}
-              activeDot={{ r: 6, fill: '#3053f9', strokeWidth: 0 }}
+              activeDot={<CustomizedActiveDot />}
             />
           </LineChart>
         </div>
