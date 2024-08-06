@@ -107,27 +107,38 @@ const CustomActiveDot = ({ cx, cy, fill }) => (
 const SpikeDot = ({ cx, cy, fill }) => (
   <svg
     x={cx - 16.5}
-    y={cy - 16.5}
+    y={cy - 24.5} // Adjusted to accommodate the text above the circle
     width="33"
-    height="33"
-    viewBox="0 0 33 33"
+    height="41" // Increased height to fit the text above the circle
+    viewBox="0 0 33 41"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
     <g filter="url(#filter0_d_817_1885)">
-      <circle cx="15" cy="15" r="13" fill="#FFD7D7" />
+      <circle cx="16.5" cy="24.5" r="13" fill="#FFD7D7" />
     </g>
     <g filter="url(#filter1_if_817_1885)">
       <path
-        d="M8.53558 15.7964L17.2806 5.28032C17.5457 4.96153 18.0598 5.21754 17.9651 5.6212L16.2234 13.0492C16.1685 13.2833 16.3348 13.5113 16.5745 13.5305L20.2654 13.8258C20.5846 13.8513 20.7408 14.2274 20.5336 14.4716L11.8334 24.7234C11.5648 25.0399 11.0527 24.7777 11.1525 24.3748L12.9968 16.9278C13.0582 16.68 12.8707 16.4405 12.6155 16.4405H8.83764C8.50475 16.4405 8.32273 16.0524 8.53558 15.7964Z"
+        d="M10.0356 24.7964L18.7806 14.2803C19.0457 13.9615 19.5598 14.2175 19.4651 14.6212L17.7234 22.0492C17.6685 22.2833 17.8348 22.5113 18.0745 22.5305L21.7654 22.8258C22.0846 22.8513 22.2408 23.2274 22.0336 23.4716L13.3334 33.7234C13.0648 34.0399 12.5527 33.7777 12.6525 33.3748L14.4968 25.9278C14.5582 25.68 14.3707 25.4405 14.1155 25.4405H10.3376C10.0048 25.4405 9.82273 25.0524 10.0356 24.7964Z"
         fill="#D33F3F"
       />
     </g>
+    <text
+      x="16.5"
+      y="10" // Positioning the text above the circle
+      textAnchor="middle"
+      dy=".3em"
+      fill="#D33F3F"
+      fontSize="10"
+      fontWeight="bold"
+    >
+      Spike
+    </text>
     <defs>
       <filter
         id="filter0_d_817_1885"
         x="0.625"
-        y="0.625"
+        y="8.625"
         width="31.5"
         height="31.5"
         filterUnits="userSpaceOnUse"
@@ -150,7 +161,7 @@ const SpikeDot = ({ cx, cy, fill }) => (
       <filter
         id="filter1_if_817_1885"
         x="8.18337"
-        y="4.87612"
+        y="13.8761"
         width="12.7047"
         height="21.03"
         filterUnits="userSpaceOnUse"
