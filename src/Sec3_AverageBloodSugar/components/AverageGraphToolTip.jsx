@@ -37,13 +37,15 @@ const TextContainer = styled.div`
   overflow-wrap: break-word; /* 넘칠 경우 글자 기준 줄바꿈 */
 
   color: #414141;
-  font-size: 0.8rem;
+  font-size: 0.77rem;
   font-weight: 400;
   line-height: 1.1rem;
   word-spacing: 0.01rem;
 `;
 
 const BSSpan = styled.span`
+  font-weight: 600;
+  font-size: 0.85rem;
   ${props =>
     props.$offset > 0
       ? // 다중 속성을 사용

@@ -13,7 +13,7 @@ const FoodItem = ({ foodId, foodName, addedState, fetchMeal }) => {
     console.log(foodId);
     if (added === false) {
       setAdd(true); // true로 변경하여 버튼 변경
-      fetchMeal(foodId);
+      console.log(fetchMeal(foodId).PromiseResult);
       // 식단 추가 버튼이 눌린 경우임 => 식단 추가 POST
     }
   };
