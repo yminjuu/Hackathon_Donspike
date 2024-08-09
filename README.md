@@ -1,6 +1,11 @@
-## 서비스 이름 및 기능 소개
+# 혈당스파이크를 막을 작은 시작, ⚡️ **DON`T SPIKE** 
+![#1-표지](https://github.com/user-attachments/assets/e1287cb0-fc36-4755-a7cc-9b1b967e7b59)
 
+## 서비스 소개
+![#04-소개2](https://github.com/user-attachments/assets/9c43fb16-c669-4136-9055-85b321302bc0)
+![#3-소개1](https://github.com/user-attachments/assets/64f5098c-6cc3-4d4f-8b14-5449714249b9)
 
+## 서비스 페이지/ 기능 상세
 
 ## 🛠️ 기술 스택
 |역할|종류|
@@ -27,8 +32,8 @@
 
 ## 실행
 ```
-git clone
-cd
+git clone https://github.com/DONTSPIKE/DONTSPIKE_FE.git
+cd DONTSPIKE_FE
 
 yarn install
 yarn run dev
