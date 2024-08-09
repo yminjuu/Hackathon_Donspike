@@ -39,3 +39,5 @@ yarn install
 yarn run dev
 ```
 
+## CoWorkers
+![#8-팀소개](https://github.com/user-attachments/assets/719f9af1-a1f3-4d89-8344-2a8194b95abd)
